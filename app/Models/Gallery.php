@@ -19,8 +19,4 @@ class Gallery extends Model
         'new_photo_path',
         'status',
     ];
-
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
 }

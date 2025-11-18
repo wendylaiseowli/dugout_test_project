@@ -11,16 +11,18 @@ use App\Models\Category;
 class GalleryTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
 
-    // public function test_example(): void
-    // {
-    //     $response = $this->get('/');
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-    //     $response->assertStatus(200);
-    // }
+        // Refresh the default database
+        $this->artisan('migrate:fresh');
+
+        // Refresh the second database
+        $this->artisan('migrate:fresh', ['--database' => 'mysql2']);
+    }
+
     public function test_gallery_records_is_inactive(){
         $foodcategory = Category::factory()->create(['name'=> 'Food']);
         $drinkcategory = Category::factory()->create(['name'=> 'Drinks']);
@@ -60,7 +62,7 @@ class GalleryTest extends TestCase
         $response->assertDontSee('34041617523075864.jpg');
         $response->assertDontSee('34041617523075863.jpg');
 
-        $response->assertSee('COMING SOON');
+        $response->assertSee('Coming Soon');
     }
 
     public function test_gallery_record_exist_and_only_get_the_active_status(){
@@ -104,8 +106,6 @@ class GalleryTest extends TestCase
         //count it is just 1
     }
 
-    
-
     public function test_gallery_record_do_not_exist(){
         $foodcategory = Category::factory()->create(['name'=> 'Food']);
         $drinkcategory = Category::factory()->create(['name'=> 'Drinks']);
@@ -113,7 +113,6 @@ class GalleryTest extends TestCase
         $response = $this->get('gallery');
 
         $response->assertStatus(200);
-        $response->assertSee('COMING SOON');
+        $response->assertSee('Coming Soon');
     }
-
 }

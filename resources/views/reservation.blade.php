@@ -122,7 +122,7 @@
             required
             autocomplete="off"
             class="peer w-full px-4 py-4 border-2 border-gray-300 rounded-full outline-none focus:border-black pr-12 placeholder-[#999ab3] font-roboto-slab"
-            value="{{ old('reservation_date') }}"
+            value="{{ $errors->any() ? old('reservation_date'): '' }}"
           />
           <button
             type="button"
@@ -176,7 +176,7 @@
             placeholder="Select Time"
             required
             readonly
-            value="{{ old('reservation_time', '11:00')}}"
+            value="{{ $errors->any() ? old('reservation_time'): '11:00'}}"
             class="peer w-full px-4 py-4 border-2 border-gray-300 rounded-full outline-none focus:border-black pr-12 font-roboto-slab"
           />
           <button
@@ -218,12 +218,12 @@
       </div>
       <div>
         <input
-          type="number"
+          type="text"
           name="number_of_people"
           id="people"
           placeholder="Number of people"
           class="w-full px-4 py-4 border-2 border-gray-300 text-[15px] rounded-full outline-none focus:border-black font-roboto-slab placeholder-[#999ab3]"
-          value="{{ old('number_of_people') }}"
+          value="{{ $errors->any() ? old('number_of_people'): '' }}"
           required
         />
         @error('number_of_people')
@@ -245,7 +245,7 @@
           placeholder="Phone Number"
           class="w-full px-4 py-4 border-2 border-gray-300 text-[15px] rounded-full outline-none focus:border-black font-roboto-slab placeholder-[#999ab3]"
           required
-          value="{{ old('phone_number') }}"
+          value="{{ $errors->any() ? old('phone_number'): '' }}"
         />
         @error('phone_number')
           <p
@@ -266,7 +266,7 @@
           placeholder="Full Name"
           class="w-full px-4 py-4 border-2 border-gray-300 text-[15px] rounded-full outline-none focus:border-black font-roboto-slab placeholder-[#999ab3]"
           required
-          value="{{ old('reservation_name') }}"
+          value="{{ $errors->any() ? old('reservation_name') : '' }}"
         />
         @error('reservation_name')
           <p
@@ -287,7 +287,7 @@
           placeholder="Email Address"
           class="w-full px-4 py-4 border-2 border-gray-300 text-[15px] rounded-full outline-none focus:border-black font-roboto-slab placeholder-[#999ab3]"
           required
-          value="{{ old('email') }}"
+          value="{{ $errors->any() ? old('email') : '' }}"
         />
         @error('email')
           <p
@@ -307,16 +307,6 @@
         Book A Table
       </button>
     </form>
-    @if ($errors->any())
-    <script>
-        window.onload = function() {
-            var form = document.getElementById('reservationSection');
-            if(form) {
-                form.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-    </script>
-    @endif
     <!-- Input Form Section Ends -->
   </section>
   <!-- Reservation Form Section Ends -->

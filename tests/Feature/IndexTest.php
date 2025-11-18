@@ -11,15 +11,17 @@ use App\Models\Team;
 class IndexTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
-    // public function test_example(): void
-    // {
-    //     $response = $this->get('/');
+    
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-    //     $response->assertStatus(200);
-    // }
+        // Refresh the default database
+        $this->artisan('migrate:fresh');
+
+        // Refresh the second database
+        $this->artisan('migrate:fresh', ['--database' => 'mysql2']);
+    }
 
     public function test_render_index_with_pass_date_status_active(){
         
@@ -61,7 +63,7 @@ class IndexTest extends TestCase
         ]);
 
         $matches = Matches::factory()->create([
-            'startDateTime' => now()->addDay(),
+            'startDateTime' => now()->addDay(2),
             'homeTeamID' => $team1->id,
             'awayTeamID' => $team2->id,
             'status'=> true,

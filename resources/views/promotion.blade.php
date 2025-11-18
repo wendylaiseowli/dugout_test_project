@@ -171,7 +171,11 @@
             </div>
           @endforeach
         @else
-          <h1 class="text-center">COMING SOON</h1>
+          <h1
+            class="col-span-full text-[30px] font-roboto-condensed uppercase font-semibold mt-10 text-[#212121] text-center"
+          >
+            Coming Soon
+          </h1>
         @endif
       </div>
     </div>

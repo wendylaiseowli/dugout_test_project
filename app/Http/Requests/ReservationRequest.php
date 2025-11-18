@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Carbon\Carbon;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 class ReservationRequest extends FormRequest
 {
     /**
@@ -22,12 +25,21 @@ class ReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reservation_name'=> 'required|string',
-            'reservation_date'=> 'required|date_format:d/m/Y|after_or_equal:today',
-            'reservation_time'=> 'required|date_format:H:i',
-            'number_of_people'=> 'required|integer',
-            'phone_number'=> 'required|string',
-            'email'=> 'required|email',
+            'reservation_name'=> ['required','string', "regex:/^[\p{L}\s\-.']+$/u"],
+            'reservation_date'=> ['required','date_format:d/m/Y','after_or_equal:today'],
+            'reservation_time'=> ['required', 'date_format:H:i'],
+            'number_of_people'=> ['required', 'integer'],
+            'phone_number'=> ['required', 'string', "regex:/^[0-9][0-9]{7,14}$/"],
+            'email'=> ['required', 'email:rfc,dns'],
         ];
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->withFragment('reservationSection')
+        );
     }
 }

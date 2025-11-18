@@ -17,7 +17,7 @@ class ReservationController extends Controller
                 // Combine date and time into one datetime
                 $datetime = Carbon::createFromFormat(
                     'd/m/Y H:i',
-                    $validated['reservation_date'] . ' ' . $validated['reservation_time'] // note the space
+                    $validated['reservation_date'] . ' ' . $validated['reservation_time']
                 );
 
                 $validated['reservation_date'] = $datetime->format('Y-m-d H:i:s');

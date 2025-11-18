@@ -118,7 +118,8 @@ class="bg-black text-white py-4 lg:py-14 xl:px-10 3xl:px-16 lg:pb-4 3xl:pb-4 w-f
                 id="email_desktop"
                 class="min-w-20 3xl:min-w-72 bg-white text-[#808080] text-[15px] p-3 outline-none font-roboto-slab"
                 placeholder="Leave email for promotion updates"
-                />
+                value="{{ old('email')}}"
+                >
                 <button
                 class="bg-[#f1c22e] flex justify-center items-center px-4 cursor-pointer hover:bg-black 3xl:px-7"
                 type="submit"

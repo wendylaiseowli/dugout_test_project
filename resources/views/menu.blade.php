@@ -275,13 +275,13 @@
                     <h1
                       class="text-[#212121] font-roboto-condensed font-semibold mb-3 text-[16px] md:text-[18px] xl:text-[20px]"
                     >
-                      {{$burger->price}}
+                      {{$pizza->price}}
                     </h1>
                   </div>
                   <p
                     class="mt-2 text-[#424242] font-roboto-slab text-[14px] md:text-[15px]"
                   >
-                    {{$burger->menu_item_description}}
+                    {{$pizza->menu_item_description}}
                   </p>
                 </div>
               @endforeach

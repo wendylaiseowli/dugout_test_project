@@ -2,6 +2,6 @@
 
 <script>
     setTimeout(function(){
-        history.back();
+        window.location.href = '{{ url()->previous() }}';
     },2000);
 </script>

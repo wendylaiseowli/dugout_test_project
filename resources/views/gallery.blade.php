@@ -79,7 +79,7 @@
                   $lastImage = $foodImages->last();
                 @endphp
                 <div
-                class="md:col-span-2 xl:col-start-2 xl:col-end-3 hidden md:flex justify-center"
+                class="md:col-span-2 xl:col-start-2 xl:col-end-3 md:flex justify-center"
                 >
                   <a
                     href="{{ asset('img/gallery/'.$lastImage->new_photo_path) }}"
@@ -95,7 +95,11 @@
               @endif
             </div>
           @else
-            <h1 class="text-center">COMING SOON</h1>
+            <h1
+              class="text-[30px] font-roboto-condensed uppercase font-semibold mt-10 text-[#212121] text-center"
+            >
+              Coming Soon
+            </h1>
           @endif
         </div>
       </div>
@@ -123,7 +127,7 @@
                     <img
                       class="h-120 md:h-115 lg:h-110 w-full object-cover"
                       src="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
-                      alt="Drink 1"
+                      alt="Drink"
                     />
                   </a>
                 @endif
@@ -134,7 +138,7 @@
                   $lastImage = $drinkImages->last();
                 @endphp
                 <div
-                  class="md:col-span-2 xl:col-start-2 xl:col-end-3 hidden md:flex justify-center"
+                  class="md:col-span-2 xl:col-start-2 xl:col-end-3 md:flex justify-center"
                 >
                   <a
                     href="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
@@ -143,14 +147,18 @@
                     <img
                       class="h-120 md:h-115 lg:h-110 md:w-70 lg:w-95 3xl:w-120 object-cover"
                       src="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
-                      alt="Drink 13"
+                      alt="Drink"
                     />
                   </a>
                 </div>
               @endif
             </div>
           @else
-            <h1 class="text-center">COMING SOON</h1>
+            <h1
+              class="text-[30px] font-roboto-condensed uppercase font-semibold mt-10 text-[#212121] text-center"
+            >
+              Coming Soon
+            </h1>
           @endif
         </div>
       </div>
@@ -191,7 +199,7 @@
                 $lastImage = $eventImages->last();
               @endphp
               <div
-                class="md:col-span-2 xl:col-start-2 xl:col-end-3 hidden md:flex justify-center"
+                class="md:col-span-2 xl:col-start-2 xl:col-end-3 md:flex justify-center"
               >
                 <a
                   href="{{ asset('img/gallery/'.$eventImage->new_photo_path) }}"
@@ -207,7 +215,11 @@
             @endif
           </div>
         @else
-          <h1 class="text-center">COMING SOON</h1>
+          <h1
+              class="text-[30px] font-roboto-condensed uppercase font-semibold mt-10 text-[#212121] text-center"
+          >
+            Coming Soon
+          </h1>
         @endif
       </div>
     </div>

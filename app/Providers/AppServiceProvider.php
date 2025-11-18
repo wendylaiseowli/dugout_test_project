@@ -21,9 +21,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
-        // Disable mysql2 during tests to avoid touching real database
-        if (env('APP_ENV') === 'testing') {
-            config(['database.connections.mysql2' => null]);
-        }
     }
 }

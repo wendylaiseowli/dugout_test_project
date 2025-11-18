@@ -446,7 +446,7 @@
     </div>
     <div
       class="custom-dots mt-8 md:mt-16 lg:mt-24 2xl:mt-20 3xl:mt-30"
-    ></div>
+    id="eventEnquirySection"></div>
     <!-- Slider Section Ends -->
   </section>
   <!-- Testimonial Section Ends -->
@@ -511,7 +511,17 @@
           required
           autocomplete="off"
           class="peer w-full h-14 bg-transparent text-base px-3 py-4 border-2 border-[#ccc] focus:outline-none rounded-md focus:border-black"
+          value="{{ old('name') }}"
         />
+        @error('name')
+          <p
+            role="alert"
+            aria-live="assertive"
+            class="uppercase text-center text-[#ff0000] font-roboto-slab text-[12px] mt-4"
+          >
+            {{$message}}
+          </p>
+        @enderror
         <label
           for="name"
           class="uppercase absolute font-roboto-condensed left-3 top-1/2 -translate-y-1/2 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:text-sm peer-valid:top-0 peer-valid:text-sm font-semibold"
@@ -529,7 +539,17 @@
           required
           autocomplete="off"
           class="peer w-full h-14 bg-transparent text-base px-3 py-4 border-2 border-[#ccc] focus:outline-none rounded-md focus:border-black"
+          value="{{ old('email') }}"
         />
+        @error('email')
+          <p
+            role="alert"
+            aria-live="assertive"
+            class="uppercase text-center text-[#ff0000] font-roboto-slab text-[12px] mt-4"
+          >
+            {{$message}}
+          </p>
+        @enderror
         <label
           for="email"
           class="uppercase absolute font-roboto-condensed left-3 top-1/2 -translate-y-1/2 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:text-sm peer-valid:top-0 peer-valid:text-sm font-semibold"
@@ -546,7 +566,17 @@
           id="phone"
           required
           class="peer w-full h-14 bg-transparent text-base px-3 py-4 border-2 border-[#ccc] focus:outline-none rounded-md pl-14 focus:border-black"
+          value="{{ old('phone') }}"
         />
+        @error('phone')
+          <p
+            role="alert"
+            aria-live="assertive"
+            class="uppercase text-center text-[#ff0000] font-roboto-slab text-[12px] mt-4"
+          >
+            {{$message}}
+          </p>
+        @enderror
         <label
           for="phone"
           class="uppercase absolute font-roboto-condensed left-14 top-1/2 -translate-y-1/2 text-base 2xl:text-sm bg-white text-[#ccc] peer-focus:text-black px-1 font-semibold transition-all duration-200 ease-in-out peer-focus:top-0 peer-valid:text-sm peer-focus:left-3"
@@ -565,7 +595,16 @@
           autocomplete="off"
           rows="3"
           class="peer w-full bg-transparent text-base px-3 py-10 border-2 border-[#ccc] focus:outline-none rounded-md focus:border-black"
-        ></textarea>
+        >{{ old('message') }}</textarea>
+        @error('message')
+          <p
+            role="alert"
+            aria-live="assertive"
+            class="uppercase text-center text-[#ff0000] font-roboto-slab text-[12px] mt-4"
+          >
+            {{$message}}
+          </p>
+        @enderror
         <label
           for="message"
           class="uppercase absolute font-roboto-condensed left-3 top-3 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:-top-2 peer-focus:text-sm peer-valid:top-0 peer-valid:text-sm font-semibold pointer-events-none"
@@ -874,6 +913,13 @@
         // Set an initial max-height greater than the content for the 'open' state
         initialWrapper.style.maxHeight = initialWrapper.scrollHeight + "px";
       }
+
+      const phoneInput = document.querySelector("#phone");
+      const oldValue = phoneInput.getAttribute("value");
+
+      if (oldValue) {
+          phoneInput.value = oldValue; // restore old value after plugin initializes
+      }
     });
 
     function toggleSection(id, imageSrc) {
@@ -1053,8 +1099,6 @@
           this.setAttribute("data-state", "closed");
         }
       });
-    });
-
-    
+    });    
   </script>
 </x-app-layout>

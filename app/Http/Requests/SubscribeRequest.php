@@ -22,7 +22,7 @@ class SubscribeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=> 'required|email',
+            'email'=>['required','email:rfc,dns'],//rfc check email standard syntax, dns check domain
         ];
     }
 }
