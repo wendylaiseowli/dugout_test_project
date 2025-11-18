@@ -47,12 +47,14 @@ class MenuTest extends TestCase
     }
 
     public function test_food_starters(){
-        $foodStarter = SubCategory::factory()->has(Menu::factory()->count(3), 'menuItems')->create(['name'=>'Starters']);
-
+        $foodStarter = Category::factory()->has(SubCategory::factory()->has(Menu::factory()->count(3), 'menuItems')->state(['name'=>'Starters']))->create(['name'=>'Food']);
+        
         $response = $this->get('menu');
         $response->assertStatus(200);
         $response->assertViewHas('starters');
-        foreach($foodStarter->menuItems as $item){
+
+        $starterSubCategory = $foodStarter->subcategories->first();
+        foreach($starterSubCategory->menuItems as $item){
             $response->assertSee($item->menu_item_name);
             $response->assertSee($item->menu_item_description);
             $response->assertSee($item->price);

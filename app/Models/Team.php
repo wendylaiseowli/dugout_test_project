@@ -16,8 +16,4 @@ class Team extends Model
         'logoURL',
         'description',
     ];
-
-    function matches(){
-        return $this->hasMany(Matches::class);
-    }
 }

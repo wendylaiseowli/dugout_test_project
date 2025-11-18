@@ -103,7 +103,6 @@ class GalleryTest extends TestCase
         $response->assertSee('34041617523075861.jpg');
         $response->assertSee('34041617523075864.jpg');
         $response->assertDontSee('34041617523075863.jpg');
-        //count it is just 1
     }
 
     public function test_gallery_record_do_not_exist(){
@@ -114,5 +113,28 @@ class GalleryTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Coming Soon');
+    }
+
+    public function test_relationship_between_gallery_and_category(){
+    
+        $foodcategory = Category::factory()->has(
+            Gallery::factory()
+        )->create(['name'=> 'Food']);
+        $drinkcategory = Category::factory()->has(
+            Gallery::factory()
+        )->create(['name'=> 'Drinks']);
+        $eventcategory = Category::factory()->has(
+            Gallery::factory()
+        )->create(['name'=> 'Events']);
+        
+        $response = $this->get('gallery');
+
+        $response->assertStatus(200);
+        $food = $foodcategory->galleries->first();
+        $drink = $drinkcategory->galleries->first();
+        $event = $eventcategory->galleries->first();
+        $response->assertSee($food->new_photo_path);
+        $response->assertSee($drink->new_photo_path);
+        $response->assertSee($event->new_photo_path);
     }
 }

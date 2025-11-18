@@ -21,8 +21,4 @@ class Menu extends Model
         'subCatgeoryID', 
         'status'
     ];
-
-    // public function subCategory(){
-    //     return $this->belongsTo(SubCategory::class);
-    // }
 }
