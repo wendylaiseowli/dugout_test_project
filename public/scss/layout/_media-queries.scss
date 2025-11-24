@@ -1,0 +1,215 @@
+/********************************
+*********************************
+MEDIA QUERIES
+*********************************
+*********************************/
+@media (max-width: 1169px) {}
+@media (max-width: 1024px) {
+  .contact-details-profile {
+    width: 100%;
+  }
+}
+@media (max-width: 960px) {
+  .navbar-header {
+    float: left;
+    width: 3.75rem;
+  }
+
+  .pagination {
+    width: 300px;
+    overflow-y: scroll;
+  }
+
+  .sidebar-expand .main-wrapper {
+    margin-left: 0;
+  }
+
+  .navbar .logo-collapse {
+    width: 40px !important;
+  }
+}
+@media (max-width: 768px) {
+  li.list-inline-item.done::after {
+    left: 60%;
+  }
+
+  .m-w-100 {
+    width: 100% !important;
+  }
+
+  .sm-flex-col {
+    flex-direction: column;
+  }
+}
+@media (max-width: 650px) {
+  #reportrange {
+    width: 100%;
+  }
+
+  .pagination {
+    margin: auto;
+  }
+}
+@media (max-width: 572px) {
+  .widget-user-profile .profile-body {
+    flex-direction: column;
+  }
+
+  .profile-body {
+    padding-bottom: 30px !important;
+  }
+
+  .login-center {
+    min-width: 0 !important;
+  }
+
+  .btn-xs {
+    margin: 2px;
+  }
+}
+@media (max-width: 426px) {
+  .m-btn-full {
+    width: 100% !important;
+  }
+
+  .m-flex-col-2 {
+    flex-direction: column;
+  }
+}
+@media (max-width: 425px) {
+  .contact-details-cell small {
+    margin-right: 10px;
+  }
+
+  .pagination {
+    width: 256px;
+  }
+
+  .navbar {
+    height: 78px;
+  }
+
+  li.list-inline-item.done::after {
+    left: 61%;
+  }
+
+  .dropdown-list-group {
+    padding: 0 11px;
+  }
+
+  .multi-step-signup .steps-tab li {
+    padding: 0 9px;
+  }
+
+  .m-short {
+    width: 60px;
+    word-break: normal;
+    position: relative;
+    bottom: -16px;
+  }
+
+  .addition-info-reg-lh {
+    position: relative;
+    top: 8px;
+  }
+
+  .reg-step-3::before {
+    width: 142% !important;
+    left: -55px !important;
+  }
+
+  .multi-step-signup .steps-tab ul li.active::before {
+    width: 66% !important;
+    left: 1px !important;
+  }
+
+  .multi-step-signup .steps-tab ul .reg-step-3.active::before {
+    left: -10px !important;
+  }
+
+  .reg-step-2::after {
+    width: 50% !important;
+  }
+
+  .ranges {
+    width: 100%;
+  }
+
+  .drp-selected {
+    width: 100%;
+    text-align: center;
+  }
+
+  .drp-buttons .cancelBtn {
+    transform: translateX(-119%);
+  }
+
+  .drp-buttons .applyBtn {
+    transform: translateX(-119%);
+  }
+
+  .drp-buttons .drp-selected {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .addition-info-reg {
+    line-height: 0 !important;
+  }
+
+  .login-center {
+    padding: 2.14286em 2.57143em;
+  }
+
+  .card-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .profile-user-address {
+    text-align: center;
+    display: block;
+  }
+
+  .l-a-m {
+    left: 0 !important;
+    transform: translateX(0);
+  }
+
+  .navbar-brand-dark .navbar-brand {
+    height: 100%;
+  }
+
+  .widget-bg .widget-heading {
+    padding: 12px 12px 0;
+  }
+
+  .widget-body {
+    padding: 12px;
+  }
+
+  .dataTables_wrapper table.dataTable thead .sorting:before,
+  .dataTables_wrapper table.dataTable thead .sorting_asc:before,
+  .dataTables_wrapper table.dataTable thead .sorting_desc:before {
+    right: -0.28571em;
+  }
+}
+@media (max-width: 375px) {
+  .multi-step-signup .steps-tab li {
+    padding: 0;
+  }
+
+  .login-center {
+    padding: 2.14286em 1.57143em;
+  }
+}
+@media (min-width: 961px) {
+  .sidebar-collapse .content-wrapper,
+  .sidebar-expand .content-wrapper {
+    padding-top: 7.5rem;
+  }
+
+  .sidebar-expand .site-sidebar {
+    width: 15.0625rem;
+  }
+}

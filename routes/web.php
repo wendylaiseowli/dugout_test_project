@@ -8,7 +8,12 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SubscribeController;
-
+use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 #Navigation
 #Index routes
 Route::get('/', [IndexController::class, 'getMatches'])->name('index');
@@ -58,15 +63,73 @@ Route::get('/thank-you', function () {
 #Subcribtion
 Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
 
-# Default laravel breeze given
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+#Admin
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    #dashboard
+    Route::get('/dashboard', [IndexController::class, 'showDashBoard'])->name('dashboard');
+
+    Route::resources([
+        'users' => UserController::class,
+        'reservations' => ReservationController::class,
+        'menus' => MenuController::class,
+        'events' => EventController::class,
+        'promotions' => PromotionController::class,
+        'gallerys' => GalleryController::class,
+        'subscribers' => SubscribeController::class,
+    ]);
+
+    Route::put('/users/{user}/active', [UserController::class, 'active'])->name('active-user');
+    Route::put('/users/{user}/deactive', [UserController::class, 'deactive'])->name('deactive-user');
+    // Route::get('/menu-add', function () {
+    //     return view('menu.menu-add');
+    // })->name('menu-add');
+
+    // Route::get('/menu-edit', function () {
+    //     return view('menu.menu-edit');
+    // })->name('menu-edit');
+
+    // Route::get('/event-add', function () {
+    //     return view('event.event-add');
+    // })->name('event-add');
+
+    // Route::get('/event-edit', function () {
+    //     return view('event.event-edit');
+    // })->name('event-edit');
+
+    // Route::get('/promo-add', function () {
+    //     return view('promotion.promo-add');
+    // })->name('promo-add');
+
+    // Route::get('/promo-edit', function () {
+    //     return view('promotion.promo-edit');
+    // })->name('promo-edit');
+
+    // Route::get('/gallery-add', function () {
+    //     return view('gallery.gallery-add');
+    // })->name('gallery-add');
+
+    // Route::get('/gallery-edit', function () {
+    //     return view('gallery.gallery-edit');
+    // })->name('gallery-edit');
+
+    // Route::get('/login', function () {
+    //     return view('auth.login');
+    // })->name('login');
 });
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->middleware('guest')->name('password.request');
+    
+
+# Default laravel breeze given
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';

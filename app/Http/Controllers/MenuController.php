@@ -8,6 +8,7 @@ use App\Models\SubCategory;
 
 class MenuController extends Controller
 {
+    #Admin
     function getMenuItems(){
         //Food
         $categoryStarter = SubCategory::latest()->where('name', 'Starters')->first();
@@ -40,5 +41,34 @@ class MenuController extends Controller
         $beers = $categoryBeer ? $categoryBeer->menuItems->where('status', true) :collect();
 
         return view('menu', compact('starters', 'mains', 'burgers', 'pizzas', 'asians', 'desserts', 'cocktails', 'nonAlcoholics', 'liquors', 'shooters', 'wines', 'beers'));
+    }
+
+    #Admin
+    public function index(){
+        return view('menu.menu');         
+    }
+
+    public function ceate(){
+        return view('menu.menu-add'); 
+    }
+
+    public function store(){
+
+    }
+
+    public function show(){
+
+    }
+
+    public function edit(){
+        return view('menu.menu-edit'); 
+    }
+
+    public function update(){
+
+    }
+
+    public function destroy(){
+
     }
 }

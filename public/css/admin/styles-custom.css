@@ -1,0 +1,470 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/admin/Roboto-Regular.eot");
+  src: url("../fonts/admin/Roboto-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/admin/Roboto-Regular.woff2") format("woff2"),
+    url("../fonts/admin/Roboto-Regular.woff") format("woff"),
+    url("../fonts/admin/Roboto-Regular.ttf") format("truetype"),
+    url("../fonts/admin/Roboto-Regular.svg#Roboto-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+@font-face {
+  font-family: "Gotham Bold";
+  src: url("../fonts/admin/Gotham-Bold.eot");
+  src: url("../fonts/admin/Gotham-Bold.woff2") format("woff2"),
+    url("../fonts/admin/Gotham-Bold.woff") format("woff"),
+    url("../fonts/admin/Gotham-Bold.ttf") format("truetype"),
+    url("../fonts/admin/Gotham-Bold.svg#Gotham-Bold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-gotham-bold {
+  font-family: "Gotham Bold", sans-serif;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/admin/Montserrat-Regular.eot");
+  src: url("../fonts/admin/Montserrat-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/admin/Montserrat-Regular.woff2") format("woff2"),
+    url("../fonts/admin/Montserrat-Regular.woff") format("woff"),
+    url("../fonts/admin/Montserrat-Regular.ttf") format("truetype"),
+    url("../fonts/admin/Montserrat-Regular.svg#Montserrat-Regular")
+      format("svg");
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url("../fonts/admin/Montserrat-Bold.eot");
+  src: url("../fonts/admin/Montserrat-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/admin/Montserrat-Bold.woff2") format("woff2"),
+    url("../fonts/admin/Montserrat-Bold.woff") format("woff"),
+    url("../fonts/admin/Montserrat-Bold.ttf") format("truetype"),
+    url("../fonts/admin/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-montserrat-bold {
+  font-family: "Montserrat Bold", sans-serif;
+}
+
+input[type="checkbox"] {
+  appearance: none; /* Remove native style */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 17px;
+  height: 17px;
+  border: 1px solid #cccccc5c;
+  border-radius: 0px; /* Now this works! */
+  cursor: pointer;
+  accent-color: #f1c22e;
+}
+
+/* when checked */
+input[type="checkbox"]:checked {
+  background-color: #f1c22e;
+  border-color: #f1c22e;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.173 12.252l-3.91-3.91 1.414-1.414L6.173 9.424l6.15-6.15 1.414 1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+}
+
+/* Admin Dashboard - My styles */
+
+.widget-list.row {
+  width: 100%;
+  padding: 15px;
+}
+
+.widget-holder.widget-sm {
+  width: 100%;
+  min-width: 260px;
+  max-width: 100%;
+}
+
+.widget-bg {
+  height: 100%;
+  padding: 20px;
+}
+
+.log-out-link:hover {
+  color: #f1c22e;
+}
+
+.select-btn {
+  padding-right: 2.5rem;
+}
+
+.input-daterange input {
+  text-align: left;
+}
+
+.export-btn {
+  background-color: #000;
+  color: #fff;
+  border: #000;
+}
+
+.export-btn:hover {
+  background-color: #bbb;
+  border-color: #bbb;
+}
+
+.sidebar-expand .footer {
+  margin-left: 0;
+}
+
+.dashboard-details-btn {
+  color: #fff;
+  background-color: #f1c22e;
+  border-color: #f1c22e;
+}
+
+.dashboard-details-btn:hover {
+  color: #fff;
+  background-color: #f1c32ec4;
+  border-color: #f1c32ec4;
+}
+
+.custom-padding-entries {
+  padding: 2px;
+}
+
+/* Ensure the label content sits inline */
+.entries-dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color:#000;
+}
+
+#entriesSelect{
+  color: #000;
+}
+
+.page-link{
+  color: #000;
+}
+
+.event-table-image-container {
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.event-table-image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.big-photo-container {
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.big-photo-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.tabledit-toolbar .btn {
+  min-width: 45px !important;
+  text-align: center !important;
+}
+
+.btn-status {
+  width: 100px;
+  text-align: center;
+}
+
+.btn-status-promo {
+  width: 140px;
+  text-align: center;
+}
+
+#dashboard::before {
+  content: none !important;
+  display: none !important;
+}
+
+.btn-edit {
+  width: 110px;
+  text-align: center;
+}
+
+#myTable tbody tr:hover {
+  background-color: #e4e9f0;
+}
+
+#indexTable tbody tr:hover {
+  background-color: #e4e9f0;
+}
+
+/* Make the sort dropdown slightly wider than the Export button */
+.sort-time-dropdown {
+  width: 135px; /* Adjust this value as needed */
+  min-width: 120px;
+  max-width: 150px;
+  border-right: 1px solid #e4e9f0 !important;
+}
+
+.sort-time-dropdown:focus {
+  border-right-color: #f1c22e !important;
+}
+
+/* Ensure Export button stays smaller */
+.export-btn {
+  width: 110px;
+  min-width: 100px;
+}
+
+/* Optional: spacing between controls for neat layout */
+.input-group .form-control,
+.input-group .btn,
+.input-group select {
+  margin-right: 6px;
+}
+
+/* Keep responsive wrapping clean */
+.input-group.flex-wrap {
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* ===== Desktop / Tablet Styling ===== */
+.sort-time-dropdown {
+  width: 135px;
+  min-width: 120px;
+  max-width: 150px;
+  flex-shrink: 0;
+}
+
+.export-btn {
+  width: 110px;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.input-group.flex-wrap {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.input-group .form-control,
+.input-group .btn,
+.input-group select {
+  margin-right: 5px;
+}
+
+.input-group .form-control {
+  border-right: 0; /* Removes the input's right border */
+  margin-right: 0; /* Removes the extra space */
+}
+
+.input-group-addon {
+  border-left: 0; /* Removes the icon box's left border */
+  margin-left: 0; /* Removes the small left margin */
+}
+
+#search-input {
+  border-right: 1px solid #e4e9f0 !important;
+}
+
+#search-input:focus {
+  border-right-color: #f1c22e !important;
+}
+
+.form-material .input-has-value > label,
+.form-material .form-group.input-has-value > label {
+  transform: translateY(-10px);
+  font-size: 12px;
+  opacity: 1;
+}
+
+.log-out-hover a:hover {
+  color: #f1c22e !important;
+}
+
+.modal-content .close:hover {
+  background-color: #f1c22e !important;
+}
+
+.datepicker-view {
+  pointer-events: none;
+}
+
+#promo-start,
+#promo-end {
+  color: #000;
+}
+
+.userdetail {
+  gap: 15px;
+}
+
+.clockpicker-popover {
+  z-index: 9999 !important;
+}
+
+.dugout-accent-color {
+  color: #f1c22e !important;
+}
+
+.side-menu .menu-item-has-children > a::before {
+  color: #f1c22e !important;
+}
+
+.modal-content .close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-line {
+  line-height: 1.2em;
+}
+
+.userdetail .text-black {
+  text-align: right;
+}
+
+.row {
+  margin-bottom: 25px;
+}
+
+.reservation-modal{
+  padding-bottom: 0; 
+}
+
+.reservation-modal .row{
+  margin-bottom: 15px;
+}
+
+.modal-footer{
+  border-top: none;
+}
+
+.dataTables_wrapper .dataTables_info{
+  color: #000;
+}
+
+.entries-dropdown{
+  color:#000;
+}
+
+/* ===== Responsive Fix for Mobile (≤ 576px) ===== */
+@media (max-width: 576px) {
+  .modal-dialog {
+    margin: 20px;
+  }
+
+  .modal {
+    top: 8%;
+  }
+
+  .input-daterange.input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-daterange.input-group > * {
+    width: 100% !important;
+    margin-right: 0;
+  }
+
+  .input-daterange.input-group > * + * {
+    margin-top: 6px;
+  }
+
+  .sort-time-dropdown,
+  .export-btn {
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .widget-bg{
+    padding: 10px;
+  }
+
+  .widget-body{
+    padding: 10px;
+  }
+
+      .widget-bg .widget-heading{
+        padding: 10px 10px 0;
+      }
+
+      .existing-promo-text{
+       white-space: wrap;
+       line-height: 1.1em;
+      }
+}
+
+@media (min-width: 768px) {
+  .widget-holder.widget-sm {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 960px) {
+  .dataTables_wrapper {
+    flex-direction: column !important; /* stack vertically */
+    align-items: center !important; /* center horizontally */
+    text-align: center; /* center inline text */
+  }
+
+  .dataTables_wrapper > * {
+    margin: 5px 0; /* add spacing between items */
+  }
+
+  .pagination {
+    width: 110px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar-expand .footer {
+    margin-left: 14.0625rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .widget-holder.widget-sm {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1800px) {
+  .widget-holder.widget-sm {
+    width: 30%;
+    margin: 0 auto;
+  }
+}

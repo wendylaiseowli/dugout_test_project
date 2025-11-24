@@ -8,6 +8,7 @@ use App\Http\Requests\ReservationRequest;
 use Carbon\Carbon;
 class ReservationController extends Controller
 {
+    #public
     public function reserve(ReservationRequest $request)
     {
         $validated = $request->validated();
@@ -29,5 +30,35 @@ class ReservationController extends Controller
         Reservation::create($validated);
 
         return view('thankyou');
+    }
+
+    #Admin
+    public function index(){
+        $reservations = Reservation::latest()->get();
+        return view('reservation.reservation', compact('reservations'));        
+    }
+
+    public function ceate(){
+
+    }
+
+    public function store(){
+
+    }
+
+    public function show(){
+
+    }
+
+    public function edit(){
+
+    }
+
+    public function update(){
+
+    }
+
+    public function destroy(){
+
     }
 }

@@ -497,7 +497,7 @@
     </div>
     <!-- Right Content -->
     <form
-      action="{{route('planEventForm')}}" method=POST
+      action="{{route('planEventForm')}}" method="POST"
       class="flex flex-col justify-center items-center py-16 md:w-1/2"
     >
       @csrf

@@ -1,0 +1,17 @@
+$primary:       #1976d2  !default;
+$primary-dark:  #1a232d !default;
+$primary-hover: #25313f !default;
+
+$nav-tabs-link-active-bg: none;
+$nav-tabs-link-active-color: $primary;
+
+$orange: #f1cc2e;
+$black: #000;
+$white: #fff;
+$red: #ff3333;
+$grey: #ddd;
+$blue: #0275d8;
+$grey-form: #C7C7CD;
+$light-orange: lighten($orange, 15%);
+$light-orange-2: lighten($orange, 25%);
+$light-orange-3: lighten($orange, 35%);

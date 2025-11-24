@@ -1,0 +1,93 @@
+<nav class="navbar">
+    <!-- Logo Area -->
+    <div class="navbar-header">
+        <a href="index.html" class="navbar-brand">
+        <img
+            class="logo-expand ds-logo"
+            alt=""
+            src="{{ asset('img/admin/dugout-logo-white_new.png') }}"
+        />
+        <img
+            class="logo-collapse ds-logo"
+            alt=""
+            src="{{ asset('img/admin/dugout-logo-white_new.png') }}"
+        />
+        <!-- <p>BonVue</p> -->
+        </a>
+    </div>
+    <!-- /.navbar-header -->
+    <!-- Left Menu & Sidebar Toggle -->
+    <ul class="nav navbar-nav">
+        <li class="sidebar-toggle dropdown">
+        <a href="javascript:void(0)" class="ripple"
+            ><i class="feather feather-menu list-icon fs-20"></i
+        ></a>
+        </li>
+    </ul>
+    <!-- /.navbar-left -->
+    <!-- Search Form -->
+    <!-- <form class="navbar-search d-none d-sm-block" role="search">
+        <i class="feather feather-search list-icon"></i>
+        <input type="search" class="search-query" placeholder="Search anything...">
+        <a href="javascript:void(0);" class="remove-focus">
+        <i class="feather feather-x"></i>
+        </a>
+    </form> -->
+    <!-- /.navbar-search -->
+    <div class="spacer"></div>
+    <!-- Right Menu -->
+    <ul class="nav navbar-nav d-none d-lg-flex ml-2 ml-0-rtl">
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-right -->
+    <!-- User Image with Dropdown -->
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+        <a
+            href="javascript:void(0);"
+            class="dropdown-toggle dropdown-toggle-user ripple"
+            data-toggle="dropdown"
+        >
+            <span class="avatar thumb-xs2">
+            <img
+                src="{{ asset('img/admin/ds-img/userasset-4.png') }}"
+                class="rounded-circle"
+                alt=""
+            />
+            <i class="feather feather-chevron-down list-icon"></i>
+            </span>
+        </a>
+        <div
+            class="dropdown-menu dropdown-left dropdown-card dropdown-card-profile animated flipInY"
+        >
+            <div class="card">
+            <header class="card-header d-flex mb-0">
+                <a href="javascript:void(0);" class="col-md-4 text-center"
+                ><i class="feather feather-user-plus align-middle"></i>
+                </a>
+                <a href="javascript:void(0);" class="col-md-4 text-center"
+                ><i class="feather feather-settings align-middle"></i>
+                </a>
+                <a href="javascript:void(0);" class="col-md-4 text-center"
+                ><i class="feather feather-power align-middle"></i
+                ></a>
+            </header>
+            <ul class="list-unstyled card-body">
+                <li class="log-out-hover">
+                <a href="login.html" 
+                    ><span class="align-middle">Log Out</span></a
+                >
+                </li>
+            </ul>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.dropdown-card-profile -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-nav -->
+</nav>
+    <!-- /.navbar -->
+    
