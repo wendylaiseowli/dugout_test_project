@@ -2081,9 +2081,14 @@
             
             // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
             rowData.push(cells[0].textContent.trim()); // ID
-            rowData.push(cells[1].textContent.trim()); // Category
-            rowData.push(cells[4].textContent.trim()); // Active?
-            rowData.push(cells[5].textContent.trim()); // Last Updated
+            rowData.push(cells[1].textContent.trim()); // name
+            rowData.push(cells[2].textContent.trim()); // date
+            rowData.push(cells[3].textContent.trim()); // time
+            rowData.push(cells[4].textContent.trim()); // no pax
+            rowData.push(cells[5].textContent.trim()); // phone
+            rowData.push(cells[6].textContent.trim()); // email          
+            rowData.push(cells[7].textContent.trim()); // Active?
+            rowData.push(cells[8].textContent.trim()); // Last Updated
             
             rows.push(rowData);
           });
@@ -2139,18 +2144,17 @@
 
         //Active
         $('#deactivate-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
+            var button = $(event.relatedTarget);
             var reservationId = button.data('reservation-id');
 
-            // Update form action URL dynamically
             $('#deactive-reservation-form').attr('action', '/reservations/' + reservationId + '/deactive');
         });        
         
+        //Deactive
         $('#activate-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
+            var button = $(event.relatedTarget);
             var reservationId = button.data('reservation-id');
 
-            // Update form action URL dynamically
             $('#active-reservation-form').attr('action', '/reservations/' + reservationId + '/active');
         });
 

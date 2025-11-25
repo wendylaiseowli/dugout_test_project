@@ -372,7 +372,7 @@
                         </button> -->
                         <a
                           class="btn btn-normal btn-default btn-orange-ds ripple mb-2 input-m m-btn-full"
-                          href="./event-add.html"
+                          href="{{ route('events.create') }}"
                           id="adduser"
                         >
                           Add Event
@@ -403,726 +403,747 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr data-expanded="true">
-                            <td>1</td>
-                            <td>Bornday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
+                          @if($events->count()>0)
+                            @foreach($events as $event)
+                              <tr data-expanded="true">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $event->event_name }}</td>
+                                <td class="text-truncate" style="max-width: 200px;">
+                                  {{ $event->description }}
+                                </td>
+                                <td>
+                                  <div class="event-table-image-container">
+                                      <img src="{{ asset('img/admin/events_gallery/'.$event->photo_path) }}" alt="placeholder image">
+                                  </div>
+                                </td>
+                                <td>{{ $event->event_date->format('d/m/Y') }}</td>
+                                <td>{{ $event->event_time->format('H:i A') }}</td>
+                                <td style="white-space: nowrap; width: 1%">
+                                  <div
+                                    class="tabledit-toolbar btn-toolbar"
+                                    style="text-align: left"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
+                                    <div
+                                      class="btn-group btn-group-sm"
+                                      style="float: none"
+                                    >
+                                      @if($event->status == true)
+                                        <button
+                                          type="button"
+                                          class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                          data-toggle="modal"
+                                          data-target="#deactivate-modal"
+                                          data-event-id="{{ $event->id }}"
+                                          style="float: none"
+                                        >
+                                          <span
+                                            class="glyphicon feather-x-circle"
+                                          ></span>
+                                          Deactivate
+                                        </button>
+                                      @else
+                                        <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                        data-toggle="modal"
+                                        data-target="#activate-modal"
+                                        data-event-id="{{ $event->id }}"
+                                        style="float: none"
+                                        >
+                                          <span
+                                            class="glyphicon feather-check-circle"
+                                          ></span>
+                                          Activate
+                                        </button>
+                                      @endif
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>{{ $event->updated_at->diffForHumans() }}</td>
+                                <td style="white-space: nowrap; width: 1%">
+                                  <div
+                                    class="tabledit-toolbar btn-toolbar"
+                                    style="text-align: left"
+                                  >
+                                    <div
+                                      class="btn-group btn-group-sm"
+                                      style="float: none"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="tabledit-delete-button btn btn-sm btn-success "
+                                        data-toggle="modal"
+                                        data-target="#eventdetails-modal"
+                                        data-event-id ="{{ $event->id }}"
+                                        data-event-name="{{ $event->event_name }}"
+                                        data-event-date="{{ $event->event_date->format('d/m/Y') }}"
+                                        data-event-time="{{ $event->event_time->format('h:i A') }}"
+                                        data-event-photo="{{ $event->photo_path }}"
+                                        style="float: none"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                      >
+                                        <span class="glyphicon feather-eye"></span>
+                                      </button>
+                                      <a
+                                        type="button"
+                                        class="tabledit-delete-button btn btn-sm btn-info"
+                                        href="{{ route('events.edit', $event->id)}}"
+                                        style="float: none; color:white;"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                      >
+                                        <span class="fa fa-edit"></span>
+                                      </a>
+                                      <button
+                                        type="button"
+                                        class="tabledit-delete-button btn btn-sm btn-danger"
+                                        data-toggle="modal"
+                                        data-target="#delete-modal"
+                                        data-event-id="{{ $event->id }}"
+                                        style="float: none"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                      >
+                                        <span class="fa fa-trash"></span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            {{-- <tr>
+                              <td>2</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
                                 </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-check-circle"
+                                      ></span>
+                                      Activate
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
+                              </td>
+                              <td>11/04/18</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span> 
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span> 
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            {{-- <tr>
+                              <td>3</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                                </div>
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>11/04/18</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>  
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>  
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            {{-- <tr>
+                              <td>4</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                                </div>
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>11/04/18</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>  
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            {{-- <tr>
+                              <td>5</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                                </div>
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>11/04/18</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>  
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            {{-- <tr>
+                              <td>6</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                                </div>
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>11/04/18</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            {{-- <tr>
+                              <td>7</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                                </div>
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>11/04/18</td>
+                            <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            {{-- <tr>
+                              <td>8</td>
+                              <td>Birthday</td>
+                              <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                    <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                                </div>
+                              </td>
+                              <td>2/12/2025</td>
+                              <td>6:00 <span>PM</span></td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>11/04/18</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#userdetails-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="event-edit.html"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr> --}}
+                            @endforeach
+                          @else
                           <tr>
-                            <td>2</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-success btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-check-circle"
-                                    ></span>
-                                    Activate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span> 
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span> 
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
+                            <td colspan="9">No record found</td>
                           </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>  
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>  
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>  
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>  
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>7</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                           <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>Birthday</td>
-                            <td class="text-truncate" style="max-width: 200px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
-                              </div>
-                            </td>
-                            <td>2/12/2025</td>
-                            <td>6:00 <span>PM</span></td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                          @endif
                         </tbody>
                       </table>
                     </div>
@@ -1351,7 +1372,9 @@
           <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="deactive-event-form">
+                  @csrf
+                  @method('PUT')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Change Status</h5>
@@ -1365,7 +1388,7 @@
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1376,11 +1399,44 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Deactivate here -->
+          <!-- activate Modal -->
+          <div id="activate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form class="form-material" method="POST" id="active-event-form">
+                  @csrf
+                  @method('PUT')
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Change Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <p class="text-center w-100">Are you sure you want to change the Event status?</p> 
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- activate here -->
           <!-- Delete Modal -->
           <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="event-delete-form">
+                  @csrf
+                  @method('DELETE')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Delete Event</h5>
@@ -1389,38 +1445,10 @@
                   </div>
                   <div class="modal-body">
                     <p class="text-center w-100">Are you sure you want to delete the following Event?</p>
-                    <!-- <div class="userdetail d-flex justify-content-between">
-                      <p>ID:</p>
-                      <p class="text-black">1</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Name:</p>
-                      <p class="text-black">Dennise</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Date:</p>
-                      <p class="text-black">13 March, Tuesday</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Time:</p>
-                      <p class="text-black">05:00 PM</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Number of People:</p>
-                      <p class="text-black">4</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Phone Number:</p>
-                      <p class="text-black">0000000000</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Email:</p>
-                      <p class="text-black">example@email.com</p>
-                    </div> -->
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1472,8 +1500,8 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Edit Password ends here -->
-          <!-- View User Modal -->
-          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+          <!-- View Event Modal -->
+          <div id="eventdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1486,28 +1514,28 @@
                 <div class="modal-body">
                   <div class="userdetail d-flex justify-content-between">
                     <p>ID:</p>
-                    <p class="text-black">1</p>
+                    <p class="text-black" id="event-id">1</p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Event Name:</p>
-                    <p class="text-black">Birthday</p>
+                    <p class="text-black" id="event-name">Birthday</p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Event Date:</p>
-                    <p class="text-black">2/12/2025</p>
+                    <p class="text-black" id="event-date">2/12/2025</p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Event Time:</p>
-                    <p class="text-black">06:00 PM</p>
+                    <p class="text-black" id="event-time">06:00 PM</p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Event Description:</p>
-                    <p class="text-black text-right">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</p>
+                    <p class="text-black text-right" id="event-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, architecto!</p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Event Image:</p>
                     <div class="event-table-image-container" style="margin: 0;">
-                      <img src="{{ asset('img/admin/dugout-placeholder.png') }}" alt="placeholder image">
+                      <img alt="placeholder image" id="event-photo">
                     </div>
                   </div>
                 </div>
@@ -2263,16 +2291,30 @@
 
           // Page numbers
           for (let i = 1; i <= pageCount; i++) {
-            const li = document.createElement("li");
-            li.className = "page-item" + (i === currentPage ? " active" : "");
-            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            li.addEventListener("click", (e) => {
-              e.preventDefault();
-              currentPage = i;
-              displayTable(currentPage);
-              setupPagination();
-            });
-            pagination.appendChild(li);
+            if (i === 1 || i === pageCount || (i >= currentPage - 1 && i <= currentPage + 1)) {
+              const li = document.createElement("li");
+              li.className = "page-item" + (i === currentPage ? " active" : "");
+              li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+              li.addEventListener("click", (e) => {
+                e.preventDefault();
+                currentPage = i;
+                displayTable(currentPage);
+                setupPagination();
+              });
+              pagination.appendChild(li);
+            } else if (i === 2 && currentPage > 3) {
+              // Ellipsis after first page
+              const li = document.createElement("li");
+              li.className = "page-item disabled";
+              li.innerHTML = `<span class="page-link">...</span>`;
+              pagination.appendChild(li);
+            } else if (i === pageCount - 1 && currentPage < pageCount - 2) {
+              // Ellipsis before last page
+              const li = document.createElement("li");
+              li.className = "page-item disabled";
+              li.innerHTML = `<span class="page-link">...</span>`;
+              pagination.appendChild(li);
+            }
           }
 
           // Next button
@@ -2434,9 +2476,13 @@
             
             // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
             rowData.push(cells[0].textContent.trim()); // ID
-            rowData.push(cells[1].textContent.trim()); // Category
-            rowData.push(cells[4].textContent.trim()); // Active?
-            rowData.push(cells[5].textContent.trim()); // Last Updated
+            rowData.push(cells[1].textContent.trim()); // Event Name
+            rowData.push(cells[2].textContent.trim()); // Description
+            rowData.push(cells[3].textContent.trim()); // Event Photo
+            rowData.push(cells[4].textContent.trim()); // Event Date
+            rowData.push(cells[5].textContent.trim()); // Event Time
+            rowData.push(cells[6].textContent.trim()); // Active
+            rowData.push(cells[7].textContent.trim()); // Lat update
             
             rows.push(rowData);
           });
@@ -2490,6 +2536,49 @@
           exportToPDF('event-filtered.pdf', false);
         });
 
+        //Active
+        $('#deactivate-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var eventId = button.data('event-id');
+
+            $('#deactive-event-form').attr('action', '/events/' + eventId + '/deactive');
+        });       
+        
+        //Deactive
+        $('#activate-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var eventId = button.data('event-id');
+
+            $('#active-event-form').attr('action', '/events/' + eventId + '/active');
+        });
+
+        //View
+        $('#eventdetails-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var eventId = button.data('event-id');
+          var name = button.data('event-name');
+          var date = button.data('event-date');
+          var time = button.data('event-time');
+          var description = button.data('event-description');
+          var photo = button.data('event-photo');
+          
+          // Update modal content
+          $('#event-id').text(eventId);
+          $('#event-name').text(name);
+          $('#event-date').text(date);
+          $('#event-time').text(time);
+          $('#event-description').text(description);
+          $('#event-photo').attr('src', 'img/admin/events_gallery/'+ photo);
+        });
+
+        //Delete
+        $('#delete-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget);
+          var eventId = button.data('event-id');
+          
+          // Update modal content
+          $('#event-delete-form').attr('action', '/events/'+ eventId);
+        });
       });
 
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

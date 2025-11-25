@@ -18,30 +18,7 @@ class SubscribeController extends Controller
 
     #Admin
     public function index(){
-        return view('subscriber.subscribers');   
-    }
-
-    public function ceate(){
-
-    }
-
-    public function store(){
-
-    }
-
-    public function show(){
-
-    }
-
-    public function edit(){
-
-    }
-
-    public function update(){
-
-    }
-
-    public function destroy(){
-
+        $subscribers= Subscribe::latest()->get();
+        return view('subscriber.subscribers', compact('subscribers'));   
     }
 }

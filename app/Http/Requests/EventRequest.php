@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class EventRequest extends FormRequest
 {
@@ -23,21 +21,19 @@ class EventRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name'=> ['required','string', "regex:/^[\p{L}\s\-.']+$/u"],
-            'email'=> ['required', 'email:rfc,dns'],
-            'phone'=> ['required', 'string', 'max:15', 'min:8', 'regex:/^\+?[0-9]+$/'],
-            'message'=> ['required', 'string', 'max:500'],
+        $rules = [
+            'event_name'=>['required', 'string'],
+            'description'=> ['required', 'string'],
+            'event_date'=> ['nullable', 'date_format:d/m/Y'],
+            'event_time'=> ['nullable', 'date_format:H:i'],
         ];
-    }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(
-            redirect()->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->withFragment('eventEnquirySection')
-        );
+        if($this->isMethod('post')){
+            $rules['photo_path']= ['required', 'string'];
+        } else{
+            $rules['photo_path']= ['nullable', 'string'];
+        }
+        
+        return $rules;
     }
 }

@@ -1934,9 +1934,13 @@
             
             // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
             rowData.push(cells[0].textContent.trim()); // ID
-            rowData.push(cells[1].textContent.trim()); // Category
-            rowData.push(cells[4].textContent.trim()); // Active?
-            rowData.push(cells[5].textContent.trim()); // Last Updated
+            rowData.push(cells[1].textContent.trim()); // Name
+            rowData.push(cells[2].textContent.trim()); // Description
+            rowData.push(cells[3].textContent.trim()); // price
+            rowData.push(cells[4].textContent.trim()); // Category
+            rowData.push(cells[5].textContent.trim()); // Subcategory          
+            rowData.push(cells[6].textContent.trim()); // Active?
+            rowData.push(cells[7].textContent.trim()); // Last Updated
             
             rows.push(rowData);
           });

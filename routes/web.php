@@ -86,6 +86,10 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/menus/{menu}/active', [MenuController::class, 'active'])->name('active-menu');
     Route::put('/menus/{menu}/deactive', [MenuController::class, 'deactive'])->name('deactive-menu');
+
+    Route::put('/events/{event}/active', [EventController::class, 'active'])->name('active-event');
+    Route::put('/events/{event}/deactive', [EventController::class, 'deactive'])->name('deactive-event');
+    
     // Route::get('/menu-add', function () {
     //     return view('menu.menu-add');
     // })->name('menu-add');

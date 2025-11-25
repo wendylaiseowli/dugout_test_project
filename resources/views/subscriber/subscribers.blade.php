@@ -396,259 +396,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr data-expanded="true">
-                            <td>1</td>
-                            <td>example@email.com</td>
-                            <!-- <td>Fuhrman</td> -->
-                            <!-- <td>High School History Teacher</td> -->
-                            <!-- <td>example@email.com</td>
-                            <td></td>
-                            <td>11/04/18</td> -->
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button> -->
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    data-toggle="modal"
-                                    data-target="#edituser-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                    Edit
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                    Delete
-                                  </button> -->
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>example@example.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>example@email.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>example@email.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>example@email.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>example@email.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>7</td>
-                            <td>example@email.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>example@email.com</td>
-                            
-                            <!-- <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                   <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success"
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    View
-                                  </button>
-                                </div>
-                              </div>
-                            </td> -->
-                          </tr>
+                          @foreach($subscribers as $person)
+                            <tr data-expanded="true">
+                              <td>{{ $loop->iteration}}</td>
+                              <td>{{ $person->email}}</td>
+                            </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -1669,285 +1422,299 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-  const table = document.getElementById("myTable");
-  const pagination = document.getElementById("pagination");
-  const info = document.getElementById("tableInfo");
-  const select = document.getElementById("entriesSelect");
-  const searchInput = document.getElementById("search-input");
-  const searchButton = document.querySelector(".btn-search");
+      const table = document.getElementById("myTable");
+      const pagination = document.getElementById("pagination");
+      const info = document.getElementById("tableInfo");
+      const select = document.getElementById("entriesSelect");
+      const searchInput = document.getElementById("search-input");
+      const searchButton = document.querySelector(".btn-search");
 
-  let allRows = Array.from(table.querySelectorAll("tbody tr"));
-  let filteredRows = [...allRows];
-  let rowsPerPage = parseInt(select?.value || 10);
-  let currentPage = 1;
+      let allRows = Array.from(table.querySelectorAll("tbody tr"));
+      let filteredRows = [...allRows];
+      let rowsPerPage = parseInt(select?.value || 10);
+      let currentPage = 1;
 
-  function displayTable(page) {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
+      function displayTable(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
 
-    filteredRows.forEach((row, index) => {
-      row.style.display = (index >= start && index < end) ? "" : "none";
-    });
+        filteredRows.forEach((row, index) => {
+          row.style.display = (index >= start && index < end) ? "" : "none";
+        });
 
-    updateInfo(start, end);
-  }
-
-  function updateInfo(start, end) {
-    const total = filteredRows.length;
-    const showingStart = total === 0 ? 0 : start + 1;
-    const showingEnd = Math.min(end, total);
-    if (info)
-      info.textContent = `Showing ${showingStart} to ${showingEnd} of ${total} entries`;
-  }
-
-  function setupPagination() {
-    const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
-    pagination.innerHTML = "";
-
-    // Previous button
-    const prev = document.createElement("li");
-    prev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
-    prev.innerHTML = `<a class="page-link" href="#">‹</a>`;
-    prev.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (currentPage > 1) {
-        currentPage--;
-        displayTable(currentPage);
-        setupPagination();
+        updateInfo(start, end);
       }
-    });
-    pagination.appendChild(prev);
 
-    // Page numbers
-    for (let i = 1; i <= pageCount; i++) {
-      const li = document.createElement("li");
-      li.className = "page-item" + (i === currentPage ? " active" : "");
-      li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-      li.addEventListener("click", (e) => {
-        e.preventDefault();
-        currentPage = i;
+      function updateInfo(start, end) {
+        const total = filteredRows.length;
+        const showingStart = total === 0 ? 0 : start + 1;
+        const showingEnd = Math.min(end, total);
+        if (info)
+          info.textContent = `Showing ${showingStart} to ${showingEnd} of ${total} entries`;
+      }
+
+      function setupPagination() {
+        const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
+        pagination.innerHTML = "";
+
+        // Previous button
+        const prev = document.createElement("li");
+        prev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+        prev.innerHTML = `<a class="page-link" href="#">‹</a>`;
+        prev.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (currentPage > 1) {
+            currentPage--;
+            displayTable(currentPage);
+            setupPagination();
+          }
+        });
+        pagination.appendChild(prev);
+
+        // Page numbers
+        for (let i = 1; i <= pageCount; i++) {
+          if (i === 1 || i === pageCount || (i >= currentPage - 1 && i <= currentPage + 1)) {
+            const li = document.createElement("li");
+            li.className = "page-item" + (i === currentPage ? " active" : "");
+            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            li.addEventListener("click", (e) => {
+              e.preventDefault();
+              currentPage = i;
+              displayTable(currentPage);
+              setupPagination();
+            });
+            pagination.appendChild(li);
+          } else if (i === 2 && currentPage > 3) {
+            // Ellipsis after first page
+            const li = document.createElement("li");
+            li.className = "page-item disabled";
+            li.innerHTML = `<span class="page-link">...</span>`;
+            pagination.appendChild(li);
+          } else if (i === pageCount - 1 && currentPage < pageCount - 2) {
+            // Ellipsis before last page
+            const li = document.createElement("li");
+            li.className = "page-item disabled";
+            li.innerHTML = `<span class="page-link">...</span>`;
+            pagination.appendChild(li);
+          }
+        }
+
+        // Next button
+        const next = document.createElement("li");
+        next.className = "page-item" + (currentPage === pageCount ? " disabled" : "");
+        next.innerHTML = `<a class="page-link" href="#">›</a>`;
+        next.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (currentPage < pageCount) {
+            currentPage++;
+            displayTable(currentPage);
+            setupPagination();
+          }
+        });
+        pagination.appendChild(next);
+      }
+
+      // // Search function
+      // function searchTable() {
+      //   const query = searchInput.value.toLowerCase().trim();
+
+      //   filteredRows = allRows.filter((row) =>
+      //     row.textContent.toLowerCase().includes(query)
+      //   );
+
+      //   currentPage = 1;
+      //   displayTable(currentPage);
+      //   setupPagination();
+      // }
+
+      // // Handle search input + button
+      // searchButton?.addEventListener("click", searchTable);
+      // searchInput?.addEventListener("keyup", (e) => {
+      //   if (e.key === "Enter") searchTable();
+      // });
+
+      document.getElementById('search-input').addEventListener('keyup', function() {
+        const filter = this.value.toLowerCase()
+        const rows = document.querySelectorAll('#myTable tbody tr')
+        rows.forEach(row => {
+          const text = row.textContent.toLowerCase()
+          row.style.display = text.includes(filter) ? '' : 'none'
+        })
+      })
+
+      // Handle entries dropdown
+      select?.addEventListener("change", () => {
+        rowsPerPage = parseInt(select.value);
+        currentPage = 1;
         displayTable(currentPage);
         setupPagination();
       });
-      pagination.appendChild(li);
-    }
 
-    // Next button
-    const next = document.createElement("li");
-    next.className = "page-item" + (currentPage === pageCount ? " disabled" : "");
-    next.innerHTML = `<a class="page-link" href="#">›</a>`;
-    next.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (currentPage < pageCount) {
-        currentPage++;
-        displayTable(currentPage);
-        setupPagination();
-      }
+      // Initialize
+      displayTable(currentPage);
+      setupPagination();
     });
-    pagination.appendChild(next);
-  }
 
-  // // Search function
-  // function searchTable() {
-  //   const query = searchInput.value.toLowerCase().trim();
+      document.addEventListener('DOMContentLoaded', function() {
 
-  //   filteredRows = allRows.filter((row) =>
-  //     row.textContent.toLowerCase().includes(query)
-  //   );
-
-  //   currentPage = 1;
-  //   displayTable(currentPage);
-  //   setupPagination();
-  // }
-
-  // // Handle search input + button
-  // searchButton?.addEventListener("click", searchTable);
-  // searchInput?.addEventListener("keyup", (e) => {
-  //   if (e.key === "Enter") searchTable();
-  // });
-
-  document.getElementById('search-input').addEventListener('keyup', function() {
-  const filter = this.value.toLowerCase()
-  const rows = document.querySelectorAll('#myTable tbody tr')
-  rows.forEach(row => {
-    const text = row.textContent.toLowerCase()
-    row.style.display = text.includes(filter) ? '' : 'none'
-  })
-})
-
-  // Handle entries dropdown
-  select?.addEventListener("change", () => {
-    rowsPerPage = parseInt(select.value);
-    currentPage = 1;
-    displayTable(currentPage);
-    setupPagination();
-  });
-
-  // Initialize
-  displayTable(currentPage);
-  setupPagination();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  // ============ CSV EXPORT FUNCTIONS ============
-  
-  function exportToCSV(filename, rows) {
-    const csvContent = rows.map(row => row.join(',')).join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    
-    if (link.download !== undefined) {
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }
-
-  function getTableData(includeAll = true) {
-    const table = document.getElementById('myTable');
-    const rows = [];
-    
-    // Add headers
-    const headers = [];
-    table.querySelectorAll('thead th').forEach(th => {
-      const headerText = th.textContent.trim();
-      if (headerText !== 'Actions') { // Skip Actions column
-        headers.push(headerText);
-      }
-    });
-    rows.push(headers);
-    
-    // Add data rows
-    const tableRows = table.querySelectorAll('tbody tr');
-    tableRows.forEach(row => {
-      // Skip hidden rows if filtering
-      if (!includeAll && row.style.display === 'none') {
-        return;
-      }
-      
-      const rowData = [];
-      const cells = row.cells;
-      
-      // Skip last column (Actions)
-      for (let i = 0; i < cells.length - 1; i++) {
-        let cellText = cells[i].textContent.trim();
+        // ============ CSV EXPORT FUNCTIONS ============
         
-        // Handle image columns - just add placeholder text
-        if (cells[i].querySelector('img')) {
-          cellText = '[Image]';
+        function exportToCSV(filename, rows) {
+          const csvContent = rows.map(row => row.join(',')).join('\n');
+          const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+          const link = document.createElement('a');
+          
+          if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
         }
-        
-        // Escape quotes and wrap in quotes if contains comma
-        cellText = cellText.replace(/"/g, '""');
-        if (cellText.includes(',') || cellText.includes('\n')) {
-          cellText = `"${cellText}"`;
+
+        function getTableData(includeAll = true) {
+          const table = document.getElementById('myTable');
+          const rows = [];
+          
+          // Add headers
+          const headers = [];
+          table.querySelectorAll('thead th').forEach(th => {
+            const headerText = th.textContent.trim();
+            if (headerText !== 'Actions') { // Skip Actions column
+              headers.push(headerText);
+            }
+          });
+          rows.push(headers);
+          
+          // Add data rows
+          const tableRows = table.querySelectorAll('tbody tr');
+          tableRows.forEach(row => {
+            // Skip hidden rows if filtering
+            if (!includeAll && row.style.display === 'none') {
+              return;
+            }
+            
+            const rowData = [];
+            const cells = row.cells;
+            
+            // Skip last column (Actions)
+            for (let i = 0; i < cells.length - 1; i++) {
+              let cellText = cells[i].textContent.trim();
+              
+              // Handle image columns - just add placeholder text
+              if (cells[i].querySelector('img')) {
+                cellText = '[Image]';
+              }
+              
+              // Escape quotes and wrap in quotes if contains comma
+              cellText = cellText.replace(/"/g, '""');
+              if (cellText.includes(',') || cellText.includes('\n')) {
+                cellText = `"${cellText}"`;
+              }
+              
+              rowData.push(cellText);
+            }
+            rows.push(rowData);
+          });
+          
+          return rows;
         }
+
+        // ============ PDF EXPORT FUNCTIONS ============
         
-        rowData.push(cellText);
-      }
-      rows.push(rowData);
-    });
-    
-    return rows;
-  }
+        function exportToPDF(filename, includeAll = true) {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+          
+          // Add title
+          doc.setFontSize(16);
+          doc.text('Subscriberss List Export', 14, 15);
+          
+          // Get table data
+          const table = document.getElementById('myTable');
+          const headers = [];
+          const rows = [];
+          
+          // Get headers (excluding Actions)
+          table.querySelectorAll('thead th').forEach((th, index) => {
+            const headerText = th.textContent.trim();
+            if (headerText !== 'Actions' && headerText !== 'Big Photo' && headerText !== 'Thumbnail Photo') {
+              headers.push(headerText);
+            }
+          });
+          
+          // Get data rows
+          const tableRows = table.querySelectorAll('tbody tr');
+          tableRows.forEach(row => {
+            if (!includeAll && row.style.display === 'none') {
+              return;
+            }
+            
+            const rowData = [];
+            const cells = row.cells;
+            
+            // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
+            rowData.push(cells[0].textContent.trim()); // ID
+            rowData.push(cells[1].textContent.trim()); // Category
+            rowData.push(cells[4].textContent.trim()); // Active?
+            rowData.push(cells[5].textContent.trim()); // Last Updated
+            
+            rows.push(rowData);
+          });
+          
+          // Generate table
+          doc.autoTable({
+            head: [headers],
+            body: rows,
+            startY: 25,
+            theme: 'grid',
+            styles: {
+              fontSize: 10,
+              cellPadding: 3
+            },
+            headStyles: {
+              fillColor: [66, 139, 202],
+              textColor: 255,
+              fontStyle: 'bold'
+            }
+          });
+          
+          // Save PDF
+          doc.save(filename);
+        }
 
-  // ============ PDF EXPORT FUNCTIONS ============
-  
-  function exportToPDF(filename, includeAll = true) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    
-    // Add title
-    doc.setFontSize(16);
-    doc.text('Subscriberss List Export', 14, 15);
-    
-    // Get table data
-    const table = document.getElementById('myTable');
-    const headers = [];
-    const rows = [];
-    
-    // Get headers (excluding Actions)
-    table.querySelectorAll('thead th').forEach((th, index) => {
-      const headerText = th.textContent.trim();
-      if (headerText !== 'Actions' && headerText !== 'Big Photo' && headerText !== 'Thumbnail Photo') {
-        headers.push(headerText);
-      }
-    });
-    
-    // Get data rows
-    const tableRows = table.querySelectorAll('tbody tr');
-    tableRows.forEach(row => {
-      if (!includeAll && row.style.display === 'none') {
-        return;
-      }
-      
-      const rowData = [];
-      const cells = row.cells;
-      
-      // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
-      rowData.push(cells[0].textContent.trim()); // ID
-      rowData.push(cells[1].textContent.trim()); // Category
-      rowData.push(cells[4].textContent.trim()); // Active?
-      rowData.push(cells[5].textContent.trim()); // Last Updated
-      
-      rows.push(rowData);
-    });
-    
-    // Generate table
-    doc.autoTable({
-      head: [headers],
-      body: rows,
-      startY: 25,
-      theme: 'grid',
-      styles: {
-        fontSize: 10,
-        cellPadding: 3
-      },
-      headStyles: {
-        fillColor: [66, 139, 202],
-        textColor: 255,
-        fontStyle: 'bold'
-      }
-    });
-    
-    // Save PDF
-    doc.save(filename);
-  }
+        // ============ EVENT LISTENERS ============
+        
+        // CSV All
+        document.getElementById('export-csv-all').addEventListener('click', function(e) {
+          e.preventDefault();
+          const data = getTableData(true);
+          exportToCSV('Subscriberss-all.csv', data);
+        });
+        
+        // CSV Filtered
+        document.getElementById('export-csv-filtered').addEventListener('click', function(e) {
+          e.preventDefault();
+          const data = getTableData(false);
+          exportToCSV('Subscriberss-filtered.csv', data);
+        });
+        
+        // PDF All
+        document.getElementById('export-pdf-all').addEventListener('click', function(e) {
+          e.preventDefault();
+          exportToPDF('Subscriberss-all.pdf', true);
+        });
+        
+        // PDF Filtered
+        document.getElementById('export-pdf-filtered').addEventListener('click', function(e) {
+          e.preventDefault();
+          exportToPDF('Subscriberss-filtered.pdf', false);
+        });
 
-  // ============ EVENT LISTENERS ============
-  
-  // CSV All
-  document.getElementById('export-csv-all').addEventListener('click', function(e) {
-    e.preventDefault();
-    const data = getTableData(true);
-    exportToCSV('Subscriberss-all.csv', data);
-  });
-  
-  // CSV Filtered
-  document.getElementById('export-csv-filtered').addEventListener('click', function(e) {
-    e.preventDefault();
-    const data = getTableData(false);
-    exportToCSV('Subscriberss-filtered.csv', data);
-  });
-  
-  // PDF All
-  document.getElementById('export-pdf-all').addEventListener('click', function(e) {
-    e.preventDefault();
-    exportToPDF('Subscriberss-all.pdf', true);
-  });
-  
-  // PDF Filtered
-  document.getElementById('export-pdf-filtered').addEventListener('click', function(e) {
-    e.preventDefault();
-    exportToPDF('Subscriberss-filtered.pdf', false);
-  });
-
-});
+      });
 
     </script>
   </body>

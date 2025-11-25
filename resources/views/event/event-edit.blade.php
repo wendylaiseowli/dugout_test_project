@@ -109,7 +109,7 @@
       <nav class="navbar">
         <!-- Logo Area -->
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand">
+          <a href="{{ route('dashboard')}}" class="navbar-brand">
             <img
               class="logo-expand ds-logo"
               alt=""
@@ -182,7 +182,7 @@
                 </header>
                 <ul class="list-unstyled card-body">
                   <li class="log-out-hover">
-                    <a href="login.html" 
+                    <a href="{{ route('login')}}" 
                       ><span class="align-middle">Log Out</span></a
                     >
                   </li>
@@ -234,7 +234,7 @@
            <nav class="sidebar-nav">
             <ul class="nav in side-menu">
               <li class="menu-item-has-children">
-                <a href="index.html" id="dashboard"
+                <a href="{{ route('dashboard')}}" id="dashboard"
                   > <i class="list-icon feather feather-bar-chart-2 dugout-accent-color"></i>
                   <span class="hide-menu">Dashboard</span></a
                 >
@@ -246,7 +246,7 @@
                   <span class="hide-menu">User </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="user.html">User List</a></li>
+                  <li><a href="{{ route('users.index')}}">User List</a></li>
                 </ul>
               </li>
 
@@ -256,7 +256,7 @@
                   <span class="hide-menu small-line">Reservation </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="reservation.html">Reservation List</a></li>
+                  <li><a href="{{ route('reservations.index')}}">Reservation List</a></li>
                 </ul>
               </li>
 
@@ -266,7 +266,7 @@
                   <span class="hide-menu small-line">Menu </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="menu.html">Menu List</a></li>
+                  <li><a href="{{ route('menus.index')}}">Menu List</a></li>
                 </ul>
               </li>
 
@@ -276,7 +276,7 @@
                   <span class="hide-menu small-line">Events </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="event.html">Events List</a></li>
+                  <li><a href="{{ route('events.index')}}">Events List</a></li>
                 </ul>
               </li>
 
@@ -286,7 +286,7 @@
                   <span class="hide-menu small-line">Promotions </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="promo.html">Promotions List</a></li>
+                  <li><a href="{{ route('promotions.index')}}">Promotions List</a></li>
                 </ul>
               </li>
 
@@ -296,7 +296,7 @@
                   <span class="hide-menu small-line">Gallery </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="gallery.html">Gallery List</a></li>
+                  <li><a href="{{ route('gallerys.index')}}">Gallery List</a></li>
                 </ul>
               </li>
 
@@ -306,7 +306,7 @@
                   <span class="hide-menu small-line">Subscribers </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="subscribers.html">Subscribers List</a></li>
+                  <li><a href="{{ route('subscribers.index')}}">Subscribers List</a></li>
                 </ul>
               </li>
             </ul>
@@ -331,7 +331,7 @@
             <div class="page-title-right d-none d-sm-inline-flex">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Dashboard</a>
+                  <a href="{{ route('dashboard')}}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Edit Event</li>
               </ol>
@@ -348,7 +348,9 @@
               <!-- /.widget-holder -->
               <div class="col-md-12 widget-holder">
                 <div class="widget-bg">
-                  <form class="widget-heading clearfix has-validation-callback" action="javascript:void(0)" method="get">
+                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('events.update', $event) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="grey-outline w-100 m-w-100">
 
                       <!-- <div class="col-lg-12">
@@ -360,10 +362,12 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-name">Event Name:</label>
                         <div class="col-md-10">
-                          <input class="form-control" id="event-name" value="Birthday" type="text" data-validation="required">
+                          <input class="form-control" id="event-name" type="text" name="event_name" value="{{old('event_name', $event->event_name)}}">
                         </div>
+                        @error('event_name')
+                          {{ $message }}
+                        @enderror
                       </div>
-
                       <!-- <div class="col-lg-12">
                         <div class="form-group">
                           <label for="l38">Event Description:</label>
@@ -374,27 +378,33 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-description">Event Description:</label>
                         <div class="col-md-10">
-                          <textarea class="form-control" id="event-description" rows="10" data-validation="required">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi, sit.</textarea>
+                          <textarea class="form-control" id="event-description" rows="10" name="description">{{old('description', $event->description)}}</textarea>
                         </div>
+                        @error('description')
+                          {{ $message }}
+                        @enderror
                       </div>
                       <div class="form-group row align-items-start">
                         <!-- Label on the left -->
                         <label for="l39" class="col-md-2 col-form-label text-md-left">Event Photo:</label>
-
                         <!-- Image + controls on the right -->
                         <div class="col-md-10">
                           <div class="d-flex flex-column align-items-center align-items-md-start">
                             <!-- Image preview -->
-                            <img 
-                              src="{{ asset('img/admin/dugout-placeholder.png') }}" 
+                            <img
+                              id="image-preview"
+                              src="{{ $event->photo_path ? asset('img/admin/events_gallery/'.$event->photo_path): asset('img/admin/dugout-placeholder.png') }}" 
                               alt="placeholder" 
                               class="img-thumbnail mb-3" 
                               style="width: 300px; height: auto;"
                             >
 
                             <!-- File input -->
-                            <input id="l39" type="file" class="form-control mb-2" style="max-width: 300px;">
-
+                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;" name="photo_path" accept="image/*" value="{{old('photo_path', $event->photo_path)}}">
+                            @error('photo_path')
+                              {{ $message }}
+                            @enderror
+                            
                             <!-- Warnings -->
                             <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 520px and height 360px.</p>
                             <p class="text-danger small mb-0">*Please ensure that the image is no larger than 1MB.</p>
@@ -404,16 +414,22 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Event Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" placeholder="Pick a Date" data-plugin-options='{"autoclose": true}' value="05/11/2025" required>
+                          <input type="text" class="form-control datepicker" placeholder="Pick a Date" data-plugin-options='{"autoclose": true}' id="event_date" value="{{old('event_date', $event->event_date)->format('d/m/Y')}}" required>
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
+                        @error('event_date')
+                          {{ $message }}
+                        @enderror                        
                       </div>
                       <div class="form-group row input-has-value">
-                        <label for="sampleClockPicker1" class="col-md-2 form-control-label text-center text-md-left">Reservation Time:</label>
+                        <label for="sampleClockPicker1" class="col-md-2 form-control-label text-center text-md-left">Event Time:</label>
                         <div class="input-group col-md-10 clockpicker">
-                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1" required>
+                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1" name="event_time" value="{{old('event_time', \Carbon\Carbon::parse($event->event_time)->format('H:i'))}}" required>
                           <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
                         </div>
+                        @error('event_time')
+                          {{ $message }}
+                        @enderror                        
                       </div>
                       <!-- <div class="col-lg-12">
                         <div class="form-group">
@@ -427,16 +443,16 @@
                       <div class="form-group row">
                         <label for="event-location" class="col-md-2 text-center text-md-left">Event Location:</label>
                         <div class="col-md-10">
-                        <input class="form-control text-black" disabled id="event-location"
-                          placeholder="Oasis Square, Jalan PJU 1A/7A, Ara Damansara, Petaling Jaya, Malaysia" type="text">
-                          </div>
+                          <input class="form-control text-black" disabled id="event-location"
+                          type="text" name="event_location" value="{{old('event_location', $event->event_location) }}" disabled>
+                        </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-md-2"> 
-                            </div>
+                        </div>
                         <div class="col-md-10 btn-list text-center text-md-left">
-                            <button class="btn btn-success btn-edit" type="submit">Save</button>
-                            <a class="btn btn-danger btn-edit" href="event.html">Go Back</a>
+                          <button class="btn btn-success btn-edit" type="submit">Save</button>
+                          <a class="btn btn-danger btn-edit" href="{{ route('events.index')}}">Go Back</a>
                         </div>
                       </div>
                     </div>
@@ -1372,7 +1388,7 @@
             "</b>?"
         );
       }
-    </scloudflare.com>
+    </script>
 
     <script type="text/javascript">
       $("#overlay").addClass("hide");
@@ -1450,7 +1466,6 @@
           });
       });
 
-
       $(document).ready(function() {
             // Initializes all elements with the class 'clockpicker'.
             // In your HTML, the parent div is marked with this class: <div class="input-group clockpicker">
@@ -1465,6 +1480,17 @@
           const val = $(this).find('input').val();
           $(this).find('input').val(val.replace(/(AM|PM)$/i, ' $1'));
         });
+      });
+
+      document.getElementById('input-image').addEventListener('change', function(event){
+        const file = event.target.files[0];
+        if(file){
+          const reader = new FileReader();
+            reader.onload = function(e){
+              document.getElementById('image-preview').src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
       });
     </script>
   </body>
