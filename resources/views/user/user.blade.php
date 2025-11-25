@@ -504,9 +504,9 @@
                                       <span class="glyphicon feather-eye"></span>
                                     </button>
                                     @if(auth()->id()==1 || auth()->id() == $user->id)
-                                      <button
+                                      <a
                                         type="button"
-                                        class="tabledit-delete-button btn btn-sm btn-success "
+                                        class="tabledit-delete-button btn btn-sm btn-info"
                                         data-toggle="modal"
                                         data-target="#userdetails-edit-modal"
                                         data-user-id ="{{ $user->id }}"
@@ -514,11 +514,11 @@
                                         data-user-last-name="{{ $user->last_name }}"
                                         data-user-username="{{ $user->username }}"
                                         data-user-email="{{ $user->email }}"
-                                        style="float: none color:white;"
+                                        style="float: none; color:white;"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                       >
                                         <span class="fa fa-edit"></span>
-                                      </button>
+                                      </a>
                                       @if(auth()->id() != 1)
                                         <button
                                           type="button"

@@ -44,8 +44,9 @@ class MenuController extends Controller
     }
 
     #Admin
-    public function index(){
-        return view('menu.menu');         
+    public function index(Menu $menu){
+        $menus = Menu::join('subcategory', 'menus.subCategoryID', '=', 'subcategory.id')->join('category', 'category.id', '=', 'subCategory.categoryID')->select('menus.*', 'subcategory.name as subcategory_name', 'category.name as category_name')->get();
+        return view('menu.menu', compact('menus'));         
     }
 
     public function ceate(){
@@ -70,5 +71,15 @@ class MenuController extends Controller
 
     public function destroy(){
 
+    }
+
+    public function active(Menu $menu){
+        $menu->update(['status'=> true]);
+        return redirect('/menus')->with('success', 'Status has change to active');
+    }
+
+    public function deactive(Menu $menu){
+        $menu->update(['status'=> false]);
+        return redirect('/menus')->with('success', 'Status has change to deactive');
     }
 }

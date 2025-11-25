@@ -9,7 +9,6 @@ use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     public function index(){
-        // $users = UserList::select('id', 'first_name', 'last_name', 'username', 'email', 'status', 'access_type', 'updated_at')->paginate(10);
         $users = UserList::select('id', 'first_name', 'last_name', 'username', 'email', 'status', 'access_type', 'updated_at')->get();
         return view('user.user', compact('users'));
     }
@@ -31,30 +30,17 @@ class UserController extends Controller
     }
 
     public function update(UserRequest $request, UserList $user){
-        // $user->update($request->validated());
+
         $data = $request->validated();
 
-    // Only hash and update password if the user entered a new one
-    if (!empty($data['password'])) {
-        $data['password'] = bcrypt($data['password']);
-    } else {
-        unset($data['password']); // don't overwrite existing password if empty
-    }
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
+        }
 
-    $user->update($data);
-        return redirect('/users')->with('success', 'User details has been updated successfully');
-
-        
-        // // Only hash if password was provided
-        // if (!empty($data['password'])) {
-        //     $data['password'] = Hash::make($data['password']);
-        // } else {
-        //     unset($data['password']);
-        // }
-
-        // $user->update($data);
-
-        // return redirect('/users')->with('success', 'User details has been updated successfully');
+        $user->update($data);
+            return redirect('/users')->with('success', 'User details has been updated successfully');
     }
 
     public function destroy(UserList $user){

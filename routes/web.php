@@ -80,6 +80,12 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/users/{user}/active', [UserController::class, 'active'])->name('active-user');
     Route::put('/users/{user}/deactive', [UserController::class, 'deactive'])->name('deactive-user');
+
+    Route::put('/reservations/{reservation}/active', [ReservationController::class, 'active'])->name('active-reservation');
+    Route::put('/reservations/{reservation}/deactive', [ReservationController::class, 'deactive'])->name('deactive-reservation');
+
+    Route::put('/menus/{menu}/active', [MenuController::class, 'active'])->name('active-menu');
+    Route::put('/menus/{menu}/deactive', [MenuController::class, 'deactive'])->name('deactive-menu');
     // Route::get('/menu-add', function () {
     //     return view('menu.menu-add');
     // })->name('menu-add');

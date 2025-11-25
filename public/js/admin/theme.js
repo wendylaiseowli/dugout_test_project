@@ -229,7 +229,7 @@
           for( var i = 0; i < toggle.length; i++ ) {
             toggle[i].classList.remove('active');
           }
-          $chatPanel.hidden = 'hidden';
+          // $chatPanel.hidden = 'hidden';
         }
       });
 		},

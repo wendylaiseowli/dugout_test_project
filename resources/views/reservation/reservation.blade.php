@@ -376,29 +376,27 @@
                           Search
                         </button> -->
                         <button
+                          type="button"
                           class="btn btn-normal btn-default btn-orange-ds ripple mb-2 input-m m-btn-full"
                           data-toggle="modal"
-                          data-target="#adduser-modal"
-                          onclick="preventDefault()"
+                          data-target="#addreservation-modal"
                           id="adduser"
                         >
                           Add Reservation
                         </button>
-                        <script>
+                        {{-- <script>
                           document
                             .getElementById("adduser")
                             .addEventListener("click", function (event) {
                               event.preventDefault();
                             });
-                        </script>
-
+                        </script> --}}
                         <select class="form-control input-m sort-time-dropdown" id="time-list">
                           <option value="" disabled selected>Sort By Time</option>
                           <option value="upcoming">Upcoming</option>
                           <option value="past">Past</option>
                           <option value="present">Present</option>
                         </select>
-                       
                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default ripple mb-2 input-m m-btn-full pull-right export-btn" type="button">Export<span class="caret"></span>
                         </button>
                         <div role="menu" class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 47px, 0px); top: 0px; left: 0px; will-change: transform;"><a class="dropdown-item" href="#" id="export-csv-all">CSV (All)</a> <a class="dropdown-item" href="#" id="export-csv-filtered">CSV (Filtered)</a> <a class="dropdown-item" href="#" id="export-pdf-all">PDF (All)</a> <a class="dropdown-item" href="#" id="export-pdf-filtered">PDF (Filtered)</a>
@@ -426,609 +424,122 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr data-expanded="true">
-                            <td>1</td>
-                            <td>Dennise</td>
-                            <td>22 November, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                          @foreach($reservations as $reservation)
+                            <tr data-expanded="true">
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $reservation->reservation_name}}</td>
+                              <td>{{ $reservation->reservation_date->format('d F, l')}}</td>
+                              <td>{{ $reservation->reservation_time->format('h:i A')}}</td>
+                              <td>{{ $reservation->number_of_people}}</td>
+                              <td>{{ $reservation->phone_number}}</td>
+                              <td>{{ $reservation->email}}</td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
+                                    @if($reservation->status == true)
+                                      <button
+                                        type="submit"
+                                        class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                        data-toggle="modal"
+                                        data-target="#deactivate-modal"
+                                        data-reservation-id ="{{ $reservation->id }}"
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-x-circle"
+                                        ></span>
+                                        Deactivate
+                                      </button>
+                                    @else
+                                      <button
+                                      type="submit"
+                                      class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                      data-toggle="modal"
+                                      data-target="#activate-modal"
+                                      data-reservation-id ="{{ $reservation->id }}"
+                                      style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-check-circle"
+                                        ></span>
+                                        Activate
+                                      </button>
+                                    @endif
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                              </td>
+                              <td>{{ $reservation->updated_at->diffForHumans()}}</td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                 <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
                                   >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    data-toggle="modal"
-                                    data-target="#edituser-modal"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>   
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#reservationdetails-modal"
+                                      data-reservation-id ="{{ $reservation->id }}"
+                                      data-reservation-name="{{ $reservation->reservation_name }}"
+                                      data-reservation-date="{{ $reservation->reservation_date->format('d F, l') }}"
+                                      data-reservation-time="{{ $reservation->reservation_time->format('h:i A') }}"
+                                      data-reservation-number-of-people="{{ $reservation->number_of_people }}"
+                                      data-reservation-phone-number="{{ $reservation->phone_number }}"
+                                      data-reservation-email="{{ $reservation->email }}"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      data-toggle="modal"
+                                      data-target="#editreservation-modal"
+                                      data-reservation-id ="{{ $reservation->id }}"
+                                      data-reservation-name="{{ $reservation->reservation_name }}"
+                                      data-reservation-date="{{ $reservation->reservation_date->format('d/m/Y') }}"
+                                      data-reservation-time="{{ $reservation->reservation_time->format('H:i') }}"
+                                      data-reservation-number-of-people="{{ $reservation->number_of_people }}"
+                                      data-reservation-phone-number="{{ $reservation->phone_number }}"
+                                      data-reservation-email="{{ $reservation->email }}"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>   
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      data-reservation-id ="{{ $reservation->id }}"
+                                      data-reservation-name="{{ $reservation->reservation_name }}"
+                                      data-reservation-date="{{ $reservation->reservation_date }}"
+                                      data-reservation-time="{{ $reservation->reservation_time }}"
+                                      data-reservation-number-of-people="{{ $reservation->number_of_people }}"
+                                      data-reservation-phone-number="{{ $reservation->phone_number }}"
+                                      data-reservation-email="{{ $reservation->email }}"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Elodia</td>
-                            <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-success btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-check-circle"
-                                    ></span>
-                                    Activate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Raeann</td>
-                            <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Junie</td>
-                            <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >                             
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>       
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>Solomon</td>
-                            <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                 <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button> 
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span> 
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>Bar</td>
-                            <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                 <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span> 
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>7</td>
-                            <td>Usha</td>
-                            <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                           <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                > 
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span> 
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>Lorriane</td>
-                           <td>22 October, Wednesday</td>
-                            <td>06:00 <span>PM</span></td>
-                            <td>2</td>
-                            <td>00000000000</td>
-                            <td>example@email.com</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >  
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span> 
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                              </td>
+                            </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -1107,73 +618,116 @@
             </div>
             <!-- /.row -->
           </div>
+          {{-- @if ($errors->any())
+            <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                var addModal = new bootstrap.Modal(document.getElementById('addreservation-modal'));
+                addModal.show();
+              });
+            </script>
+          @endif --}}
+          {{-- <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                // Auto-open the modal if there are validation errors
+                @if ($errors->any())
+                    var addModalEl = document.getElementById('addreservation-modal');
+                    var addModal = new bootstrap.Modal(addModalEl);
+                    addModal.show();
+
+                    // When the modal is closed, reset Bootstrap's modal instance
+                    addModalEl.addEventListener('hidden.bs.modal', function () {
+                        addModal.dispose(); // Destroy modal instance
+                    });
+                @endif
+            });
+          </script> --}}
 
           <!-- Page Title Area -->
           <!-- /.page-title -->
-
-          <div id="adduser-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div id="addreservation-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Add Reservation</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> --}}
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <form class="form-material">
+                <form class="form-material"  method="POST" id="add-reservation-form">
+                  @csrf
                   <div class="modal-body reservation-modal">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="reservation-name">
+                          <input type="text" class="form-control" id="reservation-name" name="reservation_name">
                           <label for="reservation-name">Reservation Name</label>
                         </div>
-                      </div>
+                        @error('reservation_name')
+                          {{ $message }}
+                        @enderror                        
+                      </div>                      
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label for="reservation-date" class="form-control-label">Reservation Date</label>
                           <div class="input-group">
-                            <input type="text" class="form-control datepicker" id="reservation-date" placeholder="Pick a Date">
+                            <input type="text" class="form-control datepicker" id="reservation-date" placeholder="Pick a Date" name="reservation_date">
                             <span class="input-group-addon">
                               <i class="material-icons list-icon">date_range</i>
                             </span>
                           </div>
                         </div>
+                        @error('reservation_date')
+                          {{ $message }}
+                        @enderror
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label for="reservation-time" class="form-control-label">Reservation Time</label>
                           <div class="input-group">
-                            <input type="text" class="form-control clockpicker" id="reservation-time" placeholder="Pick a Time">
+                            <input type="text" class="form-control clockpicker" id="reservation-time" placeholder="Pick a Time" name="reservation_time">
                             <span class="input-group-addon">
                               <i class="material-icons list-icon">watch_later</i>
                             </span>
                           </div>
                         </div>
+                        @error('reservation-time')
+                          {{ $message }}
+                        @enderror                
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="num-people">
+                          <input type="text" class="form-control" id="num-people" name="number_of_people">
                           <label for="num-people">Number of People</label>
                         </div>
+                        @error('number_of_people')
+                          {{ $message }}
+                        @enderror                         
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="phone-number">
+                          <input type="text" class="form-control" id="phone-number" name="phone_number">
                           <label for="phone-number">Phone Number</label>
                         </div>
+                        @error('phone_number')
+                          {{ $message }}
+                        @enderror                          
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="email" class="form-control" id="email-address">
+                          <input type="email" class="form-control" id="email-address" name="email">
                           <label for="email-address">Email</label>
                         </div>
+                        @error('email')
+                          {{ $message }}
+                        @enderror                          
                       </div>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button type="button" class="btn btn-primary btn-oval btn-submit ml-auto mr-2">Submit</button>
+                      <button type="submit" class="btn btn-primary btn-oval btn-submit ml-auto mr-2">Submit</button>
                       <button type="button" class="btn btn-outline-default btn-oval btn-cancel btn-black" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1182,10 +736,9 @@
             </div>
           </div> <!--Delete one div below-->
           <!-- /.modal-dialog -->
-
           <!-- add user ends here -->
-          <!-- Edit user Modal -->
-          <div id="edituser-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <!-- Edit reservation Modal -->
+          <div id="editreservation-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <div class="modal-header">
@@ -1194,60 +747,80 @@
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <form class="form-material">
+                <form class="form-material" method="POST" id="edit-reservation-form" >
+                  @csrf
+                  @method('PUT')
                   <div class="modal-body reservation-modal">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="edit-reservation-name">
+                          <input type="text" class="form-control" id="edit-reservation-name" name="reservation_name">
                           <label for="edit-reservation-name">Reservation Name</label>
+                          @error('reservation_name')
+                            {{ $message }}
+                          @enderror
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label for="edit-reservation-date" class="form-control-label">Reservation Date</label>
                           <div class="input-group">
-                            <input type="text" class="form-control datepicker" id="edit-reservation-date" placeholder="Pick a Date">
+                            <input type="text" class="form-control datepicker" id="edit-reservation-date" placeholder="Pick a Date" name="reservation_date">
                             <span class="input-group-addon">
                               <i class="material-icons list-icon">date_range</i>
                             </span>
                           </div>
+                            @error('reservation_date')
+                              {{ $message }}
+                            @enderror                          
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label for="edit-reservation-time" class="form-control-label">Reservation Time</label>
                           <div class="input-group">
-                            <input type="text" class="form-control clockpicker" id="edit-reservation-time" placeholder="Pick a Time">
+                            <input type="text" class="form-control clockpicker" id="edit-reservation-time" placeholder="Pick a Time" name="reservation_time">
                             <span class="input-group-addon">
                               <i class="material-icons list-icon">watch_later</i>
                             </span>
                           </div>
+                            @error('reservation_time')
+                              {{ $message }}
+                            @enderror                          
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="edit-num-people">
-                          <label for="edit-num-people">Number of People</label>
+                          <input type="text" class="form-control" id="edit-num-people" name="number_of_people">
+                          <label for="edit-num-people">Number of People</label>                       
                         </div>
+                          @error('number_of_people')
+                            {{ $message }}
+                          @enderror                           
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="edit-phone-number">
-                          <label for="edit-phone-number">Phone Number</label>
+                          <input type="text" class="form-control" id="edit-phone-number" name="phone_number">
+                          <label for="edit-phone-number">Phone Number</label>                        
                         </div>
+                          @error('phone_number')
+                            {{ $message }}
+                          @enderror                       
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input type="email" class="form-control" id="edit-email-address">
-                          <label for="edit-email-address">Email</label>
+                          <input type="email" class="form-control" id="edit-email-address" name="email">
+                          <label for="edit-email-address">Email</label>                      
                         </div>
+                          @error('email')
+                            {{ $message }}
+                          @enderror                             
                       </div>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button type="button" class="btn btn-primary btn-oval btn-submit ml-auto mr-2">Save</button>
+                      <button type="submit" class="btn btn-primary btn-oval btn-submit ml-auto mr-2">Save</button>
                       <button type="button" class="btn btn-outline-default btn-oval btn-cancel btn-black" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1260,7 +833,9 @@
           <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="deactive-reservation-form">
+                  @csrf
+                  @method('PUT')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Change Status</h5>
@@ -1269,12 +844,12 @@
                   </div>
                   <div class="modal-body">
                     <div class="row">
-                      <p class="text-center w-100">Are you sure you want to change the Reservation status?</p>
+                      <p class="text-center w-100">Are you sure you want to deactive the Reservation status?</p>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1285,11 +860,44 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Deactivate here -->
+          <!-- activate Modal -->
+          <div id="activate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form class="form-material" method="POST" id="active-reservation-form">
+                  @csrf
+                  @method('PUT')
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Change Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                        <p class="text-center w-100">Are you sure you want to active the Reservation status?</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- activate here -->
           <!-- Delete Modal -->
           <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="delete-reservation-form">
+                  @csrf
+                  @method('DELETE')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Delete Reservation</h5>
@@ -1299,37 +907,33 @@
                   <div class="modal-body">
                     <p class="text-center w-100">Are you sure you want to delete the following Reservation?</p>
                     <div class="userdetail d-flex justify-content-between">
-                      <p>ID:</p>
-                      <p class="text-black">1</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
                       <p>Reservation Name:</p>
-                      <p class="text-black">Dennise</p>
+                      <p class="text-black"><span id="delete-reservation-name"></p>
                     </div>
                     <div class="userdetail d-flex justify-content-between">
                       <p>Reservation Date:</p>
-                      <p class="text-black">13 March, Tuesday</p>
+                      <p class="text-black"><span id="delete-reservation-date"></p>
                     </div>
                     <div class="userdetail d-flex justify-content-between">
                       <p>Reservation Time:</p>
-                      <p class="text-black">05:00 PM</p>
+                      <p class="text-black"><span id="delete-reservation-time"></p>
                     </div>
                     <div class="userdetail d-flex justify-content-between">
                       <p>Number of People:</p>
-                      <p class="text-black">4</p>
+                      <p class="text-black"><span id="delete-reservation-number-of-people"></p>
                     </div>
                     <div class="userdetail d-flex justify-content-between">
                       <p>Phone Number:</p>
-                      <p class="text-black">0000000000</p>
+                      <p class="text-black"><span id="delete-reservation-phone"></p>
                     </div>
                     <div class="userdetail d-flex justify-content-between">
                       <p>Email:</p>
-                      <p class="text-black">example@email.com</p>
+                      <p class="text-black"><span id="delete-reservation-email"></p>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1381,8 +985,8 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Edit Password ends here -->
-          <!--  User Modal -->
-          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+          <!--  Reservation view Modal -->
+          <div id="reservationdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1395,31 +999,31 @@
                 <div class="modal-body">
                   <div class="userdetail d-flex justify-content-between">
                     <p>ID:</p>
-                    <p class="text-black">1</p>
+                    <p class="text-black"><span id="modal-reservation-id"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Reservation Name:</p>
-                    <p class="text-black">Dennise</p>
+                    <p class="text-black"><span id="modal-reservation-name"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Reservation Date:</p>
-                    <p class="text-black">13 March, Tuesday</p>
+                    <p class="text-black"><span id="modal-reservation-date"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Reservation Time:</p>
-                    <p class="text-black">05:00 PM</p>
+                    <p class="text-black"><span id="modal-reservation-time"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Number of People:</p>
-                    <p class="text-black">4</p>
+                    <p class="text-black"><span id="modal-reservation-number-of-people"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Phone Number:</p>
-                    <p class="text-black">0000000000</p>
+                    <p class="text-black"><span id="modal-reservation-phone"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Email:</p>
-                    <p class="text-black">example@email.com</p>
+                    <p class="text-black"><span id="modal-reservation-email"></p>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -1558,7 +1162,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
-    <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/bootstrap.min.js"></script>
+    <script src="/js/admin/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
@@ -1576,7 +1180,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.4/footable.min.js"></script>
-    <script src="admin-wiseowl/node_modules/jquery-tabledit/jquery.tabledit.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
@@ -1588,9 +1191,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.1/jquery.toast.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js"></script>
 
-    <script src="http://xcitemedia.tv/admin-wiseowl/assets/vendors/theme-widgets/widgets.js"></script>
-    <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/theme.js"></script>
-    <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/custom.js"></script>
+    <script src="/js/admin/theme.js"></script>
+    <script src="/js/admin/custom.js"></script>
     <script src="{{ asset('js/admin/custom-js.js') }}"></script>
     <script
       type="text/javascript"
@@ -2118,7 +1720,6 @@
             parentGroup.removeClass('input-has-value');
           }
         });
-
         // Clockpicker
         $('.clockpicker').clockpicker({
           autoclose: true,
@@ -2141,83 +1742,97 @@
       });
 
       document.addEventListener("DOMContentLoaded", function() {
-      const table = document.getElementById("myTable");
-      const pagination = document.getElementById("pagination");
-      const info = document.getElementById("tableInfo");
-      const select = document.getElementById("entriesSelect");
-      const searchInput = document.getElementById("search-input");
-      const searchButton = document.querySelector(".btn-search");
+        const table = document.getElementById("myTable");
+        const pagination = document.getElementById("pagination");
+        const info = document.getElementById("tableInfo");
+        const select = document.getElementById("entriesSelect");
+        const searchInput = document.getElementById("search-input");
+        const searchButton = document.querySelector(".btn-search");
 
-      let allRows = Array.from(table.querySelectorAll("tbody tr"));
-      let filteredRows = [...allRows];
-      let rowsPerPage = parseInt(select?.value || 10);
-      let currentPage = 1;
+        let allRows = Array.from(table.querySelectorAll("tbody tr"));
+        let filteredRows = [...allRows];
+        let rowsPerPage = parseInt(select?.value || 10);
+        let currentPage = 1;
 
-      function displayTable(page) {
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
+        function displayTable(page) {
+          const start = (page - 1) * rowsPerPage;
+          const end = start + rowsPerPage;
 
-        filteredRows.forEach((row, index) => {
-          row.style.display = (index >= start && index < end) ? "" : "none";
-        });
-
-        updateInfo(start, end);
-      }
-
-      function updateInfo(start, end) {
-        const total = filteredRows.length;
-        const showingStart = total === 0 ? 0 : start + 1;
-        const showingEnd = Math.min(end, total);
-        if (info)
-          info.textContent = `Showing ${showingStart} to ${showingEnd} of ${total} entries`;
-      }
-
-      function setupPagination() {
-        const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
-        pagination.innerHTML = "";
-
-        // Previous button
-        const prev = document.createElement("li");
-        prev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
-        prev.innerHTML = `<a class="page-link" href="#">‹</a>`;
-        prev.addEventListener("click", (e) => {
-          e.preventDefault();
-          if (currentPage > 1) {
-            currentPage--;
-            displayTable(currentPage);
-            setupPagination();
-          }
-        });
-        pagination.appendChild(prev);
-
-        // Page numbers
-        for (let i = 1; i <= pageCount; i++) {
-          const li = document.createElement("li");
-          li.className = "page-item" + (i === currentPage ? " active" : "");
-          li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-          li.addEventListener("click", (e) => {
-            e.preventDefault();
-            currentPage = i;
-            displayTable(currentPage);
-            setupPagination();
+          filteredRows.forEach((row, index) => {
+            row.style.display = (index >= start && index < end) ? "" : "none";
           });
-          pagination.appendChild(li);
+
+          updateInfo(start, end);
         }
 
-        // Next button
-        const next = document.createElement("li");
-        next.className = "page-item" + (currentPage === pageCount ? " disabled" : "");
-        next.innerHTML = `<a class="page-link" href="#">›</a>`;
-        next.addEventListener("click", (e) => {
-          e.preventDefault();
-          if (currentPage < pageCount) {
-            currentPage++;
-            displayTable(currentPage);
-            setupPagination();
+        function updateInfo(start, end) {
+          const total = filteredRows.length;
+          const showingStart = total === 0 ? 0 : start + 1;
+          const showingEnd = Math.min(end, total);
+          if (info)
+            info.textContent = `Showing ${showingStart} to ${showingEnd} of ${total} entries`;
+        }
+
+        function setupPagination() {
+          const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
+          pagination.innerHTML = "";
+
+          // Previous button
+          const prev = document.createElement("li");
+          prev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+          prev.innerHTML = `<a class="page-link" href="#">‹</a>`;
+          prev.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (currentPage > 1) {
+              currentPage--;
+              displayTable(currentPage);
+              setupPagination();
+            }
+          });
+          pagination.appendChild(prev);
+
+          // Page numbers
+          for (let i = 1; i <= pageCount; i++) {
+            if (i === 1 || i === pageCount || (i >= currentPage - 1 && i <= currentPage + 1)) {
+              const li = document.createElement("li");
+              li.className = "page-item" + (i === currentPage ? " active" : "");
+              li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+              li.addEventListener("click", (e) => {
+                e.preventDefault();
+                currentPage = i;
+                displayTable(currentPage);
+                setupPagination();
+              });
+              pagination.appendChild(li);
+            } else if (i === 2 && currentPage > 3) {
+              // Ellipsis after first page
+              const li = document.createElement("li");
+              li.className = "page-item disabled";
+              li.innerHTML = `<span class="page-link">...</span>`;
+              pagination.appendChild(li);
+            } else if (i === pageCount - 1 && currentPage < pageCount - 2) {
+              // Ellipsis before last page
+              const li = document.createElement("li");
+              li.className = "page-item disabled";
+              li.innerHTML = `<span class="page-link">...</span>`;
+              pagination.appendChild(li);
+            }
           }
-        });
-        pagination.appendChild(next);
-      }
+
+          // Next button
+          const next = document.createElement("li");
+          next.className = "page-item" + (currentPage === pageCount ? " disabled" : "");
+          next.innerHTML = `<a class="page-link" href="#">›</a>`;
+          next.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (currentPage < pageCount) {
+              currentPage++;
+              displayTable(currentPage);
+              setupPagination();
+            }
+          });
+          pagination.appendChild(next);
+        }
 
       // // 🔍 Search function
       // function searchTable() {
@@ -2239,13 +1854,13 @@
       // });
 
       document.getElementById('search-input').addEventListener('keyup', function() {
-      const filter = this.value.toLowerCase()
-      const rows = document.querySelectorAll('#myTable tbody tr')
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase()
-        row.style.display = text.includes(filter) ? '' : 'none'
+        const filter = this.value.toLowerCase()
+        const rows = document.querySelectorAll('#myTable tbody tr')
+        rows.forEach(row => {
+          const text = row.textContent.toLowerCase()
+          row.style.display = text.includes(filter) ? '' : 'none'
+        })
       })
-    })
 
       // Handle entries dropdown
       select?.addEventListener("change", () => {
@@ -2522,8 +2137,166 @@
           exportToPDF('reservation-filtered.pdf', false);
         });
 
-      });
+        //Active
+        $('#deactivate-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // jQuery object for the button
+            var reservationId = button.data('reservation-id');
 
+            // Update form action URL dynamically
+            $('#deactive-reservation-form').attr('action', '/reservations/' + reservationId + '/deactive');
+        });        
+        
+        $('#activate-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // jQuery object for the button
+            var reservationId = button.data('reservation-id');
+
+            // Update form action URL dynamically
+            $('#active-reservation-form').attr('action', '/reservations/' + reservationId + '/active');
+        });
+
+        //Add
+        // $('#addreservation-modal').on('show.bs.modal', function (event) {
+        //   var button = $(event.relatedTarget); // jQuery object for the button
+          
+        //   $('#add-reservation-form').attr('action', '/reservations');
+        // });
+        $('#add-reservation-form').on('submit', function(e) {
+          e.preventDefault(); // stop normal form submit
+
+          let form = $(this);
+          let formData = form.serialize();
+
+          $.ajax({
+            url: '/reservations',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                $('#addreservation-modal').modal('hide');
+                location.reload(); // reload table after success
+            },
+            error: function (xhr) {
+              if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+
+                // Clear old errors
+                form.find('.text-danger').remove();
+
+                // Show new errors
+                $.each(errors, function (key, messages) {
+                    let input = form.find('[name="'+ key +'"]');
+                    // Find the closest parent for input groups, otherwise use input itself
+                    let wrapper = input.closest('.input-group').length ? input.closest('.input-group') : input;
+
+                    wrapper.after('<span class="text-danger">' + messages[0] + '</span>');
+                });
+              }
+            }
+          });
+        });
+
+        //View
+        $('#reservationdetails-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var reservationId = button.data('reservation-id');
+          var name = button.data('reservation-name');
+          var date = button.data('reservation-date');
+          var time = button.data('reservation-time');
+          var number_of_people = button.data('reservation-number-of-people');
+          var phone = button.data('reservation-phone-number');
+          var email = button.data('reservation-email');
+          
+          // Update modal content
+          $('#modal-reservation-id').text(reservationId);
+          $('#modal-reservation-name').text(name);
+          $('#modal-reservation-date').text(date);
+          $('#modal-reservation-time').text(time);
+          $('#modal-reservation-number-of-people').text(number_of_people);
+          $('#modal-reservation-phone').text(phone);
+          $('#modal-reservation-email').text(email);
+        });
+
+        //Edit
+        $('#editreservation-modal').on('shown.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var reservationId = button.data('reservation-id');
+          var name = button.data('reservation-name');
+          var date = button.data('reservation-date');
+          var time = button.data('reservation-time');
+          var number_of_people = button.data('reservation-number-of-people');
+          var phone = button.data('reservation-phone-number');
+          var email = button.data('reservation-email');
+          
+          // Update modal content
+          $('#edit-reservation-name').val(name).trigger('input');
+          $('#edit-reservation-time').val(time).trigger('input');
+          $('#edit-reservation-date').datepicker('update', date).trigger('input');
+          $('#edit-num-people').val(number_of_people).trigger('input');
+          $('#edit-phone-number').val(phone).trigger('input');
+          $('#edit-email-address').val(email).trigger('input');
+          
+          // Update form action URL dynamically
+          $('#edit-reservation-form').attr('action', '/reservations/' + reservationId);
+        });
+        
+        $('#edit-reservation-form').on('submit', function(e) {
+          e.preventDefault(); // prevent normal submit
+
+          let form = $(this);
+          let formData = form.serialize();
+          let url = form.attr('action'); // dynamically set action
+
+          $.ajax({
+            url: url,
+            method: 'POST', // Laravel PUT via POST + _method
+            data: formData,
+            success: function(response) {
+              $('#editreservation-modal').modal('hide'); // hide modal on success
+              location.reload(); // reload table after success
+            },
+            error: function(xhr) {
+              if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+
+                // Clear old errors
+                form.find('.text-danger').remove();
+
+                // Show new errors
+                $.each(errors, function (key, messages) {
+                    let input = form.find('[name="'+ key +'"]');
+
+                    // For input groups (date/time), place error after wrapper
+                    let wrapper = input.closest('.input-group').length ? input.closest('.input-group') : input;
+
+                    wrapper.after('<span class="text-danger">' + messages[0] + '</span>');
+                });
+              }
+            }
+          });
+        });
+
+        //Delete
+        $('#delete-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var reservationId = button.data('reservation-id');
+          var name = button.data('reservation-name');
+          var date = button.data('reservation-date');
+          var time = button.data('reservation-time');
+          var number_of_people = button.data('reservation-number-of-people');
+          var phone = button.data('reservation-phone-number');
+          var email = button.data('reservation-email');
+
+          $('#delete-reservation-name').text(name);
+          $('#delete-reservation-date').text(date);
+          $('#delete-reservation-time').text(time);
+          $('#delete-reservation-number-of-people').text(number_of_people);
+          $('#delete-reservation-phone').text(phone);
+          $('#delete-reservation-email').text(email);
+
+          // Update form action URL dynamically
+          $('#delete-reservation-form').attr('action', '/reservations/' + reservationId);
+        });
+      });
+      
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el))
 

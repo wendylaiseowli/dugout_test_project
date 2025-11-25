@@ -423,94 +423,118 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr data-expanded="true">
-                            <td>1</td>
-                            <td>CHEF'S SPECIAL</td>
-                            <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
-                            <td><span>RM</span> 22.00</td>
-                            <td>Food</td>
-                            <td>Dessert</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                          @foreach($menus as $menu)
+                            <tr data-expanded="true">
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $menu->menu_item_name }}</td>
+                              <td>{{ $menu->menu_item_description }}</td>
+                              <td><span>RM</span>{{ $menu->price }}</td>
+                              <td>{{ $menu->category_name }}</td>
+                              <td>{{ $menu->subcategory_name }}</td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
+                                    @if($menu->status ==true)
+                                      <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                        data-toggle="modal"
+                                        data-target="#deactivate-modal"
+                                        data-menu-id ="{{ $menu->id }}"
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-x-circle"
+                                        ></span>
+                                        Deactivate
+                                      </button>
+                                    @else
+                                      <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                        data-toggle="modal"
+                                        data-target="#activate-modal"
+                                        data-menu-id ="{{ $menu->id }}"
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-check-circle"
+                                        ></span>
+                                        Activate
+                                      </button>                                    
+                                    @endif
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td>11/04/18</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                              </td>
+                              <td>{{ $menu->updated_at->diffForHumans()}}</td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="menu-edit.html"
-                                    {{-- {{ route('menus.edit')}} --}}
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
+                                    <!-- <button
+                                      type="button"
+                                      class="tabledit-edit-button btn btn-sm btn-default"
+                                      data-toggle="modal"
+                                      data-target="#deactivate-modal"
+                                      style="float: none"
+                                    >
+                                      <span
+                                        class="glyphicon feather-x-circle"
+                                      ></span>
+                                      Deactivate
+                                    </button> -->
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#menudetails-modal"
+                                      data-menu-id ="{{ $menu->id }}"
+                                      data-menu-name ="{{ $menu->menu_item_name }}"
+                                      data-menu-item-description ="{{ $menu->menu_item_description }}"
+                                      data-menu-price ="{{ $menu->price }}"
+                                      data-menu-category ="{{ $menu->category_name }}"
+                                      data-menu-subcategory ="{{ $menu->subcategory_name }}"                                      
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="menu-edit.html"
+                                      {{-- {{ route('menus.edit')}} --}}
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
+                              </td>
+                            </tr>
+                          {{-- <tr>
                             <td>2</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -596,8 +620,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> --}}
+                          {{-- <tr>
                             <td>3</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -682,8 +706,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> --}}
+                          {{-- <tr>
                             <td>4</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -769,8 +793,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> --}}
+                          {{-- <tr>
                             <td>5</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -856,8 +880,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> --}}
+                          {{-- <tr>
                             <td>6</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -942,8 +966,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> --}}
+                          {{-- <tr>
                             <td>7</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -1028,8 +1052,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> --}}
+                          {{-- <tr>
                             <td>8</td>
                             <td>CHEF'S SPECIAL</td>
                             <td class="text-truncate" style="max-width: 200px;">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</td>
@@ -1115,7 +1139,8 @@
                                 </div>
                               </div>
                             </td>
-                          </tr>
+                          </tr> --}}
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -1344,7 +1369,9 @@
           <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="deactive-menu-form">
+                  @csrf
+                  @method('PUT')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Change Status</h5>
@@ -1353,12 +1380,12 @@
                   </div>
                   <div class="modal-body">
                     <div class="row">
-                      <p class="text-center w-100">Are you sure you want to change the Menu Item status?</p>
+                      <p class="text-center w-100">Are you sure you want to deactive the Menu Item status?</p>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1369,6 +1396,37 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Deactivate here -->
+          <!-- activate Modal -->
+          <div id="activate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form class="form-material" method="POST" id="active-menu-form">
+                  @csrf
+                  @method('PUT')
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Change Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <p class="text-center w-100">Are you sure you want to active the Menu Item status?</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- activate here -->
           <!-- Delete Modal -->
           <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
@@ -1385,7 +1443,7 @@
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1438,7 +1496,7 @@
           </div>
           <!-- Edit Password ends here -->
           <!--  User Modal -->
-          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+          <div id="menudetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1451,27 +1509,27 @@
                 <div class="modal-body">
                   <div class="userdetail d-flex justify-content-between">
                     <p>ID:</p>
-                    <p class="text-black">1</p>
+                    <p class="text-black" id="modal-menu-id"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Menu Item Name:</p>
-                    <p class="text-black">CHEF'S SPECIAL</p>
+                    <p class="text-black" id="modal-menu-name"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Menu Item Description:</p>
-                    <p class="text-black text-right">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</p>
+                    <p class="text-black text-right" id="modal-menu-description"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Price (RM):</p>
-                    <p class="text-black"> 22.00</p>
+                    <p class="text-black" id="modal-menu-price"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Category:</p>
-                    <p class="text-black">Food</p>
+                    <p class="text-black" id="modal-menu-category"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Sub Category:</p>
-                    <p class="text-black">Dessert</p>
+                    <p class="text-black" id="modal-menu-subcategory"></p>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -2225,16 +2283,30 @@
 
           // Page numbers
           for (let i = 1; i <= pageCount; i++) {
-            const li = document.createElement("li");
-            li.className = "page-item" + (i === currentPage ? " active" : "");
-            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            li.addEventListener("click", (e) => {
-              e.preventDefault();
-              currentPage = i;
-              displayTable(currentPage);
-              setupPagination();
-            });
-            pagination.appendChild(li);
+            if (i === 1 || i === pageCount || (i >= currentPage - 1 && i <= currentPage + 1)) {
+              const li = document.createElement("li");
+              li.className = "page-item" + (i === currentPage ? " active" : "");
+              li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+              li.addEventListener("click", (e) => {
+                e.preventDefault();
+                currentPage = i;
+                displayTable(currentPage);
+                setupPagination();
+              });
+              pagination.appendChild(li);
+            } else if (i === 2 && currentPage > 3) {
+              // Ellipsis after first page
+              const li = document.createElement("li");
+              li.className = "page-item disabled";
+              li.innerHTML = `<span class="page-link">...</span>`;
+              pagination.appendChild(li);
+            } else if (i === pageCount - 1 && currentPage < pageCount - 2) {
+              // Ellipsis before last page
+              const li = document.createElement("li");
+              li.className = "page-item disabled";
+              li.innerHTML = `<span class="page-link">...</span>`;
+              pagination.appendChild(li);
+            }
           }
 
           // Next button
@@ -2522,6 +2594,39 @@
           exportToPDF('menu-filtered.pdf', false);
         });
 
+        //Active
+        $('#deactivate-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var menuId = button.data('menu-id');
+
+            $('#deactive-menu-form').attr('action', '/menus/' + menuId + '/deactive');
+        });        
+        //Deactive
+        $('#activate-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var menuId = button.data('menu-id');
+
+            $('#active-menu-form').attr('action', '/menus/' + menuId + '/active');
+        });
+        
+        //View
+        $('#menudetails-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget);
+          var menuId = button.data('menu-id');
+          var name = button.data('menu-name');
+          var description = button.data('menu-item-description');
+          var price = button.data('menu-price');
+          var category = button.data('menu-category');
+          var subcategory = button.data('menu-subcategory');
+          
+          // Update modal content
+          $('#modal-menu-id').text(menuId);
+          $('#modal-menu-name').text(name);
+          $('#modal-menu-description').text(description);
+          $('#modal-menu-price').text(price);
+          $('#modal-menu-category').text(category);
+          $('#modal-menu-subcategory').text(subcategory);
+        });
       });
 
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

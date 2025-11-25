@@ -33,13 +33,24 @@ class ReservationRequest extends FormRequest
             'email'=> ['required', 'email:rfc,dns'],
         ];
     }
-    protected function failedValidation(Validator $validator)
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     throw new HttpResponseException(
+    //         redirect()->back()
+    //             ->withErrors($validator)
+    //             ->withInput()
+    //             ->withFragment('reservationSection')
+    //     );
+    // }
+
+    public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(
-            redirect()->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->withFragment('reservationSection')
-        );
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(
+                response()->json(['errors' => $validator->errors()], 422)
+            );
+        }
+
+        parent::failedValidation($validator);
     }
 }
