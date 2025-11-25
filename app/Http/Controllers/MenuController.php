@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\SubCategory;
+use App\Http\Requests\MenuRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
@@ -45,32 +47,41 @@ class MenuController extends Controller
 
     #Admin
     public function index(Menu $menu){
-        $menus = Menu::join('subcategory', 'menus.subCategoryID', '=', 'subcategory.id')->join('category', 'category.id', '=', 'subCategory.categoryID')->select('menus.*', 'subcategory.name as subcategory_name', 'category.name as category_name')->get();
+        $menus = Menu::join('subcategory', 'menus.subCategoryID', '=', 'subcategory.id')->join('category', 'category.id', '=', 'subCategory.categoryID')->select('menus.*', 'subcategory.name as subcategory_name', 'category.name as category_name')->orderBy('menus.updated_at', 'desc')->get();
         return view('menu.menu', compact('menus'));         
     }
 
-    public function ceate(){
-        return view('menu.menu-add'); 
+    public function create(){
+        $subcategory= SubCategory::all();
+        return view('menu.menu-add', compact('subcategory'));
     }
 
-    public function store(){
-
+    public function store(MenuRequest $request){
+        $menu= $request->validated();
+        $menu['userID']=Auth::id();
+        Menu::create($menu);
+        return redirect('/menus')->with('success', 'Menu added successfully');
     }
 
     public function show(){
 
     }
 
-    public function edit(){
-        return view('menu.menu-edit'); 
+    public function edit(Menu $menu){
+        $subcategory= SubCategory::all();
+        return view('menu.menu-edit', compact('subcategory', 'menu')); 
     }
 
-    public function update(){
-
+    public function update(MenuRequest $request, Menu $menu){
+        $validated = $request->validated();
+        $validated['userID'] = Auth::id();
+        $menu->update($validated);
+        return redirect('/menus')->with('success', 'Menu updated successfully');
     }
 
-    public function destroy(){
-
+    public function destroy(Menu $menu){
+        $menu->delete();
+        return redirect('/menus')->with('success', 'Status has change to active');
     }
 
     public function active(Menu $menu){

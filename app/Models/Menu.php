@@ -18,7 +18,7 @@ class Menu extends Model
         'menu_item_name',
         'menu_item_description',
         'price',
-        'subCatgeoryID', 
+        'subCategoryID', 
         'status'
     ];
 }

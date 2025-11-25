@@ -11,9 +11,9 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="assets/img/favicon-dugout.png"
+      href="{{ asset('img/admin/favicon-dugout.png')}}"
     />
-    <link rel="stylesheet" href="assets/css/pace.css" />
+    <link rel="stylesheet" href="{{ asset('css/admin/pace.css')}}" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Menu Edit | The Dugout Oasis Admin Panel</title>
     <!-- CSS -->
@@ -109,7 +109,7 @@
       <nav class="navbar">
         <!-- Logo Area -->
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand">
+          <a href="{{ route('dashboard')}}" class="navbar-brand">
             <img
               class="logo-expand ds-logo"
               alt=""
@@ -182,7 +182,7 @@
                 </header>
                 <ul class="list-unstyled card-body">
                   <li class="log-out-hover">
-                    <a href="login.html" 
+                    <a href="{{ route('login')}}" 
                       ><span class="align-middle">Log Out</span></a
                     >
                   </li>
@@ -234,7 +234,7 @@
            <nav class="sidebar-nav">
             <ul class="nav in side-menu">
               <li class="menu-item-has-children">
-                <a href="index.html" id="dashboard"
+                <a href="{{ route('dashboard')}}" id="dashboard"
                   > <i class="list-icon feather feather-bar-chart-2 dugout-accent-color"></i>
                   <span class="hide-menu">Dashboard</span></a
                 >
@@ -246,7 +246,7 @@
                   <span class="hide-menu">User </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="user.html">User List</a></li>
+                  <li><a href="{{ route('users.index')}}">User List</a></li>
                 </ul>
               </li>
 
@@ -256,7 +256,7 @@
                   <span class="hide-menu small-line">Reservation </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="reservation.html">Reservation List</a></li>
+                  <li><a href="{{ route('reservations.index')}}">Reservation List</a></li>
                 </ul>
               </li>
 
@@ -266,7 +266,7 @@
                   <span class="hide-menu small-line">Menu </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="menu.html">Menu List</a></li>
+                  <li><a href="{{ route('menus.index')}}">Menu List</a></li>
                 </ul>
               </li>
 
@@ -276,7 +276,7 @@
                   <span class="hide-menu small-line">Events </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="event.html">Events List</a></li>
+                  <li><a href="{{ route('events.index')}}">Events List</a></li>
                 </ul>
               </li>
 
@@ -286,7 +286,7 @@
                   <span class="hide-menu small-line">Promotions </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="promo.html">Promotions List</a></li>
+                  <li><a href="{{ route('promotions.index')}}">Promotions List</a></li>
                 </ul>
               </li>
 
@@ -296,7 +296,7 @@
                   <span class="hide-menu small-line">Gallery </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="gallery.html">Gallery List</a></li>
+                  <li><a href="{{ route('gallerys.index')}}">Gallery List</a></li>
                 </ul>
               </li>
 
@@ -306,7 +306,7 @@
                   <span class="hide-menu small-line">Subscribers </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="subscribers.html">Subscribers List</a></li>
+                  <li><a href="{{ route('subscribers.index')}}">Subscribers List</a></li>
                 </ul>
               </li>
             </ul>
@@ -331,7 +331,7 @@
             <div class="page-title-right d-none d-sm-inline-flex">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Dashboard</a>
+                  <a href="{{ route('dashboard')}}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Menu Edit</li>
               </ol>
@@ -348,43 +348,53 @@
               <!-- /.widget-holder -->
               <div class="col-md-12 widget-holder">
                 <div class="widget-bg">
-                  <form class="widget-heading clearfix has-validation-callback" action="javascript:void(0)" method="get">
+                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('menus.update', $menu->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="grey-outline w-100 m-w-100">
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="menu-item">Menu Item Name:</label>
                         <div class="col-md-10">
-                          <input class="form-control" id="menu-item" type="text" value="CHEF'S SPECIAL" data-validation="required">
+                          <input class="form-control" id="menu-item" type="text" data-validation="required" name="menu_item_name" value="{{ old('menu_item_name', $menu->menu_item_name) }}">
                         </div>
+                        @error('menu_item_name')
+                          {{ $message }}
+                        @enderror
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="menu-item-description">Menu Item Description:</label>
                         <div class="col-md-10">
-                          <textarea class="form-control" id="menu-item-description" rows="10" data-validation="required">Pulut hitam, chocolate cake chunks, vanilla ice cream with chocolate & caramel sauce</textarea>
+                          <textarea class="form-control" id="menu-item-description" rows="10" data-validation="required" name="menu_item_description" 
+                          >{{ old('menu_item_description', $menu->menu_item_description) }}</textarea>
                         </div>
+                        @error('menu_item_description')
+                          {{ $message }}
+                        @enderror                      
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="price">Price (RM):</label>
                         <div class="col-md-10">
-                          <input class="form-control" id="price" value="22.00" type="text" data-validation="required">
+                          <input class="form-control" id="price" value="{{ old('price', $menu->price) }}" type="text" data-validation="required" name="price">
                         </div>
+                        @error('price')
+                          {{ $message }}
+                        @enderror                            
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="l13">Sub Category:</label>
                         <div class="col-md-10">
-                          <select class="form-control" id="category-list">
-                            <option>Starters</option>
-                            <option>Mains</option>
-                            <option>Burgers</option>
-                            <option selected>Dessert</option>
-                            <option>Cocktails</option>
-                            <option>Shooters</option>
-                            <option>Wine</option>
-                            <option>Beers</option>
-                            <option>Pizza</option>
-                            <option>Non-Alcoholic</option>
-                            <option>Liquor</option>
-                            <option>Asian</option>
+                          <select class="form-control" id="category-list" name="subCategoryID">
+                            @foreach($subcategory as $item)
+                              <option value="{{ old('subCategoryID', $item->id) }}" 
+                              {{ old('subCategoryID')== $item->id || $menu->subCategoryID== $item->id ? 'selected' : '' }}  
+                              >
+                                {{$item->name}}
+                              </option>
+                            @endforeach
                           </select>
+                          @error('subCategoryID')
+                            {{ $message }}
+                          @enderror                             
                         </div>
                       </div>
                       <div class="form-actions">
@@ -392,8 +402,8 @@
                           <div class="col-md-2"> 
                         </div>
                         <div class="col-md-10 btn-list text-center text-md-left ">
-                          <button class="btn btn-success btn-edit" type="button">Add Item</button>
-                          <a class="btn btn-danger btn-edit" href="menu.html">Go Back</a>
+                          <button class="btn btn-success btn-edit" type="submit">Save Changes</button>
+                          <a class="btn btn-danger btn-edit" href="{{ route('menus.index')}}">Go Back</a>
                         </div>
                       </div>
                     </div><!--Delete one div here below-->
