@@ -2158,12 +2158,6 @@
             $('#active-reservation-form').attr('action', '/reservations/' + reservationId + '/active');
         });
 
-        //Add
-        // $('#addreservation-modal').on('show.bs.modal', function (event) {
-        //   var button = $(event.relatedTarget); // jQuery object for the button
-          
-        //   $('#add-reservation-form').attr('action', '/reservations');
-        // });
         $('#add-reservation-form').on('submit', function(e) {
           e.preventDefault(); // stop normal form submit
 

@@ -78,10 +78,6 @@ class EventController extends Controller
             $validated['event_time'] = $datetime->format('Y-m-d H:i:s');
         }
 
-        if($validated['photo_path']==null){
-            $validated['photo_path'] = $event->photo_path;
-        }
-
         $event->update($validated);
 
         return redirect('/events')->with('success', 'Event has been successfully edited');

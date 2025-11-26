@@ -376,14 +376,14 @@
                         </button> -->
                         <a
                           class="btn btn-normal btn-default btn-orange-ds ripple mb-2 input-m m-btn-full"
-                          href="./promo-add.html"
+                          href="{{ route('promotions.create') }}"
                           id="adduser"
                         >
                           Add Promotion
                         </a>
                         <a
                             class="btn btn-default btn-outline-orange ripple mb-2 input-m m-btn-full existing-promo-text"
-                            href="./promo-existing.html"
+                            href="{{ route('replicatepromotionform') }}"
                             id="adduser"
                           >
                             Replicate Existing Promotion
@@ -414,729 +414,110 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr data-expanded="true">
-                            <td>1</td>
-                            <td>Ladies Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
+                          @foreach($promotions as $promotion)
+                            <tr data-expanded="true">
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $promotion->name }}</td>
+                              <td>
+                                <div class="event-table-image-container">
+                                  <img src="{{ asset('img/admin/promo/'.$promotion->photo_path)}}" alt="promo image">
                                 </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                              </td>
+                              <td>{{$promotion->promotion_startDate->format('Y-m-d') }}</td>
+                              <td>{{$promotion->promotion_endDate->format('Y-m-d') }}</td>
+                              <td class="text-truncate" style="max-width: 200px;">{{$promotion->description}}</td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
+                                    @if($promotion->status == true)
+                                      <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                        data-toggle="modal"
+                                        data-target="#deactivate-modal"
+                                        data-promotion-id="{{ $promotion->id }}"
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-x-circle"
+                                        ></span>
+                                        Deactivate
+                                      </button>
+                                    @else
+                                      <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                        data-toggle="modal"
+                                        data-target="#activate-modal"
+                                        data-promotion-id="{{ $promotion->id }}"
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-check-circle"
+                                        ></span>
+                                        Activate
+                                      </button>
+                                    @endif
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{$promotion->updated_at->diffForHumans()}}</td>
+                              <td style="white-space: nowrap; width: 1%">
+                                <div
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
+                                >
+                                  <div
+                                    class="btn-group btn-group-sm"
+                                    style="float: none"
+                                  >
+                                    <button
+                                        type="button"
+                                        class="tabledit-delete-button btn btn-sm btn-success "
+                                        data-toggle="modal"
+                                        data-target="#promotiondetails-modal"
+                                        data-promotion-id="{{ $promotion->id }}"
+                                        data-promotion-name="{{ $promotion->name }}"
+                                        data-promotion-start-date="{{ $promotion->promotion_startDate->format('Y-m-d') }}"
+                                        data-promotion-end-date="{{ $promotion->promotion_endDate->format('Y-m-d') }}"
+                                        data-promotion-description="{{ $promotion->description }}"
+                                        data-promotion-image="{{ $promotion->photo_path }}"
+                                        style="float: none"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                      >
+                                        <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
                                       type="button"
-                                      class="tabledit-delete-button btn btn-sm btn-success "
-                                      data-toggle="modal"
-                                      data-target="#userdetails-modal"
-                                      style="float: none"
-                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="{{ route('promotions.edit', $promotion->id) }}"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                     >
-                                      <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Men's Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/promo/men_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-success btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-check-circle"
-                                    ></span>
-                                    Activate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Ladies Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                 <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Ladies Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>Ladies Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>Ladies Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                          <td>7</td>
-                          <td>Ladies Night</td>
-                          <td>
-                            <div class="event-table-image-container">
-                              <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                            </div>
-                          </td>
-                          <td>2025-03-26</td>
-                          <td>2026-06-30</td>
-                          <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                        class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
                                       type="button"
-                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
                                       data-toggle="modal"
-                                      data-target="#userdetails-modal"
+                                      data-target="#delete-modal"
+                                      data-promotion-id ="{{ $promotion->id }}"
                                       style="float: none"
-                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                     >
-                                      <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>Ladies Night</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
-                              </div>
-                            </td>
-                            <td>2025-03-26</td>
-                            <td>2026-06-30</td>
-                            <td class="text-truncate" style="max-width: 200px;">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                              </td>
+                            </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -1364,7 +745,9 @@
           <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="deactive-promotion-form">
+                  @csrf
+                  @method('PUT')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Change Status</h5>
@@ -1378,7 +761,7 @@
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="subbmit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1388,12 +771,44 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
-          <!-- Deactivate here -->
+          <!-- activate here -->
+          <div id="activate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form class="form-material" method="POST" id="active-promotion-form">
+                  @csrf
+                  @method('PUT')
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Change Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <p class="text-center w-100">Are you sure you want to change the Promotion status?</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- activate here -->
           <!-- Delete Modal -->
           <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="promo-delete-form">
+                  @csrf
+                  @method('DELETE')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Delete Event</h5>
@@ -1402,38 +817,10 @@
                   </div>
                   <div class="modal-body">
                     <p class="text-center w-100">Are you sure you want to delete the following Promotion?</p>
-                    <!-- <div class="userdetail d-flex justify-content-between">
-                      <p>ID:</p>
-                      <p class="text-black">1</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Name:</p>
-                      <p class="text-black">Dennise</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Date:</p>
-                      <p class="text-black">13 March, Tuesday</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Time:</p>
-                      <p class="text-black">05:00 PM</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Number of People:</p>
-                      <p class="text-black">4</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Phone Number:</p>
-                      <p class="text-black">0000000000</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Email:</p>
-                      <p class="text-black">example@email.com</p>
-                    </div> -->
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1485,8 +872,8 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Edit Password ends here -->
-          <!-- View User Modal -->
-          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+          <!-- View Promotion Modal -->
+          <div id="promotiondetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1499,11 +886,11 @@
                 <div class="modal-body">
                   <div class="userdetail d-flex justify-content-between">
                     <p>ID:</p>
-                    <p class="text-black">1</p>
+                    <p class="text-black" id="promo-id"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Promotion Name:</p>
-                    <p class="text-black">Ladies Night</p>
+                    <p class="text-black" id="promo-name"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Promotion Start Date:</p>
@@ -1525,12 +912,12 @@
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Promotion Description:</p>
-                    <p class="text-black text-right">Ladies Night every Thursday , house pours are on us! From 8pm to 11pm, indulge in free Whiskey, Gin, Vodka, Tequila or Rum house pours and let the good times flow! *Promo changes weekly</p>
+                    <p class="text-black text-right" id="promo-description"></p>
                   </div>
                   <div class="userdetail d-flex justify-content-between">
                     <p>Promotion Image:</p>
                     <div class="event-table-image-container" style="margin: 0;">
-                        <img src="{{ asset('img/admin/promo/ladies_night.jpg')}}" alt="promo image">
+                        <img alt="promo image" id="promo-photo">
                     </div>
                   </div>
                 </div>
@@ -2516,16 +1903,51 @@
           exportToPDF('promotions-filtered.pdf', false);
         });
 
+        //Active status
+        $('#activate-modal').on('show.bs.modal', function (event){
+          var button = $(event.relatedTarget);
+          var promotionID = button.data('promotion-id');
+
+          $('#active-promotion-form').attr('action', '/promotions/' + promotionID + '/active');
+        });
+
+        //Deactive status
+        $('#deactivate-modal').on('show.bs.modal', function (event){
+          var button = $(event.relatedTarget);
+          var promotionID = button.data('promotion-id');
+
+          $('#deactive-promotion-form').attr('action', '/promotions/' + promotionID + '/deactive');
+        });
+
+        //View
+        $('#promotiondetails-modal').on('show.bs.modal', function (event){
+          var button = $(event.relatedTarget);
+          var id = button.data('promotion-id');
+          var name = button.data('promotion-name');
+          var startDate = button.data('promotion-start-date');
+          var endDate = button.data('promotion-end-date');
+          var description = button.data('promotion-description');
+          var photo = button.data('promotion-image');
+
+          $('#promo-id').text(id);
+          $('#promo-name').text(name);
+          $('#promo-start').val(startDate);
+          $('#promo-end').val(endDate);
+          $('#promo-description').text(description);
+          $('#promo-photo').attr('src', 'img/admin/promo/' + photo);
+        });
+
+        //Delete
+        $('#delete-modal').on('show.bs.modal', function (event){
+          var button = $(event.relatedTarget);
+          var id = button.data('promotion-id');
+
+          $('#promo-delete-form').attr('action', '/promotions/' + id)
+        });
       });
 
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el))
-
-      $(document).ready(function() {
-        $('#promo-start').val('07/11/2025')
-        $('#promo-end').val('30/11/2025')
-      })
-
+      const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el))
     </script>
   </body>
 </html>

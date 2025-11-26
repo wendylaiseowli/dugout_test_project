@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -59,7 +59,8 @@ class ReservationController extends Controller
             $validated['reservation_time'] = $datetime->format('Y-m-d H:i:s');
         }
 
-        $validated['userID'] = $validated['userID'] ?? 1;
+        // $validated['userID'] = $validated['userID'] ?? 1;
+        $validated['userID'] = Auth::id();
 
         Reservation::create($validated);
         // return redirect('/reservations')->with('success', 'Reservation has been successfully added');

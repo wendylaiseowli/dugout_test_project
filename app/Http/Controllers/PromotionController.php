@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Promotion;
+use App\Http\Requests\PromotionRequest;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PromotionController extends Controller
 {
@@ -15,30 +18,89 @@ class PromotionController extends Controller
 
     #Admin
     public function index(){
-        return view('promotion.promo');    
+        $promotions = Promotion::orderBy('updated_at', 'desc')->get();
+        return view('promotion.promo', compact('promotions'));    
     }
 
-    public function ceate(){
+    public function create(){
         return view('promotion.promo-add'); 
     }
 
-    public function store(){
+    public function store(PromotionRequest $request){
+        $validated = $request->validated();
+        $validated['userID'] = Auth::id();
 
+        // if (!empty($validated['promotion_startDate']) && !empty($validated['promotion_endDate'])) {
+
+        //     $validated['promotion_startDate']->format('Y-m-d H:i:s');
+        //     $validated['promotion_endDate']->format('Y-m-d H:i:s');
+        // }
+
+        Promotion::create($validated);
+
+        return redirect('/promotions')->with('success', 'The promotion has been successfully created');
     }
 
     public function show(){
 
     }
 
-    public function edit(){
-        return view('promotion.promo-edit');
+    public function edit(Promotion $promotion){
+        return view('promotion.promo-edit', compact('promotion'));
     }
 
-    public function update(){
+    public function update(PromotionRequest $request, Promotion $promotion){
+        $validated = $request->validated();
 
+        // if (!empty($validated['promotion_startDate'])) {
+
+        //     $validated['promotion_startDate']= Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])
+        //     ->format('Y-m-d');
+        // }
+
+        // if (!empty($validated['promotion_endDate'])) {
+
+        //     $validated['promotion_endDate']= Carbon::createFromFormat('d/m/Y', $validated['promotion_endDate'])
+        //     ->format('Y-m-d');
+        // }
+
+        $promotion->update($validated);
+
+        return redirect('/promotions')->with('success', 'The promotion has been successfully updated');
     }
 
-    public function destroy(){
+    public function destroy(Promotion $promotion){
+        $promotion->delete();
+        return redirect('/promotions')->with('success', 'The promotion has been successfully deleted');
+    }
 
+    public function active(Promotion $promotion){
+        $promotion->update(['status'=> true]);
+        return redirect('/promotions')->with('success', 'The promotion has been successfully active');
+    }
+
+    public function deactive(Promotion $promotion){
+        $promotion->update(['status'=> false]);
+        return redirect('/promotions')->with('success', 'The promotion has been successfully deactive');
+    }
+
+    public function replicate(PromotionRequest $request){
+        $validated = $request->validated();
+        $validated['userID'] = Auth::id();
+
+        // if (!empty($validated['promotion_startDate']) && !empty($validated['promotion_endDate'])) {
+
+        //     $validated['promotion_startDate']->format('Y-m-d H:i:s');
+        //     $validated['promotion_endDate']->format('Y-m-d H:i:s');
+        // }
+
+        Promotion::create($validated);
+
+        return redirect('/promotions')->with('success', 'The promotion has been successfully created');        
+    }
+
+    public function replicateForm(){
+        $promotions= Promotion::all();
+        return view('promotion.promo-existing', compact('promotions'));
     }
 }

@@ -393,14 +393,16 @@
                             <!-- Image preview -->
                             <img
                               id="image-preview"
-                              src="{{ $event->photo_path ? asset('img/admin/events_gallery/'.$event->photo_path): asset('img/admin/dugout-placeholder.png') }}" 
+                              src="{{ asset(old('photo_path') ? 'img/admin/events_gallery/'.old('photo_path') : 'img/admin/events_gallery/'.$event->photo_path) }}"
                               alt="placeholder" 
                               class="img-thumbnail mb-3" 
                               style="width: 300px; height: auto;"
                             >
 
+                            <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path', $event->photo_path)}}">
+
                             <!-- File input -->
-                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;" name="photo_path" accept="image/*" value="{{old('photo_path', $event->photo_path)}}">
+                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;" name="photo_path_old" accept="image/*" value="{{old('photo_path', $event->photo_path)}}">
                             @error('photo_path')
                               {{ $message }}
                             @enderror
@@ -424,7 +426,7 @@
                       <div class="form-group row input-has-value">
                         <label for="sampleClockPicker1" class="col-md-2 form-control-label text-center text-md-left">Event Time:</label>
                         <div class="input-group col-md-10 clockpicker">
-                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1" name="event_time" value="{{old('event_time', \Carbon\Carbon::parse($event->event_time)->format('H:i'))}}" required>
+                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1" name="event_time" value="{{old('event_time', ($event->event_time)->format('H:i'))}}" required>
                           <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
                         </div>
                         @error('event_time')
@@ -1490,6 +1492,7 @@
               document.getElementById('image-preview').src = e.target.result;
           };
           reader.readAsDataURL(file);
+          document.getElementById('photo_path').value = file.name;
         }
       });
     </script>

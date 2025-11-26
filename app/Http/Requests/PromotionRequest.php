@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventRequest extends FormRequest
+class PromotionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,11 @@ class EventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'event_name'=>['required', 'string'],
-            'description'=> ['required', 'string'],
-            'photo_path'=>['required', 'string'],
-            'event_date'=> ['nullable', 'date_format:d/m/Y'],
-            'event_time'=> ['nullable', 'date_format:H:i'],
+            'name'=> ['required', 'string'],
+            'photo_path'=> ['required', 'string'],
+            'promotion_startDate'=> ['required', 'date_format:d/m/Y'],
+            'promotion_endDate'=>['required', 'date_format:d/m/Y'],
+            'description'=>['required', 'string'],
         ];
     }
 }

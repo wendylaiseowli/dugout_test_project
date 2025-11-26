@@ -361,7 +361,7 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-name">Event Name:</label>
                         <div class="col-md-10">
-                          <input class="form-control" id="event-name" type="text" name="event_name">
+                          <input class="form-control" id="event-name" type="text" name="event_name" value="{{ old('event_name') }}">
                         </div>
                         @error('event_name')
                           {{ $message }}
@@ -376,7 +376,7 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-description">Event Description:</label>
                         <div class="col-md-10">
-                          <textarea class="form-control" id="event-description" rows="10" data-validation="required" name="description"></textarea>
+                          <textarea class="form-control" id="event-description" rows="10" data-validation="required" name="description">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                           {{ $message }}
@@ -391,14 +391,17 @@
                             <!-- Image preview -->
                             <img 
                               id="image-preview"
-                              src="{{ asset('img/admin/dugout-placeholder.png') }}" 
+                              src="{{ asset(old('photo_path') ? 'img/admin/events_gallery/'.old('photo_path') : 'img/admin/dugout-placeholder.png') }}" 
                               alt="placeholder" 
                               class="img-thumbnail mb-3" 
                               style="width: 300px; height: auto;"
                               name="photo_path"
                             >
+
+                            <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path')}}">
+
                             <!-- File input -->
-                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;"  name="photo_path" accept="image/*">
+                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;"  name="photo_path_old" accept="image/*">
                             <!-- Warnings -->
                             <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 520px and height 360px.</p>
                             <p class="text-danger small mb-0">*Please ensure that the image is no larger than 1MB.</p>
@@ -408,7 +411,7 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Event Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" placeholder="Pick a Date" data-plugin-options='{"autoclose": true}' required name="event_date">
+                          <input type="text" class="form-control datepicker" placeholder="Pick a Date" data-plugin-options='{"autoclose": true}' required name="event_date" value="{{ old('event_date') }}">
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
                         @error('event_date')
@@ -418,8 +421,8 @@
                       <div class="form-group row input-has-value">
                         <label for="sampleClockPicker1" class="col-md-2 form-control-label text-center text-md-left">Event Time:</label>
                         <div class="input-group col-md-10 clockpicker">
-                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1" required name="event_time">
-                          <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>                  
+                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1" required name="event_time" value="{{ old('event_time') }}">
+                          <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
                         </div>
                         @error('event_time')
                           {{ $message }}
@@ -1474,7 +1477,7 @@
           $(this).find('input').val(val.replace(/(AM|PM)$/i, ' $1'));
         });
       });
-
+      
       document.getElementById('input-image').addEventListener('change', function(event) {
         const file = event.target.files[0];
 
@@ -1484,6 +1487,7 @@
             document.getElementById('image-preview').src = e.target.result;
           };
             reader.readAsDataURL(file);
+            document.getElementById('photo_path').value = file.name;            
         }
       });
     </script>

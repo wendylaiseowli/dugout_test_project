@@ -11,9 +11,9 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="assets/img/favicon-dugout.png"
+      href="{{ asset('img/admin/favicon-dugout.png')}}"
     />
-    <link rel="stylesheet" href="assets/css/pace.css" />
+    <link rel="stylesheet" href="{{ asset('css/admin/pace.css')}}" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Add Existing Promotion | The Dugout Oasis Admin Panel</title>
     <!-- CSS -->
@@ -23,17 +23,17 @@
       type="text/css"
     />
     <link
-      href="assets/vendors/material-icons/material-icons.css"
+      href="{{ asset('vendors/material-icons/material-icons.css')}}"
       rel="stylesheet"
       type="text/css"
     />
     <link
-      href="assets/vendors/mono-social-icons/monosocialiconsfont.css"
+      href="{{ asset('vendors/mono-social-icons/monosocialiconsfont.css')}}"
       rel="stylesheet"
       type="text/css"
     />
     <link
-      href="assets/vendors/feather-icons/feather.css"
+      href="{{ asset('vendors/feather-icons/feather.css')}}"
       rel="stylesheet"
       type="text/css"
     />
@@ -66,12 +66,12 @@
       type="text/css"
     />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/admin/style.css')}}" rel="stylesheet" type="text/css" />
     <!-- DS-styles -->
-    <link href="assets/css/style-ds.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/admin/style-ds.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- My style sheet -->
-    <link rel="stylesheet" href="./assets/css/styles-custom.css" />
+    <link rel="stylesheet" href="{{ asset('css/admin/styles-custom.css')}}" />
     <!-- Head Libs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script
@@ -109,16 +109,16 @@
       <nav class="navbar">
         <!-- Logo Area -->
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand">
+          <a href="{{ route('dashboard')}}" class="navbar-brand">
             <img
               class="logo-expand ds-logo"
               alt=""
-              src="assets/img/dugout-logo-white_new.png"
+              src="{{ asset('img/admin/dugout-logo-white_new.png')}}"
             />
             <img
               class="logo-collapse ds-logo"
               alt=""
-              src="assets/img/dugout-logo-white_new.png"
+              src="{{ asset('img/admin/dugout-logo-white_new.png')}}"
             />
             <!-- <p>BonVue</p> -->
           </a>
@@ -135,12 +135,12 @@
         <!-- /.navbar-left -->
         <!-- Search Form -->
         <!-- <form class="navbar-search d-none d-sm-block" role="search">
-      <i class="feather feather-search list-icon"></i>
-      <input type="search" class="search-query" placeholder="Search anything...">
-      <a href="javascript:void(0);" class="remove-focus">
-        <i class="feather feather-x"></i>
-      </a>
-    </form> -->
+          <i class="feather feather-search list-icon"></i>
+          <input type="search" class="search-query" placeholder="Search anything...">
+          <a href="javascript:void(0);" class="remove-focus">
+            <i class="feather feather-x"></i>
+          </a>
+        </form> -->
         <!-- /.navbar-search -->
         <div class="spacer"></div>
         <!-- Right Menu -->
@@ -158,7 +158,7 @@
             >
               <span class="avatar thumb-xs2">
                 <img
-                  src="assets/img/ds-img/userasset-4.png"
+                  src="{{ asset('img/admin/ds-img/userasset-4.png')}}"
                   class="rounded-circle"
                   alt=""
                 />
@@ -182,7 +182,7 @@
                 </header>
                 <ul class="list-unstyled card-body">
                   <li class="log-out-hover">
-                    <a href="login.html" 
+                    <a href="href="{{ route('logout')}}" 
                       ><span class="align-middle">Log Out</span></a
                     >
                   </li>
@@ -234,7 +234,7 @@
           <nav class="sidebar-nav">
             <ul class="nav in side-menu">
               <li class="menu-item-has-children">
-                <a href="index.html" id="dashboard"
+                <a href="{{ route('dashboard')}}" id="dashboard"
                   > <i class="list-icon feather feather-bar-chart-2 dugout-accent-color"></i>
                   <span class="hide-menu">Dashboard</span></a
                 >
@@ -246,7 +246,7 @@
                   <span class="hide-menu">User </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="user.html">User List</a></li>
+                  <li><a href="{{ route('users.index')}}">User List</a></li>
                 </ul>
               </li>
 
@@ -256,7 +256,7 @@
                   <span class="hide-menu small-line">Reservation </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="reservation.html">Reservation List</a></li>
+                  <li><a href="{{ route('reservations.index')}}">Reservation List</a></li>
                 </ul>
               </li>
 
@@ -266,7 +266,7 @@
                   <span class="hide-menu small-line">Menu </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="menu.html">Menu List</a></li>
+                  <li><a href="{{ route('menus.index')}}">Menu List</a></li>
                 </ul>
               </li>
 
@@ -276,7 +276,7 @@
                   <span class="hide-menu small-line">Events </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="event.html">Events List</a></li>
+                  <li><a href="{{ route('events.index')}}">Events List</a></li>
                 </ul>
               </li>
 
@@ -286,7 +286,7 @@
                   <span class="hide-menu small-line">Promotions </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="promo.html">Promotions List</a></li>
+                  <li><a href="{{ route('promotions.index')}}">Promotions List</a></li>
                 </ul>
               </li>
 
@@ -296,7 +296,7 @@
                   <span class="hide-menu small-line">Gallery </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="gallery.html">Gallery List</a></li>
+                  <li><a href="{{ route('gallerys.index')}}">Gallery List</a></li>
                 </ul>
               </li>
 
@@ -306,7 +306,7 @@
                   <span class="hide-menu small-line">Subscribers </span></a
                 >
                 <ul class="list-unstyled sub-menu">
-                  <li><a href="subscribers.html">Subscribers List</a></li>
+                  <li><a href="{{ route('subscribers.index')}}">Subscribers List</a></li>
                 </ul>
               </li>
             </ul>
@@ -331,7 +331,7 @@
             <div class="page-title-right d-none d-sm-inline-flex">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="index.html">Dashboard</a>
+                  <a href="{{ route('dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Add Existing Promotion</li>
               </ol>
@@ -348,121 +348,115 @@
               <!-- /.widget-holder -->
               <div class="col-md-12 widget-holder">
                 <div class="widget-bg">
-  <form class="widget-heading clearfix has-validation-callback" action="javascript:void(0)" method="get">
-    <div class="grey-outline w-100 m-w-100">
+                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('replicate-promotion') }}" method="POST">
+                    @csrf
+                    <div class="grey-outline w-100 m-w-100">
+                      <!-- <div class="col-lg-12">
+                        <div class="form-group">
+                          <label for="event-name">Event Name:</label>
+                          <input class="form-control" id="event-name" type="text">
+                        </div>
+                      </div> -->
+
+                      <div class="form-group row">
+                        <label class="col-md-2 text-center text-md-left" for="category">Existing Promotions:</label>
+                        <div class="col-md-10">
+                          <select class="form-control" id="existing-promo-list" name="id">
+                            <option disabled selected>Select Promotion</option>
+                            @foreach($promotions as $promotion)
+                              <option 
+                              data-name ="{{ $promotion->name }}"
+                              data-description ="{{ $promotion->description }}"
+                              data-photo ="{{ $promotion->photo_path }}"
+                              data-start ="{{ $promotion->promotion_startDate->format('m/d/Y') }}"
+                              data-end ="{{ $promotion->promotion_endDate->format('m/d/Y') }}"
+                              >
+                                {{$promotion->name}}
+                              </option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label class="col-md-2 text-center text-md-left" for="promo-name">Promotion Name:</label>
+                        <div class="col-md-10">
+                          <input class="form-control" id="promo-name" name="name" type="text" data-validation="required" value="{{ old('name') }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-2 text-center text-md-left" for="event-description">Promotion Description:</label>
+                        <div class="col-md-10">
+                          <textarea class="form-control" id="promo-description" name="description" rows="10" data-validation="required">{{ old('description') }}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row align-items-start">
+                      <!-- Label on the left -->
+                      <label for="photo-path" class="col-md-2 col-form-label text-md-left">Promotion Photo:</label>
+
+                      <!-- Image + controls on the right -->
+                      <div class="col-md-10">
+                        <div class="d-flex flex-column align-items-center align-items-md-start">
+                          <!-- Image preview -->
+                          <img
+                            id = "image-preview"
+                            src="{{ asset(old('photo_path') ? 'img/admin/promo/'.old('photo_path') :'img/admin/dugout-placeholder.png') }}" 
+                            alt="placeholder" 
+                            class="img-thumbnail mb-3" 
+                            style="width: 300px; height: auto;"
+                          >
+
+                          <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path')}}">
+                          
+                          <!-- File input -->
+                          <input id="input-image" name="photo_path_old" type="file" class="form-control mb-2" style="max-width: 300px;">
+
+                          <!-- Warnings -->
+                          <p class="text-danger small mb-1">*If no new image is input, existing image that is displayed will be used.</p>
+                          <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 481px and height 297px.</p>
+                          <p class="text-danger small mb-0">*Please ensure that the image is no larger than 1MB.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row input-has-value">
+                      <label class="col-md-2 form-control-label text-center text-md-left">Promotion Start Date:</label>
+                      <div class="input-group col-md-10 input-has-value">
+                        <input type="text" class="form-control datepicker" placeholder="Start Date" data-plugin-options='{"autoclose": true}' required name="promotion_startDate" id="promo-start" value="{{ old('promotion_startDate') }}">
+                        <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
+                      </div>
+                    </div>
+
+                    <div class="form-group row input-has-value">
+                      <label class="col-md-2 form-control-label text-center text-md-left">Promotion End Date:</label>
+                      <div class="input-group col-md-10 input-has-value">
+                        <input type="text" class="form-control datepicker" placeholder="End Date" data-plugin-options='{"autoclose": true}' required name="promotion_endDate" id="promo-end" value="{{ old('promotion_endDate') }}">
+                        <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
+                      </div>
+                    </div>
       
-      <!-- <div class="col-lg-12">
-        <div class="form-group">
-          <label for="event-name">Event Name:</label>
-          <input class="form-control" id="event-name" type="text">
-        </div>
-      </div> -->
+                    <!-- <div class="col-lg-12">
+                      <div class="form-group">
+                        <label for="sampleClockPicker1" class="form-control-label">Reservation Time:</label>
+                        <div class="input-group clockpicker">
+                          <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1">
+                          <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
+                        </div>
+                      </div>
+                    </div> -->
 
-      <div class="form-group row">
-                                        <label class="col-md-2 text-center text-md-left" for="category">Existing Promotions:</label>
-                                        <div class="col-md-10">
-                                            <select class="form-control" id="existing-promo-list">
-                                                <option disabled selected>Select Promotion</option>
-                                                <option>Men's Night</option>
-                                                <option>Gin Promotion</option>
-                                                <option>Aviation Night</option>
-                                                <option>Kids eat for free</option>
-                                                <option>Ladies Night</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-      <div class="form-group row">
-                                        <label class="col-md-2 text-center text-md-left" for="promo-name">Promotion Name:</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" id="promo-name" type="text" data-validation="required">
-                                        </div>
-                                    </div>
-
-      <!-- <div class="col-lg-12">
-        <div class="form-group">
-          <label for="l38">Event Description:</label>
-          <textarea class="form-control" id="l38" rows="5"></textarea>
-        </div>
-      </div> -->
-
-      <div class="form-group row">
-                                        <label class="col-md-2 text-center text-md-left" for="event-description">Promotion Description:</label>
-                                        <div class="col-md-10">
-                                            <textarea class="form-control" id="event-description" rows="10" data-validation="required"></textarea>
-                                        </div>
-                                    </div>
-<div class="form-group row align-items-start">
-  <!-- Label on the left -->
-  <label for="photo-path" class="col-md-2 col-form-label text-md-left">Promotion Photo:</label>
-
-  <!-- Image + controls on the right -->
-  <div class="col-md-10">
-    <div class="d-flex flex-column align-items-center align-items-md-start">
-      <!-- Image preview -->
-      <img 
-        src="./assets/img/dugout-placeholder.png" 
-        alt="placeholder" 
-        class="img-thumbnail mb-3" 
-        style="width: 300px; height: auto;"
-      >
-
-      <!-- File input -->
-      <input id="file-input" type="file" class="form-control mb-2" style="max-width: 300px;">
-
-      <!-- Warnings -->
-      <p class="text-danger small mb-1">*If no new image is input, existing image that is displayed will be used.</p>
-      <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 481px and height 297px.</p>
-      <p class="text-danger small mb-0">*Please ensure that the image is no larger than 1MB.</p>
-    </div>
-  </div>
-</div>
-
-
-
-      
-        <div class="form-group row input-has-value">
-          <label class="col-md-2 form-control-label text-center text-md-left">Promotion Start Date:</label>
-          <div class="input-group col-md-10 input-has-value">
-            <input type="text" class="form-control datepicker" placeholder="Start Date" data-plugin-options='{"autoclose": true}' required>
-            <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-          </div>
-        </div>
-
-        <div class="form-group row input-has-value">
-          <label class="col-md-2 form-control-label text-center text-md-left">Promotion End Date:</label>
-          <div class="input-group col-md-10 input-has-value">
-            <input type="text" class="form-control datepicker" placeholder="End Date" data-plugin-options='{"autoclose": true}' required>
-            <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-          </div>
-        </div>
-      
-      <!-- <div class="col-lg-12">
-        <div class="form-group">
-          <label for="sampleClockPicker1" class="form-control-label">Reservation Time:</label>
-          <div class="input-group clockpicker">
-            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1">
-            <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-          </div>
-        </div>
-      </div> -->
-
-      
-
-      <div class="form-group row">
-        <div class="col-md-2"> 
-            </div>
-        <div class="col-md-10 btn-list text-center text-md-left">
-            <button class="btn btn-success btn-status-promo" type="submit">Add Promotion</button>
-            <a class="btn btn-danger btn-status-promo" href="event.html">Go Back</a>
-        </div>
-    </div>
-
-    </div>
-  </form>
-  <!-- /.widget-heading -->
-</div>
-
+                    <div class="form-group row">
+                      <div class="col-md-2"> 
+                      </div>
+                      <div class="col-md-10 btn-list text-center text-md-left">
+                        <button class="btn btn-success btn-status-promo" type="submit">Add Promotion</button>
+                        <a class="btn btn-danger btn-status-promo" href="{{ route('promotions.index')}}">Go Back</a>
+                      </div>
+                    </div>
+                    <!--Delete one div here-->
+                  </form>
+                  <!-- /.widget-heading -->
+                </div>
                 <!-- /.widget-bg -->
               </div>
               <!-- /.widget-holder -->
@@ -474,329 +468,323 @@
           <!-- /.page-title -->
 
           <div id="adduser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-      <div class="modal-dialog modal-large">
-        <div class="modal-content">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <div class="modal-header">
-            <h5 class="modal-title">Add Reservation</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-          </div>
-          <form class="form-material" _lpchecked="1">
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l30">RESERVATION NAME</label>
+            <div class="modal-dialog modal-large">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Reservation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <form class="form-material" _lpchecked="1">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l30">RESERVATION NAME</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group input-has-value">
+                          <label class="form-control-label">Reservation Date</label>
+                          <div class="input-group input-has-value">
+                            <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
+                          </div>
+                          <!-- /.input-group -->
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group input-has-value">
+                          <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
+                          <div class="input-group clockpicker">
+                            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
+                          </div>
+                          <!-- /.input-group -->
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l31">NUMBER OF PEOPLE</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l31">PHONE NUMBER</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l31">EMAIL</label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group input-has-value">
-                    <label class="form-control-label">Reservation Date</label>
-                                        <div class="input-group input-has-value">
-                                            <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-                                        </div>
-                                        <!-- /.input-group -->
-                                    </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group input-has-value">
-                    <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
-                                        <div class="input-group clockpicker">
-                                            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-                                        </div>
-                                        <!-- /.input-group -->
-                                    </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l31">NUMBER OF PEOPLE</label>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l31">PHONE NUMBER</label>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l31">EMAIL</label>
+                </form>
+                <div class="modal-footer">
+                  <div class="form-actions d-flex align-items-end">
+                    <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="button">Submit</button>
+                    <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                   </div>
                 </div>
               </div>
             </div>
-          </form>
-          <div class="modal-footer">
-            <div class="form-actions d-flex align-items-end">
-              <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="button">Submit</button>
-              <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-            </div>
+            <!-- /.modal-content -->
           </div>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- add user ends here -->
-  <!-- Edit user Modal -->
-  <div id="edituser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog modal-large">
-      <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Reservation</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <form class="form-material" _lpchecked="1">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l30">RESERVATION NAME</label>
+          <!-- /.modal-dialog remove div below -->
+          <!-- add user ends here -->
+          <!-- Edit user Modal -->
+          <div id="edituser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog modal-large">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit Reservation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <form class="form-material" _lpchecked="1">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l30">RESERVATION NAME</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group input-has-value">
+                          <label class="form-control-label">Reservation Date</label>
+                          <div class="input-group input-has-value">
+                            <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
+                          </div>
+                          <!-- /.input-group -->
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group input-has-value">
+                          <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
+                          <div class="input-group clockpicker">
+                            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
+                          </div>
+                          <!-- /.input-group -->
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l31">NUMBER OF PEOPLE</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l31">PHONE NUMBER</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
+                          <label for="l31">EMAIL</label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group input-has-value">
-                                        <label class="form-control-label">Reservation Date</label>
-                                        <div class="input-group input-has-value">
-                                            <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-                                        </div>
-                                        <!-- /.input-group -->
-                                    </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group input-has-value">
-                                        <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
-                                        <div class="input-group clockpicker">
-                                            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-                                        </div>
-                                        <!-- /.input-group -->
-                                    </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l31">NUMBER OF PEOPLE</label>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Save</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l31">PHONE NUMBER</label>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                    <label for="l31">EMAIL</label>
-                  </div>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="form-actions d-flex align-items-end">
-              <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Save</button>
-              <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- Edit ends here -->
-  <!-- Deactivate Modal -->
-  <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form class="form-material">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <div class="modal-header">
-            <h5 class="modal-title">Confirm Deactivate</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <p class="text-center w-100">Are you sure you want to change the Reservation status?</p>
-
-                
+                </form>
               </div>
+              <!-- /.modal-content -->
             </div>
-            <div class="modal-footer">
-              <div class="form-actions d-flex align-items-end">
-                <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
-            <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+            <!-- /.modal-dialog -->
           </div>
-      </div>
-      </form>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-  </div>
-  <!-- Deactivate here -->
-  <!-- Delete Modal -->
-  <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form class="form-material">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <div class="modal-header">
-            <h5 class="modal-title">Delete Reservation</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-            </div>
-            <div class="modal-body">
-              
-                <p class="text-center w-100">Are you sure you want to delete the following Reservation?</p>
-                <div class="userdetail d-flex justify-content-between">
-            <p>ID:</p>
-            <p class="text-black">1</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Reservation Name:</p>
-            <p class="text-black">Dennise</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Reservation Date:</p>
-            <p class="text-black">13 March, Tuesday</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Reservation Time:</p>
-            <p class="text-black">05:00 PM</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Number of People:</p>
-            <p class="text-black">4</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Phone Number:</p>
-            <p class="text-black">0000000000</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Email:</p>
-            <p class="text-black">example@email.com</p>
-          </div>
-              
-            </div>
-            <div class="modal-footer">
-              <div class="form-actions d-flex align-items-end">
-                <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
-            <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-          </div>
-      </div>
-      </form>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-  </div>
-  <!-- Delete here -->
-  <!-- Edit Password Modal -->
-  <div id="editpassword-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <form class="form-material" _lpchecked="1">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="form-group">
-                  <input class="form-control" placeholder="New Password" type="password" style="cursor: auto;">
-                  <label for="l31">NEW PASSWORD</label>
-                </div>
+          <!-- Edit ends here -->
+          <!-- Deactivate Modal -->
+          <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form class="form-material">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Confirm Deactivate</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <p class="text-center w-100">Are you sure you want to change the Reservation status?</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="col-lg-12">
-                <div class="form-group">
-                  <input class="form-control" placeholder="Confirm password" type="password" style="cursor: auto;">
-                  <label for="l31">CONFIRM PASSWORD</label>
-                </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- Deactivate here -->
+          <!-- Delete Modal -->
+          <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form class="form-material">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Delete Reservation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-center w-100">Are you sure you want to delete the following Reservation?</p>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>ID:</p>
+                      <p class="text-black">1</p>
+                    </div>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>Reservation Name:</p>
+                      <p class="text-black">Dennise</p>
+                    </div>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>Reservation Date:</p>
+                      <p class="text-black">13 March, Tuesday</p>
+                    </div>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>Reservation Time:</p>
+                      <p class="text-black">05:00 PM</p>
+                    </div>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>Number of People:</p>
+                      <p class="text-black">4</p>
+                    </div>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>Phone Number:</p>
+                      <p class="text-black">0000000000</p>
+                    </div>
+                    <div class="userdetail d-flex justify-content-between">
+                      <p>Email:</p>
+                      <p class="text-black">example@email.com</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
               </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- Delete here -->
+          <!-- Edit Password Modal -->
+          <div id="editpassword-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit Password</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <form class="form-material" _lpchecked="1">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" placeholder="New Password" type="password" style="cursor: auto;">
+                          <label for="l31">NEW PASSWORD</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" placeholder="Confirm password" type="password" style="cursor: auto;">
+                          <label for="l31">CONFIRM PASSWORD</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Submit</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- Edit Password ends here -->
+          <!-- View User Modal -->
+          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog modal-large">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header">
+                  <h5 class="modal-title">Reservation Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>ID:</p>
+                    <p class="text-black">1</p>
+                  </div>
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>Reservation Name:</p>
+                    <p class="text-black">Dennise</p>
+                  </div>
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>Reservation Date:</p>
+                    <p class="text-black">13 March, Tuesday</p>
+                  </div>
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>Reservation Time:</p>
+                    <p class="text-black">05:00 PM</p>
+                  </div>
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>Number of People:</p>
+                    <p class="text-black">4</p>
+                  </div>
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>Phone Number:</p>
+                    <p class="text-black">0000000000</p>
+                  </div>
+                  <div class="userdetail d-flex justify-content-between">
+                    <p>Email:</p>
+                    <p class="text-black">example@email.com</p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="form-actions d-flex align-items-end">
+                    <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="form-actions d-flex align-items-end">
-              <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Submit</button>
-              <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- Edit Password ends here -->
-  <!-- View User Modal -->
-  <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog modal-large">
-      <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <div class="modal-header">
-          <h5 class="modal-title">Reservation Details</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="userdetail d-flex justify-content-between">
-            <p>ID:</p>
-            <p class="text-black">1</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Reservation Name:</p>
-            <p class="text-black">Dennise</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Reservation Date:</p>
-            <p class="text-black">13 March, Tuesday</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Reservation Time:</p>
-            <p class="text-black">05:00 PM</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Number of People:</p>
-            <p class="text-black">4</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Phone Number:</p>
-            <p class="text-black">0000000000</p>
-          </div>
-          <div class="userdetail d-flex justify-content-between">
-            <p>Email:</p>
-            <p class="text-black">example@email.com</p>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="form-actions d-flex align-items-end">
-            <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-  </div>
-  <!-- View user modal ends here -->
-
+          <!-- View user modal ends here -->
           <!-- /.chat-panel -->
         </main>
       </div>
@@ -920,44 +908,44 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
-<script src="http://xcitemedia.tv/admin-wiseowl/assets/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
+    <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.7.0/js/perfect-scrollbar.jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.77/jquery.form-validator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.7.0/js/perfect-scrollbar.jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.77/jquery.form-validator.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/1.1.1/mithril.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/1.1.1/mithril.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.4/footable.min.js"></script>
-<script src="admin-wiseowl/node_modules/jquery-tabledit/jquery.tabledit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.4/footable.min.js"></script>
+    <script src="admin-wiseowl/node_modules/jquery-tabledit/jquery.tabledit.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.2/countUp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.2/countUp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.1/jquery.toast.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.1/jquery.toast.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js"></script>
 
-<script src="http://xcitemedia.tv/admin-wiseowl/assets/vendors/theme-widgets/widgets.js"></script>
-<script src="http://xcitemedia.tv/admin-wiseowl/assets/js/theme.js"></script>
-<script src="http://xcitemedia.tv/admin-wiseowl/assets/js/custom.js"></script>
-<script src="./assets/js/custom-js.js"></script>
+    <script src="http://xcitemedia.tv/admin-wiseowl/assets/vendors/theme-widgets/widgets.js"></script>
+    <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/theme.js"></script>
+    <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/custom.js"></script>
+    <script src="{{ asset('js/admin/custom-js.js') }}"></script>
     <script
       type="text/javascript"
       src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"
@@ -1093,24 +1081,24 @@
         /*$('#table-one').Tabledit({
           url: 'update-user',
           columns: {
-              identifier: [0, 'id'],
-              editable: [[1, 'name'], [2, 'email'], [3, 'phone']]
+            identifier: [0, 'id'],
+            editable: [[1, 'name'], [2, 'email'], [3, 'phone']]
           },
           onAjax: function () {
-              //validation here
+            //validation here
           },
           onSuccess: function(data, textStatus, jqXHR) {
-              console.log(data);
-              console.log('success');
-              console.log(jqXHR);
+            console.log(data);
+            console.log('success');
+            console.log(jqXHR);
           },
           onFail: function(jqXHR, textStatus, errorThrown) {
-              console.log(jqXHR);
-              console.log('erro r failed');
-              console.log(errorThrown);
-              ajax_error_handling(jqXHR, textStatus);
+            console.log(jqXHR);
+            console.log('erro r failed');
+            console.log(errorThrown);
+            ajax_error_handling(jqXHR, textStatus);
           }
-      });*/
+        });*/
         $("#addSubmit").click(function () {
           $(".error").removeClass("show");
           $("#loading-pace").removeClass("pace-inactive");
@@ -1464,33 +1452,56 @@
         });
       });
 
-$(document).ready(function() {
-    // This is the command that activates the datepicker plugin 
-    // on all elements that have the class 'datepicker'.
-    $('.datepicker').datepicker({
-        // Add options here to match the template's behavior:
-        format: 'dd/mm/yyyy',
-        autoclose: true,
-    });
-});
+      $(document).ready(function() {
+          // This is the command that activates the datepicker plugin 
+          // on all elements that have the class 'datepicker'.
+          $('.datepicker').datepicker({
+              // Add options here to match the template's behavior:
+              format: 'dd/mm/yyyy',
+              autoclose: true,
+          });
+      });
 
+      $(document).ready(function() {
+          // Initializes all elements with the class 'clockpicker'.
+          // In your HTML, the parent div is marked with this class: <div class="input-group clockpicker">
+        $('.clockpicker').clockpicker({
+          placement: 'bottom',
+          align: 'left',
+          autoclose: false,
+          vibrate: true,
+          twelvehour: true,
+          donetext: 'Done'
+        }).on('change', function() {
+          const val = $(this).find('input').val();
+          $(this).find('input').val(val.replace(/(AM|PM)$/i, ' $1'));
+        });
 
-$(document).ready(function() {
-    // Initializes all elements with the class 'clockpicker'.
-    // In your HTML, the parent div is marked with this class: <div class="input-group clockpicker">
-    $('.clockpicker').clockpicker({
-  placement: 'bottom',
-  align: 'left',
-  autoclose: false,
-  vibrate: true,
-  twelvehour: true,
-  donetext: 'Done'
-}).on('change', function() {
-  const val = $(this).find('input').val();
-  $(this).find('input').val(val.replace(/(AM|PM)$/i, ' $1'));
-});
-});
+        document.getElementById('input-image').addEventListener('change', function(event){
+          const file = event.target.files[0];
+          if(file){
+            const reader = new FileReader;
+            reader.onload = function(e){
+              document.getElementById('image-preview').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+            document.getElementById('photo_path').value = file.name;
+          }
+        });
 
+        const promoPath = "{{ asset('img/admin/promo') }}";
+        document.getElementById('existing-promo-list').addEventListener('change', function() {
+          const selected = this.options[this.selectedIndex];
+          document.getElementById('promo-name').value = selected.dataset.name || '';
+          document.getElementById('promo-description').value = selected.dataset.description || '';
+          document.getElementById('photo_path').value = selected.dataset.photo || '';
+          document.getElementById('promo-start').value = selected.dataset.start || '';
+          document.getElementById('promo-end').value = selected.dataset.end || '';
+
+          document.getElementById('image-preview').src = promoPath + '/' + selected.dataset.photo;
+
+        });
+      });
     </script>
   </body>
 </html>

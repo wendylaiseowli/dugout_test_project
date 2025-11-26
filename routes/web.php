@@ -67,7 +67,8 @@ Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subs
 Route::middleware('auth')->group(function () {
     #dashboard
     Route::get('/dashboard', [IndexController::class, 'showDashBoard'])->name('dashboard');
-
+    Route::post('/promotions/replicate', [PromotionController::class, 'replicate'])->name('replicate-promotion');
+    Route::get('/promotions/replicate', [PromotionController::class, 'replicateForm'])->name('replicatepromotionform');
     Route::resources([
         'users' => UserController::class,
         'reservations' => ReservationController::class,
@@ -89,7 +90,14 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/events/{event}/active', [EventController::class, 'active'])->name('active-event');
     Route::put('/events/{event}/deactive', [EventController::class, 'deactive'])->name('deactive-event');
-    
+
+    Route::put('/promotions/{promotion}/active', [PromotionController::class, 'active'])->name('active-promotion');
+    Route::put('/promotions/{promotion}/deactive', [PromotionController::class, 'deactive'])->name('deactive-promotion');
+
+    // Route::get('/menu-add', function () {
+    //     return view('promotion.promo-existing');
+    // })->name('menu-add');
+
     // Route::get('/menu-add', function () {
     //     return view('menu.menu-add');
     // })->name('menu-add');

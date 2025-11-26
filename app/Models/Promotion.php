@@ -19,6 +19,7 @@ class Promotion extends Model
         'promotion_endDate',
         'description',
         'status', //active and deactive
+        'userID',
     ];
 
     protected $casts=[
