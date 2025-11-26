@@ -30,7 +30,6 @@ class UserController extends Controller
     }
 
     public function update(UserRequest $request, UserList $user){
-
         $data = $request->validated();
 
         if (!empty($data['password'])) {

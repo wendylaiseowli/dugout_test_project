@@ -2222,7 +2222,6 @@
           });
       });
 
-
       $(document).ready(function() {
           // Initializes all elements with the class 'clockpicker'.
           // In your HTML, the parent div is marked with this class: <div class="input-group clockpicker">
@@ -2441,7 +2440,7 @@
           // Get headers (excluding Actions)
           table.querySelectorAll('thead th').forEach((th, index) => {
             const headerText = th.textContent.trim();
-            if (headerText !== 'Actions' && headerText !== 'Big Photo' && headerText !== 'Thumbnail Photo') {
+            if (headerText !== 'Actions' && headerText !== 'Big Photo' && headerText !== 'Thumbnail Photo' && headerText !=='Promotion Photo') {
               headers.push(headerText);
             }
           });
@@ -2458,9 +2457,12 @@
             
             // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
             rowData.push(cells[0].textContent.trim()); // ID
-            rowData.push(cells[1].textContent.trim()); // Category
-            rowData.push(cells[4].textContent.trim()); // Active?
-            rowData.push(cells[5].textContent.trim()); // Last Updated
+            rowData.push(cells[1].textContent.trim()); // Name
+            rowData.push(cells[3].textContent.trim()); // start date
+            rowData.push(cells[4].textContent.trim()); // end date
+            rowData.push(cells[5].textContent.trim()); // description                       
+            rowData.push(cells[6].textContent.trim()); // Active?
+            rowData.push(cells[7].textContent.trim()); // Last Updated
             
             rows.push(rowData);
           });

@@ -904,7 +904,7 @@
             </div>
           </div>
           <!-- View user detials ends here -->
-          {{-- <!-- Edit user detials starts here -->
+          <!-- Edit user detials starts here -->
           <div id="userdetails-edit-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
@@ -915,7 +915,7 @@
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <form method="POST" action="/users/4"id="edit-user-form" class="form-material" _lpchecked="1">
+                <form method="POST" id="edit-user-form" class="form-material" _lpchecked="1">
                   @csrf
                   @method('PUT')
                   <div class="modal-body reservation-modal">
@@ -938,6 +938,8 @@
                             @enderror
                           </div>
                         </div>
+                        <input class="form-control" id="edit-modal-user-username" name="username" type="hidden" style="cursor: auto;">
+                        <input class="form-control" id="edit-modal-user-email" name="email" type="hidden" style="cursor: auto;">
                         <div class="col-lg-12">
                           <div class="form-group">
                             <input class="form-control" id="edit-modal-user-password" name="password" type="password" style="cursor: auto;">
@@ -969,78 +971,8 @@
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
-          </div> --}}
-
-          <div id="userdetails-edit-modal" class="modal fade " tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog modal-large">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">User Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form method="POST" id="edit-user-form" >
-                  @csrf
-                  @method('PUT')
-                  <div class="modal-body">
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>First Name:</p>
-                      <p class="text-black"><input id="edit-modal-user-first-name" name="first_name"></p>
-                    </div>
-                    @error('first_name')
-                      {{ $message }}
-                    @enderror
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Last Name:</p>
-                      <p class="text-black"><input id="edit-modal-user-last-name" name="last_name"></p>
-                    </div>
-                    @error('last_name')
-                      {{ $message }}
-                    @enderror
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Username:</p>
-                      <p class="text-black"><input id="edit-modal-user-username" name="username"></p>
-                    </div>
-                    @error('username')
-                      {{ $message }}
-                    @enderror
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Email:</p>
-                      <p class="text-black"><input id="edit-modal-user-email" name="email"></p>
-                    </div>
-                    @error('email')
-                      {{ $message }}
-                    @enderror
-                    <div class="userdetail d-flex justify-content-between">
-                    <p>Password:</p>
-                    <p class="text-black"><input id="edit-modal-user-password" name="password" type="password"></p>
-                    </div>
-                    @error('password')
-                      {{ $message }}
-                    @enderror
-                    <div class="userdetail d-flex justify-content-between">
-                    <p>Confirm Pass:</p>
-                    <p class="text-black"><input id="edit-modal-user-confirm-password" name="password_confirmation" type="password"></p>
-                    </div>
-                    @error('password_confirmation')
-                      {{ $message }}
-                    @enderror
-                  </div>
-                  <div class="modal-footer">
-                    <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Save</button>
-                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </form>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>
           </div>
-          <!-- Edit user detials ends here -->
+        </div>
           <!-- /.chat-panel -->
         </main>
       {{-- @endsection --}}
@@ -1309,9 +1241,9 @@
           },
         });
       });
-    </script>
+    </script> --}}
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
       $(document).ready(function () {
         //$("#term").attr('placeholder','Search by user name, email, phone number');
         $(".search-form").keypress(function (e) {
@@ -1634,9 +1566,9 @@
             "</b>?"
         );
       }
-    </script>
+    </script> --}}
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
       $("#overlay").addClass("hide");
 
       function ajax_error_handling(jqXHR, exception) {
@@ -2012,67 +1944,49 @@
 
         //Edit
         $('#userdetails-edit-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
-            var userId = button.data('user-id');
-            var userFirstName = button.data('user-first-name');
-            var userLastName = button.data('user-last-name');
-            var userName = button.data('user-username');
-            var userEmail = button.data('user-email');
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var userId = button.data('user-id');
+          var userFirstName = button.data('user-first-name');
+          var userLastName = button.data('user-last-name');
+          var userName = button.data('user-username');
+          var userEmail = button.data('user-email');
 
-            // Update modal content
-            $('#edit-modal-user-first-name').val(userFirstName);
-            $('#edit-modal-user-last-name').val(userLastName);
-            $('#edit-modal-user-username').val(userName);
-            $('#edit-modal-user-email').val(userEmail);
-            $('#edit-modal-user-password').val('');
-            $('#edit-modal-user-confirm-password').val('');
-            // Update form action URL dynamically
-            
-            $('#edit-user-form').attr('action', '/users/' + userId);
+          // Update modal content
+          $('#edit-modal-user-first-name').val(userFirstName).trigger('input');
+          $('#edit-modal-user-last-name').val(userLastName).trigger('input');
+          $('#edit-modal-user-username').val(userName);
+          $('#edit-modal-user-email').val(userEmail);            
+          $('#edit-modal-user-password').val('');
+          $('#edit-modal-user-confirm-password').val('');
+          // Update form action URL dynamically
+          
+          $('#edit-user-form').attr('action', '/users/' + userId);
         });
-//         $('#userdetails-edit-modal').on('show.bs.modal', function (event) {
-//     var button = $(event.relatedTarget); // button that triggered modal
-//     var userId = button.data('user-id');
-//     var userFirstName = button.data('user-first-name');
-//     var userLastName = button.data('user-last-name');
-
-//     console.log('User ID:', userId); // check that this prints correctly
-
-//     // Update modal content
-//     $('#edit-modal-user-first-name').val(userFirstName);
-//     $('#edit-modal-user-last-name').val(userLastName);
-//     $('#edit-modal-user-password').val('');
-//     $('#edit-modal-user-confirm-password').val('');
-
-//     // Update form action URL dynamically
-//     $('#edit-user-form').attr('action', '/users/' + userId);
-//         console.log('Form action set to:', $('#edit-user-form').attr('action'));
-// });
 
         //Delete
         $('#delete-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
-            var userId = button.data('user-id');
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var userId = button.data('user-id');
 
-            // Update form action URL dynamically
-            $('#delete-user-form').attr('action', '/users/' + userId);
+          // Update form action URL dynamically
+          $('#delete-user-form').attr('action', '/users/' + userId);
         });
 
         //Active
         $('#deactivate-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
-            var userId = button.data('user-id');
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var userId = button.data('user-id');
 
-            // Update form action URL dynamically
-            $('#deactive-user-form').attr('action', '/users/' + userId + '/deactive');
+          // Update form action URL dynamically
+          $('#deactive-user-form').attr('action', '/users/' + userId + '/deactive');
         });        
         
         $('#activate-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
-            var userId = button.data('user-id');
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var userId = button.data('user-id');
 
-            // Update form action URL dynamically
-            $('#active-user-form').attr('action', '/users/' + userId + '/active');
+          // Update form action URL dynamically
+          $('#active-user-form').attr('action', '/users/' + userId + '/active');
         });
       });
 

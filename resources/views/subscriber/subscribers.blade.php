@@ -1601,7 +1601,7 @@
             const cells = row.cells;
             
             // Skip last column (Actions)
-            for (let i = 0; i < cells.length - 1; i++) {
+            for (let i = 0; i < cells.length; i++) {
               let cellText = cells[i].textContent.trim();
               
               // Handle image columns - just add placeholder text
@@ -1658,10 +1658,8 @@
             
             // Add data (skip Actions, Big Photo, Thumbnail Photo columns)
             rowData.push(cells[0].textContent.trim()); // ID
-            rowData.push(cells[1].textContent.trim()); // Category
-            rowData.push(cells[4].textContent.trim()); // Active?
-            rowData.push(cells[5].textContent.trim()); // Last Updated
-            
+            rowData.push(cells[1].textContent.trim()); // Email
+
             rows.push(rowData);
           });
           
