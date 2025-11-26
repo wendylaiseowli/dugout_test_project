@@ -941,8 +941,6 @@
                             @enderror
                           </div>
                         </div>
-                        <input class="form-control" id="edit-modal-user-username" name="username" type="hidden" style="cursor: auto;">
-                        <input class="form-control" id="edit-modal-user-email" name="email" type="hidden" style="cursor: auto;">
                         <div class="col-lg-12">
                           <div class="form-group">
                             <input class="form-control" id="edit-modal-user-password" name="password" type="password" style="cursor: auto;">
@@ -1098,7 +1096,7 @@
       <!-- /.modal-dialog -->
     </div>
 
-    <!-- Scripts -->
+       <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
     <script src="http://xcitemedia.tv/admin-wiseowl/assets/js/bootstrap.min.js"></script>
@@ -1244,9 +1242,9 @@
           },
         });
       });
-    </script> --}}
+    </script>
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function () {
         //$("#term").attr('placeholder','Search by user name, email, phone number');
         $(".search-form").keypress(function (e) {
@@ -1569,9 +1567,9 @@
             "</b>?"
         );
       }
-    </script> --}}
+    </script>
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
       $("#overlay").addClass("hide");
 
       function ajax_error_handling(jqXHR, exception) {
@@ -1930,23 +1928,6 @@
 
         //View
         $('#userdetails-modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // jQuery object for the button
-            var userId = button.data('user-id');
-            var userFirstName = button.data('user-first-name');
-            var userLastName = button.data('user-last-name');
-            var userName = button.data('user-username');
-            var userEmail = button.data('user-email');
-
-            // Update modal content
-            $('#modal-user-id').text(userId);
-            $('#modal-user-first-name').text(userFirstName);
-            $('#modal-user-last-name').text(userLastName);
-            $('#modal-user-username').text(userName);
-            $('#modal-user-email').text(userEmail);
-        });
-
-        //Edit
-        $('#userdetails-edit-modal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget); // jQuery object for the button
           var userId = button.data('user-id');
           var userFirstName = button.data('user-first-name');
@@ -1955,15 +1936,65 @@
           var userEmail = button.data('user-email');
 
           // Update modal content
+          $('#modal-user-id').text(userId);
+          $('#modal-user-first-name').text(userFirstName);
+          $('#modal-user-last-name').text(userLastName);
+          $('#modal-user-username').text(userName);
+          $('#modal-user-email').text(userEmail);
+        });
+
+        //Edit
+        $('#userdetails-edit-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // jQuery object for the button
+          var userId = button.data('user-id');
+          var userFirstName = button.data('user-first-name');
+          var userLastName = button.data('user-last-name');
+
+          // Update modal content
           $('#edit-modal-user-first-name').val(userFirstName).trigger('input');
           $('#edit-modal-user-last-name').val(userLastName).trigger('input');
-          $('#edit-modal-user-username').val(userName);
-          $('#edit-modal-user-email').val(userEmail);            
           $('#edit-modal-user-password').val('');
           $('#edit-modal-user-confirm-password').val('');
           // Update form action URL dynamically
           
           $('#edit-user-form').attr('action', '/users/' + userId);
+        });
+
+        $('#edit-user-form').on('submit', function(e) {
+          e.preventDefault(); // Prevent normal submit
+
+          let form = $(this);
+          let formData = form.serialize();
+          let actionUrl = form.attr('action');
+
+          $.ajax({
+            url: actionUrl,
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+              $('#userdetails-edit-modal').modal('hide');
+              location.reload(); // Refresh table or page
+            },
+            error: function (xhr) {
+              if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+
+                // Remove old errors
+                form.find('.text-danger').remove();
+
+                // Display new errors
+                $.each(errors, function (key, messages) {
+                  let input = form.find('[name="'+ key +'"]');
+
+                  // If input is inside form-group (it is)
+                  let group = input.closest('.form-group');
+
+                  // Append error
+                  group.append('<span class="text-danger">' + messages[0] + '</span>');
+                });
+              }
+            }
+          });
         });
 
         //Delete
@@ -1990,6 +2021,39 @@
 
           // Update form action URL dynamically
           $('#active-user-form').attr('action', '/users/' + userId + '/active');
+        });
+      });
+
+      $('#editUserSubmit').on('click', function () {
+        let formData = {
+          first_name: $('#first-name').val(),
+          last_name: $('#last-name').val(),
+          new_password: $('#new-pwd').val(),
+          confirm_password: $('#confirm-pwd').val(),
+          _token: '{{ csrf_token() }}'
+        };
+
+        $.ajax({
+          url: "/users/update",
+          method: "POST",
+          data: formData,
+          success: function (response) {
+            // Close modal on success
+            $('#edituser-modal').modal('hide');
+
+            // Optional: reload page
+            location.reload();
+          },
+          error: function (xhr) {
+            if (xhr.status === 422) {
+              let errors = xhr.responseJSON.errors;
+
+              // Show errors in the modal without closing it
+              $.each(errors, function (key, value) {
+                alert(value[0]); // simplest way
+              });
+            }
+          }
         });
       });
 

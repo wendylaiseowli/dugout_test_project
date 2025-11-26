@@ -2245,7 +2245,7 @@
 
           $.ajax({
             url: url,
-            method: 'POST', // Laravel PUT via POST + _method
+            method: 'POST',
             data: formData,
             success: function(response) {
               $('#editreservation-modal').modal('hide'); // hide modal on success
