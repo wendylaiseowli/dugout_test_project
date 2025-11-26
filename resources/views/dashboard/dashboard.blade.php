@@ -168,7 +168,7 @@
                     <form method="POST" class="hidden" id="log-outForm" action="{{ route('logout') }}">
                       @csrf
                     </form>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('log-outForm').submit();">
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('log-outForm').submit();">
                       <span class="align-middle">Log Out</span>
                     </a>
                   </li>

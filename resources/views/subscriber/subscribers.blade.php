@@ -180,9 +180,12 @@
                 </header>
                 <ul class="list-unstyled card-body">
                   <li class="log-out-hover">
-                    <a href="{{ route('dashboard')}}" 
-                      ><span class="align-middle">Log Out</span></a
-                    >
+                    <form method="POST" class="hidden" id="log-outForm" action="{{ route('logout') }}">
+                      @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('log-outForm').submit();">
+                      <span class="align-middle">Log Out</span>
+                    </a>
                   </li>
                 </ul>
                 <!-- /.card-body -->

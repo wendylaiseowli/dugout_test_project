@@ -65,7 +65,7 @@
                     <!-- Email -->
                     <div class="flex flex-col gap-y-2">
                         <label
-                        for="email"
+                        for="text"
                         class="text-[#999999] uppercase font-montserrat font-bold text-[12px]"
                         >Email</label
                         >
