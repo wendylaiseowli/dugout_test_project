@@ -1124,8 +1124,6 @@
             reader.readAsDataURL(file);      
         }
       });
-
-
     </script>
   </body>
 </html>

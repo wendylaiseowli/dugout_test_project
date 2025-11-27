@@ -386,12 +386,18 @@
                         <div class="col-md-10">
                           <input class="form-control" id="promo-name" name="name" type="text" data-validation="required" value="{{ old('name') }}">
                         </div>
+                        @error('name')
+                          {{ $message }}
+                        @enderror
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-description">Promotion Description:</label>
                         <div class="col-md-10">
                           <textarea class="form-control" id="promo-description" name="description" rows="10" data-validation="required">{{ old('description') }}</textarea>
                         </div>
+                        @error('description')
+                          {{ $message }}
+                        @enderror                        
                       </div>
                       <div class="form-group row align-items-start">
                       <!-- Label on the left -->
@@ -413,7 +419,9 @@
                           
                           <!-- File input -->
                           <input id="input-image" name="photo_path_old" type="file" class="form-control mb-2" style="max-width: 300px;">
-
+                          @error('photo_path')
+                            {{ $message }}
+                          @enderror    
                           <!-- Warnings -->
                           <p class="text-danger small mb-1">*If no new image is input, existing image that is displayed will be used.</p>
                           <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 481px and height 297px.</p>
@@ -425,17 +433,23 @@
                     <div class="form-group row input-has-value">
                       <label class="col-md-2 form-control-label text-center text-md-left">Promotion Start Date:</label>
                       <div class="input-group col-md-10 input-has-value">
-                        <input type="text" class="form-control datepicker" placeholder="Start Date" data-plugin-options='{"autoclose": true}' required name="promotion_startDate" id="promo-start" value="{{ old('promotion_startDate') }}">
+                        <input type="text" class="form-control datepicker" placeholder="Start Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' required name="promotion_startDate" id="promo-start" value="{{ old('promotion_startDate') }}">
                         <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                       </div>
+                      @error('promotion_startDate')
+                        {{ $message }}
+                      @enderror                        
                     </div>
 
                     <div class="form-group row input-has-value">
                       <label class="col-md-2 form-control-label text-center text-md-left">Promotion End Date:</label>
                       <div class="input-group col-md-10 input-has-value">
-                        <input type="text" class="form-control datepicker" placeholder="End Date" data-plugin-options='{"autoclose": true}' required name="promotion_endDate" id="promo-end" value="{{ old('promotion_endDate') }}">
+                        <input type="text" class="form-control datepicker" placeholder="End Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' required name="promotion_endDate" id="promo-end" value="{{ old('promotion_endDate') }}">
                         <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                       </div>
+                      @error('promotion_endDate')
+                        {{ $message }}
+                      @enderror                                 
                     </div>
       
                     <!-- <div class="col-lg-12">

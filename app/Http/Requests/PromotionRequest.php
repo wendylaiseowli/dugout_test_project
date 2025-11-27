@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
+use Carbon\Carbon;
 
 class PromotionRequest extends FormRequest
 {
@@ -28,5 +30,21 @@ class PromotionRequest extends FormRequest
             'promotion_endDate'=>['required', 'date_format:d/m/Y'],
             'description'=>['required', 'string'],
         ];
+    }
+
+    public function withValidator(Validator $validator){
+        $validator->after(function($validator){
+            $start = $this->input('promotion_startDate');
+            $end = $this->input('promotion_endDate');
+
+            if($start && $end){
+                $startDate = Carbon::createFromFormat('d/m/Y', $start);
+                $endDate = Carbon::createFromFormat('d/m/Y', $end);
+
+                if($endDate->lt($startDate)){
+                    $validator->errors()->add('promotion_endDate', 'The end date must be after the start date');
+                }
+            }
+        });
     }
 }

@@ -30,11 +30,9 @@ class PromotionController extends Controller
         $validated = $request->validated();
         $validated['userID'] = Auth::id();
 
-        // if (!empty($validated['promotion_startDate']) && !empty($validated['promotion_endDate'])) {
-
-        //     $validated['promotion_startDate']->format('Y-m-d H:i:s');
-        //     $validated['promotion_endDate']->format('Y-m-d H:i:s');
-        // }
+        // Convert to Y-m-d for database
+        $validated['promotion_startDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])->format('Y-m-d');
+        $validated['promotion_endDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_endDate'])->format('Y-m-d');
 
         Promotion::create($validated);
 
@@ -52,17 +50,9 @@ class PromotionController extends Controller
     public function update(PromotionRequest $request, Promotion $promotion){
         $validated = $request->validated();
 
-        // if (!empty($validated['promotion_startDate'])) {
-
-        //     $validated['promotion_startDate']= Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])
-        //     ->format('Y-m-d');
-        // }
-
-        // if (!empty($validated['promotion_endDate'])) {
-
-        //     $validated['promotion_endDate']= Carbon::createFromFormat('d/m/Y', $validated['promotion_endDate'])
-        //     ->format('Y-m-d');
-        // }
+        // Convert to Y-m-d for database
+        $validated['promotion_startDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])->format('Y-m-d');
+        $validated['promotion_endDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_endDate'])->format('Y-m-d');
 
         $promotion->update($validated);
 
@@ -88,11 +78,9 @@ class PromotionController extends Controller
         $validated = $request->validated();
         $validated['userID'] = Auth::id();
 
-        // if (!empty($validated['promotion_startDate']) && !empty($validated['promotion_endDate'])) {
-
-        //     $validated['promotion_startDate']->format('Y-m-d H:i:s');
-        //     $validated['promotion_endDate']->format('Y-m-d H:i:s');
-        // }
+        // Convert to Y-m-d for database
+        $validated['promotion_startDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])->format('Y-m-d');
+        $validated['promotion_endDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_endDate'])->format('Y-m-d');
 
         Promotion::create($validated);
 
