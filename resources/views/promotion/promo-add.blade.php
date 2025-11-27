@@ -398,7 +398,7 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Promotion Start Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" placeholder="Start Date" data-plugin-options='{"autoclose": true}' required name="promotion_startDate" value="{{old('promotion_startDate')}}">
+                          <input type="text" class="form-control datepicker" placeholder="Start Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' required name="promotion_startDate" value="{{old('promotion_startDate')}}">
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
                       </div>
@@ -408,7 +408,7 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Promotion End Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" placeholder="End Date" data-plugin-options='{"autoclose": true}' required name="promotion_endDate" value="{{old('promotion_startDate')}}">
+                          <input type="text" class="form-control datepicker" placeholder="End Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' required name="promotion_endDate" value="{{old('promotion_startDate')}}">
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
                         @error('promotion_endDate')

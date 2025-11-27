@@ -414,7 +414,7 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Event Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" placeholder="Pick a Date" data-plugin-options='{"autoclose": true}' required name="event_date" value="{{ old('event_date') }}">
+                          <input type="text" class="form-control datepicker" placeholder="Pick a Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' required name="event_date" value="{{ old('event_date') }}">
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
                         @error('event_date')

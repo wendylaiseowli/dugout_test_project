@@ -11,9 +11,9 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="{{ asset('img/admin/favicon-dugout.png') }}"
+      href="{{ asset('img/admin/favicon-dugout.png')}}"
     />
-    <link rel="stylesheet" href="{{ asset('css/admin/pace.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/admin/pace.css')}}" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Gallery  | The Dugout Oasis Admin Panel</title>
     <!-- CSS -->
@@ -23,17 +23,17 @@
       type="text/css"
     />
     <link
-      href="{{ asset('vendors/material-icons/material-icons.css') }}"
+      href="{{ asset('vendors/material-icons/material-icons.css')}}"
       rel="stylesheet"
       type="text/css"
     />
     <link
-      href="{{ asset('vendors/mono-social-icons/monosocialiconsfont.css') }}"
+      href="{{ asset('vendors/mono-social-icons/monosocialiconsfont.css')}}"
       rel="stylesheet"
       type="text/css"
     />
     <link
-      href="{{ asset('vendors/feather-icons/feather.css') }}"
+      href="{{ asset('vendors/feather-icons/feather.css')}}"
       rel="stylesheet"
       type="text/css"
     />
@@ -65,15 +65,14 @@
       rel="stylesheet"
       type="text/css"
     />
-
     <link
       href="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       rel="stylesheet"
       type="text/css"
     />
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/admin/style.css')}}" rel="stylesheet" type="text/css" />
     <!-- DS-styles -->
-    <link href="{{ asset('css/admin/style-ds.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/admin/style-ds.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- My style sheet -->
     <link rel="stylesheet" href="{{ asset('css/admin/styles-custom.css') }}" />
@@ -118,16 +117,16 @@
       <nav class="navbar">
         <!-- Logo Area -->
         <div class="navbar-header">
-          <a href="{{ route('dashboard')}}" class="navbar-brand">
+          <a href="{{ route('dashboard') }}" class="navbar-brand">
             <img
               class="logo-expand ds-logo"
               alt=""
-              src="{{ asset('img/admin/dugout-logo-white_new.png') }}"
+              src="{{ asset('img/admin/dugout-logo-white_new.png')}}"
             />
             <img
               class="logo-collapse ds-logo"
               alt=""
-              src="{{ asset('img/admin/dugout-logo-white_new.png') }}"
+              src="{{ asset('img/admin/dugout-logo-white_new.png')}}"
             />
             <!-- <p>BonVue</p> -->
           </a>
@@ -167,7 +166,7 @@
             >
               <span class="avatar thumb-xs2">
                 <img
-                  src="{{ asset('img/admin/ds-img/userasset-4.png') }}"
+                  src="{{ asset('img/admin/ds-img/userasset-4.png')}}"
                   class="rounded-circle"
                   alt=""
                 />
@@ -376,7 +375,7 @@
                         </button> -->
                         <a
                           class="btn btn-normal btn-default btn-orange-ds ripple mb-2 input-m m-btn-full"
-                          href="./gallery-add.html"
+                          href="{{ route('gallerys.create') }}"
                           id="adduser"
                         >
                           Add Gallery
@@ -388,6 +387,7 @@
                           <option value="drinks">Drinks</option>
                           <option value="events">Events</option>
                         </select>
+                       
                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default ripple mb-2 input-m m-btn-full pull-right export-btn" type="button">Export<span class="caret"></span>
                         </button>
                         <div role="menu" class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 47px, 0px); top: 0px; left: 0px; will-change: transform;"><a class="dropdown-item" href="#" id="export-csv-all">CSV (All)</a> <a class="dropdown-item" href="#" id="export-csv-filtered">CSV (Filtered)</a> <a class="dropdown-item" href="#" id="export-pdf-all">PDF (All)</a> <a class="dropdown-item" href="#" id="export-pdf-filtered">PDF (Filtered)</a>
@@ -411,710 +411,104 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr data-expanded="true">
-                            <td>1</td>
-                            <td>Events</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="event image">
-                              </div>
-                            </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                    
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Food</td>
-                            <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/food_gallery/food1.jpg') }}" alt="food image">
-                              </div>
-                            </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-success btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-check-circle"
-                                    ></span>
-                                    Activate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Drinks</td>
-                             <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/drinks_gallery/drink1.jpg') }}" alt="drink image">
-                              </div>
-                            </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Events</td>
-                             <td>
-                              <div class="event-table-image-container">
-                                <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
-                              </div>
-                            </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>Events</td>
-                             <td>
+                          @foreach($galleries as $gallery)
+                            <tr data-expanded="true">
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $gallery->name}}</td>
+                              <td>
                                 <div class="event-table-image-container">
-                                    <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
-                                  </div>
+                                  <img src="{{ asset($gallery->new_photo_path) }}" alt="event image">
+                                </div>
                               </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>Events</td>
-                             <td>
-                                <div class="event-table-image-container">
-                                    <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
+                                    @if($gallery->status == true)
+                                      <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                        data-toggle="modal"
+                                        data-target="#deactivate-modal"
+                                        data-gallery-id="{{ $gallery->id }}"
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-x-circle"
+                                        ></span>
+                                        Deactivate
+                                      </button>
+                                    @else
+                                      <button
+                                        type="button"
+                                        class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                        data-toggle="modal"
+                                        data-target="#activate-modal"
+                                        data-gallery-id="{{ $gallery->id }}"                                        
+                                        style="float: none"
+                                      >
+                                        <span
+                                          class="glyphicon feather-check-circle"
+                                        ></span>
+                                        Activate
+                                      </button> 
+                                    @endif
                                   </div>
+                                </div>
                               </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
+                              <td>{{ $gallery->updated_at->diffForHumans() }}</td>
+                              <td style="white-space: nowrap; width: 1%">
                                 <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
+                                  class="tabledit-toolbar btn-toolbar"
+                                  style="text-align: left"
                                 >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
+                                  <div
+                                    class="btn-group btn-group-sm"
                                     style="float: none"
                                   >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>7</td>
-                            <td>Events</td>
-                            
-                             <td>
-                                <div class="event-table-image-container">
-                                    <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-success "
+                                      data-toggle="modal"
+                                      data-target="#gallerydetails-modal"
+                                      data-gallery-category= "{{ $gallery->name }}"
+                                      data-gallery-ori-photo= "{{ $gallery->original_photo_path }}"
+                                      data-gallery-new-photo= "{{ $gallery->new_photo_path }}"
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                    >
+                                      <span class="glyphicon feather-eye"></span>
+                                    </button>
+                                    <a
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-info"
+                                      href="{{ route('gallerys.edit', $gallery->id) }}"
+                                      style="float: none; color:white;"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                    >
+                                      <span class="fa fa-edit"></span>
+                                    </a>
+                                    <button
+                                      type="button"
+                                      class="tabledit-delete-button btn btn-sm btn-danger"
+                                      data-toggle="modal"
+                                      data-target="#delete-modal"
+                                      data-gallery-id = {{ $gallery->id }}
+                                      style="float: none"
+                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                    >
+                                      <span class="fa fa-trash"></span>
+                                    </button>
                                   </div>
+                                </div>
                               </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                           <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                    
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>Events</td>
-                             <td>
-                                <div class="event-table-image-container">
-                                    <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
-                                  </div>
-                              </td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-danger btn-status"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                            <td>7 months ago</td>
-                            <td style="white-space: nowrap; width: 1%">
-                              <div
-                                class="tabledit-toolbar btn-toolbar"
-                                style="text-align: left"
-                              >
-                                <div
-                                  class="btn-group btn-group-sm"
-                                  style="float: none"
-                                >
-                                  <!-- <button
-                                    type="button"
-                                    class="tabledit-edit-button btn btn-sm btn-default"
-                                    data-toggle="modal"
-                                    data-target="#deactivate-modal"
-                                    style="float: none"
-                                  >
-                                    <span
-                                      class="glyphicon feather-x-circle"
-                                    ></span>
-                                    Deactivate
-                                  </button> -->
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-success "
-                                    data-toggle="modal"
-                                    data-target="#userdetails-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                  >
-                                    <span class="glyphicon feather-eye"></span>
-                                  </button>
-                                  <a
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-info"
-                                    href="event-edit.html"
-                                    style="float: none; color:white;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                  >
-                                    <span class="fa fa-edit"></span>
-                                  </a>
-                                  <button
-                                    type="button"
-                                    class="tabledit-delete-button btn btn-sm btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#delete-modal"
-                                    style="float: none"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                  >
-                                    <span class="fa fa-trash"></span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                            </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -1197,138 +591,27 @@
 
           <!-- Page Title Area -->
           <!-- /.page-title -->
-
-          <div id="adduser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog modal-large">
+          <!-- Deactivate Modal -->
+          <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog">
               <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">Add Event</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-                </div>
-                <form class="form-material" _lpchecked="1">
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l30">RESERVATION NAME</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group input-has-value">
-                          <label class="form-control-label">Reservation Date</label>
-                          <div class="input-group input-has-value">
-                            <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-                          </div>
-                          <!-- /.input-group -->
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group input-has-value">
-                          <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
-                          <div class="input-group clockpicker">
-                            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-                          </div>
-                          <!-- /.input-group -->
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">NUMBER OF PEOPLE</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">PHONE NUMBER</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">EMAIL</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <div class="modal-footer">
-                  <div class="form-actions d-flex align-items-end">
-                    <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="button">Submit</button>
-                    <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                  </div>
-                </div><!--Delete a div below-->
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- add user ends here -->
-          <!-- Edit user Modal -->
-          <div id="edituser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog modal-large">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">Edit Reservation</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <form class="form-material" method="POST" id="deactive-gallery-form">
+                  @csrf
+                  @method('PUT')
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Change Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form class="form-material" _lpchecked="1">
+                  </div>
                   <div class="modal-body">
                     <div class="row">
-                      <div class="col-lg-12">
-                          <div class="form-group">
-                            <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                            <label for="l30">RESERVATION NAME</label>
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group input-has-value">
-                            <label class="form-control-label">Reservation Date</label>
-                            <div class="input-group input-has-value">
-                              <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-                            </div>
-                            <!-- /.input-group -->
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group input-has-value">
-                            <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
-                            <div class="input-group clockpicker">
-                              <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-                            </div>
-                            <!-- /.input-group -->
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                            <label for="l31">NUMBER OF PEOPLE</label>
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                            <label for="l31">PHONE NUMBER</label>
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                            <label for="l31">EMAIL</label>
-                          </div>
-                        </div>
+                      <p class="text-center w-100">Are you sure you want to change the Gallery status?</p>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Save</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1338,28 +621,30 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
-          <!-- Edit ends here -->
-          <!-- Deactivate Modal -->
-          <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+          <!-- Deactivate here -->
+          <!-- activate Modal -->
+          <div id="activate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="active-gallery-form">
+                  @csrf
+                  @method('PUT')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Change Status</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <p class="text-center w-100">Are you sure you want to change the Gallery status?</p>
                     </div>
-                    <div class="modal-body">
-                      <div class="row">
-                        <p class="text-center w-100">Are you sure you want to change the Gallery status?</p>
-                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
-                    <div class="modal-footer">
-                      <div class="form-actions d-flex align-items-end">
-                        <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
-                        <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                      </div>
                   </div>
                 </form>
               </div>
@@ -1367,51 +652,26 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
-          <!-- Deactivate here -->
+          <!-- activate here -->
           <!-- Delete Modal -->
           <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form class="form-material">
+                <form class="form-material" method="POST" id="delete-gallery-form">
+                  @csrf
+                  @method('DELETE')
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <div class="modal-header">
                     <h5 class="modal-title">Delete Event</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body">    
                     <p class="text-center w-100">Are you sure you want to delete the following Gallery?</p>
-                    <!-- <div class="userdetail d-flex justify-content-between">
-                    <p>ID:</p>
-                    <p class="text-black">1</p>
                   </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Reservation Name:</p>
-                    <p class="text-black">Dennise</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Reservation Date:</p>
-                    <p class="text-black">13 March, Tuesday</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Reservation Time:</p>
-                    <p class="text-black">05:00 PM</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Number of People:</p>
-                    <p class="text-black">4</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Phone Number:</p>
-                    <p class="text-black">0000000000</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Email:</p>
-                    <p class="text-black">example@email.com</p>
-                  </div> --><!--Delete a div below-->
                   <div class="modal-footer">
                     <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="submit">Confirm</button>
                       <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -1463,8 +723,8 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Edit Password ends here -->
-          <!-- View User Modal -->
-          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
+          <!-- View Gallery Modal -->
+          <div id="gallerydetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1482,14 +742,15 @@
                   <div class="userdetail d-flex justify-content-between">
                     <p>Big Photo:</p>
                     <div class="big-photo-container" style="margin: 0 0 30px 0;">
-                        <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
+                      <img alt="promo image" id="big-photo">
                     </div>
                   </div>
+                  
                   <div class="userdetail d-flex justify-content-between">
                     <p>Thumbnail Image:</p>
                     <div class="event-table-image-container" style="margin: 0;">
-                        <img src="{{ asset('img/admin/events_gallery/event1.jpg') }}" alt="promo image">
-                    </div>
+                      <img alt="promo image" id="thum-photo">
+                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -1503,7 +764,6 @@
             </div>
           </div>
           <!-- View user modal ends here -->
-
           <!-- /.chat-panel -->
         </main>
       </div>
@@ -2171,182 +1431,195 @@
 
     <script>
       $(document).ready(function() {
-          // This is the command that activates the datepicker plugin 
-          // on all elements that have the class 'datepicker'.
-          $('.datepicker').datepicker({
-              // Add options here to match the template's behavior:
-              format: 'dd/mm/yyyy',
-              autoclose: true,
-          });
+        // This is the command that activates the datepicker plugin 
+        // on all elements that have the class 'datepicker'.
+        $('.datepicker').datepicker({
+            // Add options here to match the template's behavior:
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+        });
       });
-
 
       $(document).ready(function() {
-          // Initializes all elements with the class 'clockpicker'.
-          // In your HTML, the parent div is marked with this class: <div class="input-group clockpicker">
-          $('.clockpicker').clockpicker({
-              // Recommended options:
-              placement: 'bottom', // Positions the popup below the input
-              align: 'left',       // Aligns the popup to the left
-              autoclose: true,     // Closes the popup once a time is selected
-              vibrate: true,        // Adds a small vibration on mobile (optional)
-          });
+        // Initializes all elements with the class 'clockpicker'.
+        // In your HTML, the parent div is marked with this class: <div class="input-group clockpicker">
+        $('.clockpicker').clockpicker({
+          // Recommended options:
+          placement: 'bottom', // Positions the popup below the input
+          align: 'left',       // Aligns the popup to the left
+          autoclose: true,     // Closes the popup once a time is selected
+          vibrate: true,        // Adds a small vibration on mobile (optional)
+        });
       });
 
-      document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById("myTable");
-        const pagination = document.getElementById("pagination");
-        const info = document.getElementById("tableInfo");
-        const select = document.getElementById("entriesSelect");
-        const searchInput = document.getElementById("search-input");
-        const searchButton = document.querySelector(".btn-search");
+        document.addEventListener("DOMContentLoaded", function() {
+          const table = document.getElementById("myTable");
+          const pagination = document.getElementById("pagination");
+          const info = document.getElementById("tableInfo");
+          const select = document.getElementById("entriesSelect");
+          const searchInput = document.getElementById("search-input");
+          const searchButton = document.querySelector(".btn-search");
 
-        let allRows = Array.from(table.querySelectorAll("tbody tr"));
-        let filteredRows = [...allRows];
-        let rowsPerPage = parseInt(select?.value || 10);
-        let currentPage = 1;
+          let allRows = Array.from(table.querySelectorAll("tbody tr"));
+          let filteredRows = [...allRows];
+          let rowsPerPage = parseInt(select?.value || 10);
+          let currentPage = 1;
 
-        function displayTable(page) {
-          const start = (page - 1) * rowsPerPage;
-          const end = start + rowsPerPage;
+          function displayTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
 
-          filteredRows.forEach((row, index) => {
-            row.style.display = (index >= start && index < end) ? "" : "none";
-          });
-
-          updateInfo(start, end);
-        }
-
-        function updateInfo(start, end) {
-          const total = filteredRows.length;
-          const showingStart = total === 0 ? 0 : start + 1;
-          const showingEnd = Math.min(end, total);
-          if (info)
-            info.textContent = `Showing ${showingStart} to ${showingEnd} of ${total} entries`;
-        }
-
-        function setupPagination() {
-          const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
-          pagination.innerHTML = "";
-
-          // Previous button
-          const prev = document.createElement("li");
-          prev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
-          prev.innerHTML = `<a class="page-link" href="#">‹</a>`;
-          prev.addEventListener("click", (e) => {
-            e.preventDefault();
-            if (currentPage > 1) {
-              currentPage--;
-              displayTable(currentPage);
-              setupPagination();
-            }
-          });
-          pagination.appendChild(prev);
-
-          // Page numbers
-          for (let i = 1; i <= pageCount; i++) {
-            const li = document.createElement("li");
-            li.className = "page-item" + (i === currentPage ? " active" : "");
-            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            li.addEventListener("click", (e) => {
-              e.preventDefault();
-              currentPage = i;
-              displayTable(currentPage);
-              setupPagination();
+            filteredRows.forEach((row, index) => {
+              row.style.display = (index >= start && index < end) ? "" : "none";
             });
-            pagination.appendChild(li);
+
+            updateInfo(start, end);
           }
 
-          // Next button
-          const next = document.createElement("li");
-          next.className = "page-item" + (currentPage === pageCount ? " disabled" : "");
-          next.innerHTML = `<a class="page-link" href="#">›</a>`;
-          next.addEventListener("click", (e) => {
-            e.preventDefault();
-            if (currentPage < pageCount) {
-              currentPage++;
-              displayTable(currentPage);
-              setupPagination();
+          function updateInfo(start, end) {
+            const total = filteredRows.length;
+            const showingStart = total === 0 ? 0 : start + 1;
+            const showingEnd = Math.min(end, total);
+            if (info)
+              info.textContent = `Showing ${showingStart} to ${showingEnd} of ${total} entries`;
+          }
+
+          function setupPagination() {
+            const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
+            pagination.innerHTML = "";
+
+            // Previous button
+            const prev = document.createElement("li");
+            prev.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+            prev.innerHTML = `<a class="page-link" href="#">‹</a>`;
+            prev.addEventListener("click", (e) => {
+              e.preventDefault();
+              if (currentPage > 1) {
+                currentPage--;
+                displayTable(currentPage);
+                setupPagination();
+              }
+            });
+            pagination.appendChild(prev);
+
+            // Page numbers
+            for (let i = 1; i <= pageCount; i++) {
+              if (i === 1 || i === pageCount || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                const li = document.createElement("li");
+                li.className = "page-item" + (i === currentPage ? " active" : "");
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  currentPage = i;
+                  displayTable(currentPage);
+                  setupPagination();
+                });
+                pagination.appendChild(li);
+              } else if (i === 2 && currentPage > 3) {
+                // Ellipsis after first page
+                const li = document.createElement("li");
+                li.className = "page-item disabled";
+                li.innerHTML = `<span class="page-link">...</span>`;
+                pagination.appendChild(li);
+              } else if (i === pageCount - 1 && currentPage < pageCount - 2) {
+                // Ellipsis before last page
+                const li = document.createElement("li");
+                li.className = "page-item disabled";
+                li.innerHTML = `<span class="page-link">...</span>`;
+                pagination.appendChild(li);
+              }
             }
-          });
-          pagination.appendChild(next);
-        }
 
-        // // 🔍 Search function
-        // function searchTable() {
-        //   const query = searchInput.value.toLowerCase().trim();
+            // Next button
+            const next = document.createElement("li");
+            next.className = "page-item" + (currentPage === pageCount ? " disabled" : "");
+            next.innerHTML = `<a class="page-link" href="#">›</a>`;
+            next.addEventListener("click", (e) => {
+              e.preventDefault();
+              if (currentPage < pageCount) {
+                currentPage++;
+                displayTable(currentPage);
+                setupPagination();
+              }
+            });
+            pagination.appendChild(next);
+          }
 
-        //   filteredRows = allRows.filter((row) =>
-        //     row.textContent.toLowerCase().includes(query)
-        //   );
+          // // 🔍 Search function
+          // function searchTable() {
+          //   const query = searchInput.value.toLowerCase().trim();
 
-        //   currentPage = 1;
-        //   displayTable(currentPage);
-        //   setupPagination();
-        // }
+          //   filteredRows = allRows.filter((row) =>
+          //     row.textContent.toLowerCase().includes(query)
+          //   );
 
-        // // Handle search input + button
-        // searchButton?.addEventListener("click", searchTable);
-        // searchInput?.addEventListener("keyup", (e) => {
-        //   if (e.key === "Enter") searchTable();
-        // });
+          //   currentPage = 1;
+          //   displayTable(currentPage);
+          //   setupPagination();
+          // }
 
-        document.getElementById('search-input').addEventListener('keyup', function() {
-        const filter = this.value.toLowerCase()
-        const rows = document.querySelectorAll('#myTable tbody tr')
-        rows.forEach(row => {
-          const text = row.textContent.toLowerCase()
-          row.style.display = text.includes(filter) ? '' : 'none'
+          // // Handle search input + button
+          // searchButton?.addEventListener("click", searchTable);
+          // searchInput?.addEventListener("keyup", (e) => {
+          //   if (e.key === "Enter") searchTable();
+          // });
+
+          document.getElementById('search-input').addEventListener('keyup', function() {
+          const filter = this.value.toLowerCase()
+          const rows = document.querySelectorAll('#myTable tbody tr')
+          rows.forEach(row => {
+            const text = row.textContent.toLowerCase()
+            row.style.display = text.includes(filter) ? '' : 'none'
+          })
         })
-      })
 
-        // Handle entries dropdown
-        select?.addEventListener("change", () => {
-          rowsPerPage = parseInt(select.value);
-          currentPage = 1;
+          // Handle entries dropdown
+          select?.addEventListener("change", () => {
+            rowsPerPage = parseInt(select.value);
+            currentPage = 1;
+            displayTable(currentPage);
+            setupPagination();
+          });
+
+          // Initialize
           displayTable(currentPage);
           setupPagination();
         });
 
-        // Initialize
-        displayTable(currentPage);
-        setupPagination();
-      });
-
-      // Wait for the page to fully load
-      document.addEventListener('DOMContentLoaded', function() {
-        
-        // Get the dropdown element
-        const galleryDropdown = document.getElementById('gallery-list');
-        
-        // Add event listener for when dropdown value changes
-        galleryDropdown.addEventListener('change', function() {
+        // Wait for the page to fully load
+        document.addEventListener('DOMContentLoaded', function() {
           
-          // Get the selected category value
-          const selectedCategory = this.value.toLowerCase();
+          // Get the dropdown element
+          const galleryDropdown = document.getElementById('gallery-list');
           
-          // Get all table rows in the tbody
-          const tableRows = document.querySelectorAll('#myTable tbody tr');
-          
-          // Loop through each row
-          tableRows.forEach(function(row) {
+          // Add event listener for when dropdown value changes
+          galleryDropdown.addEventListener('change', function() {
             
-            // Get the category cell (2nd column, index 1)
-            const categoryCell = row.cells[1];
+            // Get the selected category value
+            const selectedCategory = this.value.toLowerCase();
             
-            // Get the text content and convert to lowercase
-            const rowCategory = categoryCell.textContent.trim().toLowerCase();
+            // Get all table rows in the tbody
+            const tableRows = document.querySelectorAll('#myTable tbody tr');
             
-            // Show or hide the row based on selection
-            if (selectedCategory === '' || rowCategory === selectedCategory) {
-              row.style.display = ''; // Show row
-            } else {
-              row.style.display = 'none'; // Hide row
-            }
+            // Loop through each row
+            tableRows.forEach(function(row) {
+              
+              // Get the category cell (2nd column, index 1)
+              const categoryCell = row.cells[1];
+              
+              // Get the text content and convert to lowercase
+              const rowCategory = categoryCell.textContent.trim().toLowerCase();
+              
+              // Show or hide the row based on selection
+              if (selectedCategory === '' || rowCategory === selectedCategory) {
+                row.style.display = ''; // Show row
+              } else {
+                row.style.display = 'none'; // Hide row
+              }
+            });
           });
+          
         });
-        
-      });
 
       document.addEventListener('DOMContentLoaded', function() {
 
@@ -2505,6 +1778,59 @@
         document.getElementById('export-pdf-filtered').addEventListener('click', function(e) {
           e.preventDefault();
           exportToPDF('gallery-filtered.pdf', false);
+        });
+
+        //Deactive
+        $('#deactivate-modal').on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          var galleryId = button.data('gallery-id');
+
+          $('#deactive-gallery-form').attr('action', '/gallerys/' + galleryId + '/deactive')
+        });
+
+        //Active
+        $('#activate-modal').on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          var galleryId = button.data('gallery-id');
+
+          $('#active-gallery-form').attr('action', '/gallerys/' + galleryId + '/active')
+        });
+
+        //Deactive
+        $('#deactivate-modal').on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          var galleryId = button.data('gallery-id');
+
+          $('#deactive-gallery-form').attr('action', '/gallerys/' + galleryId + '/deactive')
+        });
+
+        //View
+        $('#gallerydetails-modal').on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          var category = button.data('gallery-category');
+          var ori_photo = button.data('gallery-ori-photo');
+          var new_photo = button.data('gallery-new-photo');
+
+          if(category=='Food'){
+            $('#big-photo').attr('src', ori_photo);
+            $('#thum-photo').attr('src', new_photo);
+          }else if(category=='Drinks'){
+            $('#big-photo').attr('src', ori_photo);
+            $('#thum-photo').attr('src', new_photo);
+          }else if(category=='Events'){
+            $('#big-photo').attr('src', ori_photo);
+            $('#thum-photo').attr('src', new_photo);
+          }
+
+          $('#category').text(category);
+        });
+
+        //Delete
+        $('#delete-modal').on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          var galleryId = button.data('gallery-id');
+
+          $('#delete-gallery-form').attr('action', '/gallerys/' + galleryId )
         });
 
       });

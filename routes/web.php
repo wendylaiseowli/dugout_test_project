@@ -94,6 +94,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/promotions/{promotion}/active', [PromotionController::class, 'active'])->name('active-promotion');
     Route::put('/promotions/{promotion}/deactive', [PromotionController::class, 'deactive'])->name('deactive-promotion');
 
+    Route::put('/gallerys/{gallery}/active', [GalleryController::class, 'active'])->name('active-gallery');
+    Route::put('/gallerys/{gallery}/deactive', [GalleryController::class, 'deactive'])->name('deactive-gallery');
+
     // Route::get('/menu-add', function () {
     //     return view('promotion.promo-existing');
     // })->name('menu-add');
