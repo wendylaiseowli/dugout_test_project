@@ -351,17 +351,10 @@
               <!-- /.widget-holder -->
               <div class="col-md-12 widget-holder">
                 <div class="widget-bg">
-                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('events.update', $event) }}" method="POST">
+                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('events.update', $event) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="grey-outline w-100 m-w-100">
-
-                      <!-- <div class="col-lg-12">
-                        <div class="form-group">
-                          <label for="event-name">Event Name:</label>
-                          <input class="form-control" id="event-name" type="text">
-                        </div>
-                      </div> -->
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-name">Event Name:</label>
                         <div class="col-md-10">
@@ -396,16 +389,14 @@
                             <!-- Image preview -->
                             <img
                               id="image-preview"
-                              src="{{ asset(old('photo_path') ? 'img/admin/events_gallery/'.old('photo_path') : 'img/admin/events_gallery/'.$event->photo_path) }}"
+                              src="{{ asset($event->photo_path) }}"
                               alt="placeholder" 
                               class="img-thumbnail mb-3" 
                               style="width: 300px; height: auto;"
                             >
 
-                            <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path', $event->photo_path)}}">
-
                             <!-- File input -->
-                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;" name="photo_path_old" accept="image/*" value="{{old('photo_path', $event->photo_path)}}">
+                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;" name="photo_path" accept="image/*">
                             @error('photo_path')
                               {{ $message }}
                             @enderror
@@ -419,7 +410,7 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Event Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" name="event_date" placeholder="Pick a Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' id="event_date" value="{{old('event_date', $event->event_date)->format('d/m/Y')}}" required>
+                          <input type="text" class="form-control datepicker" name="event_date" placeholder="Pick a Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' id="event_date" value="{{old('event_date',  $event->event_date)->format('d/m/Y') }}" required>
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
                         @error('event_date')
@@ -473,324 +464,6 @@
 
           <!-- Page Title Area -->
           <!-- /.page-title -->
-
-          <div id="adduser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog modal-large">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">Add Reservation</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form class="form-material" _lpchecked="1">
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l30">RESERVATION NAME</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group input-has-value">
-                          <label class="form-control-label">Reservation Date</label>
-                          <div class="input-group input-has-value">
-                            <input type="text" class="form-control datepicker" placeholder="Pick Up Date"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-                          </div>
-                          <!-- /.input-group -->
-                        </div>
-                      </div>
-                      <!-- <div class="col-lg-12">
-                        <div class="form-group input-has-value">
-                          <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
-                          <div class="input-group clockpicker">
-                            <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-                          </div>
-                        </div>
-                      </div> -->
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">NUMBER OF PEOPLE</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">PHONE NUMBER</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">EMAIL</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <div class="modal-footer">
-                  <div class="form-actions d-flex align-items-end">
-                    <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="button">Submit</button>
-                    <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog --> <!--Delete one div below-->
-          <!-- add user ends here -->
-          <!-- Edit user Modal -->
-          <div id="edituser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog modal-large">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">Edit Reservation</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form class="form-material" _lpchecked="1">
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-lg-12">
-                          <div class="form-group">
-                            <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                            <label for="l30">RESERVATION NAME</label>
-                          </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group input-has-value">
-                          <label class="form-control-label">Reservation Date</label>
-                          <div class="input-group input-has-value">
-                              <input type="text" class="form-control datepicker" placeholder="Pick Up Date" id="sampleDatePicker1"> <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
-                          </div>
-                          <!-- /.input-group -->
-                        </div>
-                      </div>
-                      <!-- <div class="col-lg-12">
-                        <div class="form-group input-has-value">
-                          <label for="sampleClockPicker1" class="form-control-label">Reservation Time</label>
-                          <div class="input-group clockpicker">
-                              <input type="text" class="form-control" data-masked-input="99:99" id="sampleClockPicker1"> <span class="input-group-addon"><span class="material-icons list-icon">watch_later</span></span>
-                          </div>
-                        </div>
-                      </div> -->
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">NUMBER OF PEOPLE</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">PHONE NUMBER</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" id="l30" type="text" style="cursor: auto;">
-                          <label for="l31">EMAIL</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Save</button>
-                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- Edit ends here -->
-          <!-- Deactivate Modal -->
-          <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form class="form-material">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <div class="modal-header">
-                    <h5 class="modal-title">Confirm Deactivate</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </div>
-                  <div class="modal-body">
-                    <div class="row">
-                      <p class="text-center w-100">Are you sure you want to change the Reservation status?</p>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
-                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- Deactivate here -->
-          <!-- Delete Modal -->
-          <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form class="form-material">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <div class="modal-header">
-                    <h5 class="modal-title">Delete Reservation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </div>
-                  <div class="modal-body">
-                    <p class="text-center w-100">Are you sure you want to delete the following Reservation?</p>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>ID:</p>
-                      <p class="text-black">1</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Name:</p>
-                      <p class="text-black">Dennise</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Date:</p>
-                      <p class="text-black">13 March, Tuesday</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Reservation Time:</p>
-                      <p class="text-black">05:00 PM</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Number of People:</p>
-                      <p class="text-black">4</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Phone Number:</p>
-                      <p class="text-black">0000000000</p>
-                    </div>
-                    <div class="userdetail d-flex justify-content-between">
-                      <p>Email:</p>
-                      <p class="text-black">example@email.com</p>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Confirm</button>
-                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- Delete here -->
-          <!-- Edit Password Modal -->
-          <div id="editpassword-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">Edit Password</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form class="form-material" _lpchecked="1">
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" placeholder="New Password" type="password" style="cursor: auto;">
-                          <label for="l31">NEW PASSWORD</label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <input class="form-control" placeholder="Confirm password" type="password" style="cursor: auto;">
-                          <label for="l31">CONFIRM PASSWORD</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="form-actions d-flex align-items-end">
-                      <button class="btn btn-primary btn-oval btn-submit ml-auto  mr-2" type="button">Submit</button>
-                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- Edit Password ends here -->
-          <!-- View User Modal -->
-          <div id="userdetails-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog modal-large">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="modal-header">
-                  <h5 class="modal-title">Reservation Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>ID:</p>
-                    <p class="text-black">1</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Reservation Name:</p>
-                    <p class="text-black">Dennise</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Reservation Date:</p>
-                    <p class="text-black">13 March, Tuesday</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Reservation Time:</p>
-                    <p class="text-black">05:00 PM</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Number of People:</p>
-                    <p class="text-black">4</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Phone Number:</p>
-                    <p class="text-black">0000000000</p>
-                  </div>
-                  <div class="userdetail d-flex justify-content-between">
-                    <p>Email:</p>
-                    <p class="text-black">example@email.com</p>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <div class="form-actions d-flex align-items-end">
-                    <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>
-          </div>
-          <!-- View user modal ends here -->
-
           <!-- /.chat-panel -->
         </main>
       </div>
@@ -1495,7 +1168,7 @@
               document.getElementById('image-preview').src = e.target.result;
           };
           reader.readAsDataURL(file);
-          document.getElementById('photo_path').value = file.name;
+          // document.getElementById('photo_path').value = file.name;
         }
       });
     </script>

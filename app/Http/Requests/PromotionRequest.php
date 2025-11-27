@@ -23,13 +23,20 @@ class PromotionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name'=> ['required', 'string'],
-            'photo_path'=> ['required', 'string'],
             'promotion_startDate'=> ['required', 'date_format:d/m/Y'],
             'promotion_endDate'=>['required', 'date_format:d/m/Y'],
             'description'=>['required', 'string'],
         ];
+
+        if($this->isMethod('put')){
+            $rules['photo_path'] = ['nullable', 'file', 'image', 'max:5120'];
+        }else{
+            $rules['photo_path'] = ['required', 'file', 'image', 'max:5120'];
+        }
+        
+        return $rules;
     }
 
     public function withValidator(Validator $validator){

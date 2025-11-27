@@ -423,7 +423,7 @@
                               <td>{{ $promotion->name }}</td>
                               <td>
                                 <div class="event-table-image-container">
-                                  <img src="{{ asset('img/admin/promo/'.$promotion->photo_path)}}" alt="promo image">
+                                  <img src="{{ asset($promotion->photo_path)}}" alt="promo image">
                                 </div>
                               </td>
                               <td>{{$promotion->promotion_startDate->format('Y-m-d') }}</td>

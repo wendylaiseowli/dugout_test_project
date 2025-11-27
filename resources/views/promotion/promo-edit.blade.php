@@ -351,7 +351,7 @@
               <!-- /.widget-holder -->
               <div class="col-md-12 widget-holder">
                 <div class="widget-bg">
-                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('promotions.update', $promotion->id) }}" method="POST">
+                  <form class="widget-heading clearfix has-validation-callback" action="{{ route('promotions.update', $promotion->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="grey-outline w-100 m-w-100">
@@ -382,19 +382,18 @@
                             <!-- Image preview -->
                             <img 
                               id = "image-preview"
-                              src="{{ asset(old('photo_path') ? 'img/admin/promo/'.old('photo_path') : 'img/admin/promo/'.$promotion->photo_path) }}"
+                              src="{{ asset($promotion->photo_path) }}"
                               alt="Ladies Night Image" 
                               class="img-thumbnail mb-3" 
                               style="width: 300px; height: auto;"
                             >
 
-                            <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path', $promotion->photo_path)}}">
-
                             <!-- File input -->
-                            <input id="input-image" name="photo_path_old" type="file" class="form-control mb-2" style="max-width: 300px;">
+                            <input id="input-image" name="photo_path" type="file" class="form-control mb-2" style="max-width: 300px;">
                             @error('photo_path')
                               {{ $message }}
-                            @enderror                   
+                            @enderror
+
                             <!-- Warnings -->
                             <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 481px and height 297px.</p>
                             <p class="text-danger small mb-0">*Please ensure that the image is no larger than 5MB.</p>

@@ -352,7 +352,7 @@
               <!-- /.widget-holder -->
               <div class="col-md-12 widget-holder">
                 <div class="widget-bg">
-                  <form class="widget-heading clearfix has-validation-callback" method="POST" action="{{ route('events.store') }}">
+                  <form class="widget-heading clearfix has-validation-callback" method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="grey-outline w-100 m-w-100"> 
                       <!-- <div class="col-lg-12">
@@ -394,17 +394,18 @@
                             <!-- Image preview -->
                             <img 
                               id="image-preview"
-                              src="{{ asset(old('photo_path') ? 'img/admin/events_gallery/'.old('photo_path') : 'img/admin/dugout-placeholder.png') }}" 
+                              src="{{ asset('img/admin/dugout-placeholder.png') }}"
                               alt="placeholder" 
                               class="img-thumbnail mb-3" 
                               style="width: 300px; height: auto;"
                               name="photo_path"
                             >
 
-                            <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path')}}">
-
                             <!-- File input -->
-                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;"  name="photo_path_old" accept="image/*">
+                            <input id="input-image" type="file" class="form-control mb-2" style="max-width: 300px;"  name="photo_path" accept="image/*">
+                            @error('photo_path')
+                              {{ $message }}
+                            @enderror
                             <!-- Warnings -->
                             <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 520px and height 360px.</p>
                             <p class="text-danger small mb-0">*Please ensure that the image is no larger than 1MB.</p>
@@ -1489,8 +1490,7 @@
           reader.onload = function(e) {
             document.getElementById('image-preview').src = e.target.result;
           };
-            reader.readAsDataURL(file);
-            document.getElementById('photo_path').value = file.name;            
+            reader.readAsDataURL(file);     
         }
       });
     </script>

@@ -129,6 +129,7 @@ class GalleryController extends Controller
         $gallery->delete();
 
         $filepath = public_path($gallery->new_photo_path);
+        
         if(file_exists($filepath)){
             unlink($filepath);
         }

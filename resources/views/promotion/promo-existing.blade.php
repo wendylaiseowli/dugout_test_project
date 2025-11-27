@@ -354,12 +354,6 @@
                   <form class="widget-heading clearfix has-validation-callback" action="{{ route('replicate-promotion') }}" method="POST">
                     @csrf
                     <div class="grey-outline w-100 m-w-100">
-                      <!-- <div class="col-lg-12">
-                        <div class="form-group">
-                          <label for="event-name">Event Name:</label>
-                          <input class="form-control" id="event-name" type="text">
-                        </div>
-                      </div> -->
 
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="category">Existing Promotions:</label>
@@ -384,7 +378,7 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="promo-name">Promotion Name:</label>
                         <div class="col-md-10">
-                          <input class="form-control" id="promo-name" name="name" type="text" data-validation="required" value="{{ old('name') }}">
+                          <input class="form-control" id="promo-name" name="name" type="text" value="{{ old('name') }}">
                         </div>
                         @error('name')
                           {{ $message }}
@@ -393,11 +387,11 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-description">Promotion Description:</label>
                         <div class="col-md-10">
-                          <textarea class="form-control" id="promo-description" name="description" rows="10" data-validation="required">{{ old('description') }}</textarea>
+                          <textarea class="form-control" id="promo-description" name="description" rows="10">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                           {{ $message }}
-                        @enderror                        
+                        @enderror              
                       </div>
                       <div class="form-group row align-items-start">
                       <!-- Label on the left -->
@@ -409,19 +403,20 @@
                           <!-- Image preview -->
                           <img
                             id = "image-preview"
-                            src="{{ asset(old('photo_path') ? 'img/admin/promo/'.old('photo_path') :'img/admin/dugout-placeholder.png') }}" 
+                            src="{{ asset('img/admin/dugout-placeholder.png') }}" 
                             alt="placeholder" 
                             class="img-thumbnail mb-3" 
                             style="width: 300px; height: auto;"
                           >
 
-                          <input type="hidden" name="photo_path" id="photo_path" value="{{ old('photo_path')}}">
+                          <input type="hidden" name="new_photo_path" id="new_photo_path">
                           
                           <!-- File input -->
-                          <input id="input-image" name="photo_path_old" type="file" class="form-control mb-2" style="max-width: 300px;">
+                          <input id="input-image" name="photo_path" type="file" class="form-control mb-2" style="max-width: 300px;">
                           @error('photo_path')
                             {{ $message }}
-                          @enderror    
+                          @enderror
+
                           <!-- Warnings -->
                           <p class="text-danger small mb-1">*If no new image is input, existing image that is displayed will be used.</p>
                           <p class="text-danger small mb-1">*Please input an image with minimum dimensions of width 481px and height 297px.</p>
@@ -1506,17 +1501,16 @@
           }
         });
 
-        const promoPath = "{{ asset('img/admin/promo') }}";
+        const promoPath = "{{ asset('') }}";
         document.getElementById('existing-promo-list').addEventListener('change', function() {
           const selected = this.options[this.selectedIndex];
           document.getElementById('promo-name').value = selected.dataset.name || '';
           document.getElementById('promo-description').value = selected.dataset.description || '';
-          document.getElementById('photo_path').value = selected.dataset.photo || '';
+          document.getElementById('new_photo_path').value = selected.dataset.photo || '';
           document.getElementById('promo-start').value = selected.dataset.start || '';
           document.getElementById('promo-end').value = selected.dataset.end || '';
 
-          document.getElementById('image-preview').src = promoPath + '/' + selected.dataset.photo;
-
+          document.getElementById('image-preview').src = promoPath + selected.dataset.photo;
         });
       });
     </script>

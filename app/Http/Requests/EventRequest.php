@@ -21,12 +21,19 @@ class EventRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'event_name'=>['required', 'string'],
             'description'=> ['required', 'string'],
-            'photo_path'=>['required', 'string'],
             'event_date'=> ['nullable', 'date_format:d/m/Y'],
             'event_time'=> ['nullable', 'date_format:H:i'],
         ];
+
+        if($this->isMethod('put')){
+            $rules['photo_path'] = ['nullable', 'file', 'image', 'max:1024'];
+        }else{
+            $rules['photo_path'] = ['required', 'file', 'image', 'max:1024'];
+        }
+        
+        return $rules;
     }
 }

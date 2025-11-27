@@ -36,6 +36,33 @@ class EventController extends Controller
         $validated['event_location']= 'Oasis Square, Jalan PJU 1A/7A, Ara Damansara, Petaling Jaya, Malaysia';
         $validated['userID']= Auth::id();
 
+        if ($request->hasFile('photo_path')) {
+
+            $file = $request->file('photo_path');
+            $folder = 'img/admin/gallery'; 
+
+            // Full path to the folder
+            $fullPath = public_path($folder);
+
+            // Create folder if it doesn't exist
+            if (!file_exists($fullPath)) {
+                mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
+            }
+
+            // Create filename
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            // Move the file to the folder
+            $file->move($fullPath, $filename);
+
+            $validated['photo_path'] = $folder . '/' . $filename;
+
+        } else {
+            return redirect()->back()
+                ->withErrors(['original_photo_path' => 'The original photo path failed to upload'])
+                ->withInput();
+        }
+
         // Convert date and time to proper DB format
         if (!empty($validated['event_date']) && !empty($validated['event_time'])) {
             // Combine date and time into one datetime
@@ -47,6 +74,7 @@ class EventController extends Controller
             $validated['event_date'] = $datetime->format('Y-m-d H:i:s');
             $validated['event_time'] = $datetime->format('Y-m-d H:i:s');
         }
+
         Event::create($validated);
 
         return redirect('/events')->with('success', 'Event successfully added');
@@ -65,6 +93,37 @@ class EventController extends Controller
         
         $validated['event_location']= 'Oasis Square, Jalan PJU 1A/7A, Ara Damansara, Petaling Jaya, Malaysia';
         $validated['userID']= Auth::id();
+
+        if ($request->hasFile('photo_path')) {
+
+            $file = $request->file('photo_path');
+            $folder = 'img/admin/gallery';    
+
+            // Full path to the folder
+            $fullPath = public_path($folder);
+
+            // Create folder if it doesn't exist
+            if (!file_exists($fullPath)) {
+                mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
+            }
+
+            // Create filename
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            // Move the file to the folder
+            $file->move($fullPath, $filename);
+
+            //Delete the old one
+            if($event->photo_path && file_exists(public_path($event->photo_path))){
+                unlink(public_path($event->photo_path));
+            }
+
+            $validated['photo_path'] = $folder . '/' . $filename;
+
+        } else {
+            // No new image uploaded (keep old one) 
+            $validated['photo_path'] = $event->photo_path;
+        }
 
         // Convert date and time to proper DB format
         if (!empty($validated['event_date']) && !empty($validated['event_time'])) {
@@ -85,6 +144,12 @@ class EventController extends Controller
 
     public function destroy(Event $event){
         $event->delete();
+
+        //Delete the old one
+        if($event->photo_path && file_exists(public_path($event->photo_path))){
+            unlink(public_path($event->photo_path));
+        }
+        
         return redirect('/events')->with('success', 'Event has been successfully deleted');
     }
 
