@@ -33,15 +33,6 @@ class ReservationRequest extends FormRequest
             'email'=> ['required', 'email:rfc,dns'],
         ];
     }
-    // protected function failedValidation(Validator $validator)
-    // {
-    //     throw new HttpResponseException(
-    //         redirect()->back()
-    //             ->withErrors($validator)
-    //             ->withInput()
-    //             ->withFragment('reservationSection')
-    //     );
-    // }
 
     public function failedValidation(Validator $validator)
     {

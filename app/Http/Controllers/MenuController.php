@@ -63,10 +63,6 @@ class MenuController extends Controller
         return redirect('/menus')->with('success', 'Menu added successfully');
     }
 
-    public function show(){
-
-    }
-
     public function edit(Menu $menu){
         $subcategory= SubCategory::all();
         return view('menu.menu-edit', compact('subcategory', 'menu')); 

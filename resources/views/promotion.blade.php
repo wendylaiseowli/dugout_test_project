@@ -41,7 +41,7 @@
             >
               <!-- Image -->
               <img
-                src="{{ asset('img/promo/'.$promotion->photo_path) }}"
+                src="{{ asset($promotion->photo_path) }}"
                 alt="Ladies Night Image"
                 class="w-full h-auto object-cover"
               />
@@ -99,7 +99,7 @@
                 <div class="lg:w-1/2 lg:mr-4">
                   <!-- Image -->
                   <img
-                    src="{{ asset('img/promo/'.$promotion->photo_path) }}"
+                    src="{{ asset($promotion->photo_path) }}"
                     alt="Ladies Night Image"
                     class="w-full h-auto object-cover"
                   />

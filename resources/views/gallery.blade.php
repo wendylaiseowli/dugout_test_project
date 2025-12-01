@@ -62,12 +62,12 @@
               @foreach($foodImages as $foodImage)
                 @if(!($loop->last && $loop->iteration % 3 === 1 && $loop->count > 1))
                   <a
-                    href="{{ asset('img/gallery/'.$foodImage->new_photo_path) }}"
+                    href="{{ asset($foodImage->new_photo_path) }}"
                     data-fancybox="food-gallery"
                   >
                     <img
                       class="h-120 md:h-115 lg:h-110 w-full object-cover"
-                      src="{{ asset('img/gallery/'.$foodImage->new_photo_path) }}"
+                      src="{{ asset($foodImage->new_photo_path) }}"
                       alt="Food Image"
                     />
                   </a>
@@ -82,12 +82,12 @@
                 class="md:col-span-2 xl:col-start-2 xl:col-end-3 md:flex justify-center"
                 >
                   <a
-                    href="{{ asset('img/gallery/'.$lastImage->new_photo_path) }}"
+                    href="{{ asset($lastImage->new_photo_path) }}"
                     data-fancybox="food-gallery"
                   >
                     <img
                       class="h-120 md:h-115 lg:h-110 md:w-70 lg:w-full 3xl:w-120 object-cover"
-                      src="{{ asset('img/food_gallery/food7.jpg') }}"
+                      src="{{ asset($lastImage->new_photo_path) }}"
                       alt="food Image"
                     />
                   </a>
@@ -121,12 +121,12 @@
               @foreach($drinkImages as $drinkImage)
                 @if(!($loop->last && $loop->iteration % 3 === 1 && $loop->count > 1))
                   <a
-                    href="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
+                    href="{{ asset($drinkImage->new_photo_path) }}"
                     data-fancybox="drink-gallery"
                   >
                     <img
                       class="h-120 md:h-115 lg:h-110 w-full object-cover"
-                      src="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
+                      src="{{ asset($drinkImage->new_photo_path) }}"
                       alt="Drink"
                     />
                   </a>
@@ -141,12 +141,12 @@
                   class="md:col-span-2 xl:col-start-2 xl:col-end-3 md:flex justify-center"
                 >
                   <a
-                    href="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
+                    href="{{ asset($drinkImage->new_photo_path) }}"
                     data-fancybox="drink-gallery"
                   >
                     <img
                       class="h-120 md:h-115 lg:h-110 md:w-70 lg:w-95 3xl:w-120 object-cover"
-                      src="{{ asset('img/gallery/'.$drinkImage->new_photo_path) }}"
+                      src="{{ asset($drinkImage->new_photo_path) }}"
                       alt="Drink"
                     />
                   </a>
@@ -182,12 +182,12 @@
             @foreach($eventImages as $eventImage)
               @if(!($loop->last && $loop->iteration % 3 === 1 && $loop->count>1))
                 <a
-                  href="{{ asset('img/gallery/'.$eventImage->new_photo_path) }}"
+                  href="{{ asset($eventImage->new_photo_path) }}"
                   data-fancybox="events-gallery"
                 >
                   <img
                     class="h-120 md:h-115 lg:h-110 w-full object-cover"
-                    src="{{ asset('img/gallery/'.$eventImage->new_photo_path) }}"
+                    src="{{ asset($eventImage->new_photo_path) }}"
                     alt="Event Image"
                   />
                 </a>
@@ -202,12 +202,12 @@
                 class="md:col-span-2 xl:col-start-2 xl:col-end-3 md:flex justify-center"
               >
                 <a
-                  href="{{ asset('img/gallery/'.$eventImage->new_photo_path) }}"
+                  href="{{ asset($eventImage->new_photo_path) }}"
                   data-fancybox="events-gallery"
                 >
                   <img
                     class="h-120 md:h-115 lg:h-110 md:w-70 lg:w-95 3xl:w-120 object-cover"
-                    src="{{ asset('img/gallery/'.$eventImage->new_photo_path) }}"
+                    src="{{ asset($eventImage->new_photo_path) }}"
                     alt="Event 19"
                   />
                 </a>

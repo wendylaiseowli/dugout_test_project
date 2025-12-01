@@ -3,33 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\UserList;
+use App\Models\User;    
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index(){
-        $users = UserList::select('id', 'first_name', 'last_name', 'username', 'email', 'status', 'access_type', 'updated_at')->get();
+        $users = User::select('id', 'first_name', 'last_name', 'username', 'email', 'status', 'updated_at')->orderByRaw("id = ? DESC", [Auth::id()])->get();
         return view('user.user', compact('users'));
     }
 
-    public function ceate(){
-
-    }
-
-    public function store(){
-
-    }
-
-    public function show(){
-
-    }
-
-    public function edit(){
-
-    }
-
-    public function update(UserRequest $request, UserList $user){
+    public function update(UserRequest $request, User $user){
         $data = $request->validated();
 
         if (!empty($data['password'])) {
@@ -42,17 +27,17 @@ class UserController extends Controller
             return redirect('/users')->with('success', 'User details has been updated successfully');
     }
 
-    public function destroy(UserList $user){
+    public function destroy(User $user){
         $user->delete();
         return redirect('/users')->with('success', 'User has been deleted successfully');
     }
 
-    public function active(UserList $user){
+    public function active(User $user){
         $user->update(['status'=> true]);
         return redirect('/users')->with('success', 'User details has been activated successfully');
     }
 
-    public function deactive(UserList $user){
+    public function deactive(User $user){
         $user->update(['status'=> false]);
         return redirect('/users')->with('success', 'User details has been deactivated successfully');
     }

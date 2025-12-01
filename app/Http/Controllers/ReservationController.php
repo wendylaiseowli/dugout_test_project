@@ -28,10 +28,13 @@ class ReservationController extends Controller
             }
 
         $validated['userID'] = $validated['userID'] ?? 1;
-
+        
         Reservation::create($validated);
 
-        return view('thankyou');
+        if (request()->ajax()) {
+            return response()->json(['success' => true]);
+        }
+        
     }
 
     #Admin

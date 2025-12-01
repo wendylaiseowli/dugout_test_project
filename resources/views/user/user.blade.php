@@ -375,22 +375,25 @@
                         >
                           Search
                         </button> -->
-                        <!-- <button
-                          class="btn btn-normal btn-default btn-outline-orange ripple mb-2 input-m m-btn-full"
-                          data-toggle="modal"
-                          data-target="#adduser-modal"
-                          onclick="preventDefault()"
-                          id="adduser"
-                        >
-                          Add User
-                        </button>
+                        @if(auth()->id() ==1)
+                          <button
+                            class="btn btn-normal btn-default btn-outline-orange ripple mb-2 input-m m-btn-full"
+                            data-test="add-user-btn"
+                            data-toggle="modal"
+                            data-target="#adduser-modal"
+                            onclick="preventDefault()"
+                            id="adduser"
+                          >
+                            Add User
+                          </button>
+                        @endif
                         <script>
                           document
                             .getElementById("adduser")
                             .addEventListener("click", function (event) {
                               event.preventDefault();
                             });
-                        </script> -->
+                        </script>
                        
                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default ripple mb-2 input-m m-btn-full pull-right export-btn" type="button">Export<span class="caret"></span>
                         </button>
@@ -438,6 +441,7 @@
                                         <button
                                           type="button"
                                           class="tabledit-edit-button btn btn-sm btn-danger btn-status"
+                                          data-test="deactivate-user-btn"
                                           data-user-id ="{{ $user->id }}"
                                           data-toggle="modal"
                                           data-target="#deactivate-modal"
@@ -464,6 +468,7 @@
                                         <button
                                           type="button"
                                           class="tabledit-edit-button btn btn-sm btn-success btn-status"
+                                          data-test="activate-user-btn"
                                           data-user-id ="{{ $user->id }}"
                                           data-toggle="modal"
                                           data-target="#activate-modal"
@@ -479,7 +484,7 @@
                                   </td>
                                 @endif
                               @else
-                                  <td></td>
+                                <td></td>
                               @endif
                               <td>{{ $user->updated_at->diffForHumans() }}</td>
                               <td style="white-space: nowrap; width: 1%">
@@ -522,7 +527,7 @@
                                       >
                                         <span class="fa fa-edit"></span>
                                       </a>
-                                      @if(auth()->id() != 1)
+                                      @if($user->id != 1)
                                         <button
                                           type="button"
                                           class="tabledit-delete-button btn btn-sm btn-danger"
@@ -633,24 +638,31 @@
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <form class="form-material" _lpchecked="1">
+                <form class="form-material" _lpchecked="1" method="POST">
+                  @csrf
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input class="form-control" id="first-name" type="text" style="cursor: auto;">
+                          <input class="form-control" id="first-name" type="text" style="cursor: auto;" name="first_name">
                           <label for="first-name">FIRST NAME</label>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input class="form-control" id="last-name" type="text" style="cursor: auto;">
+                          <input class="form-control" id="last-name" type="text" style="cursor: auto;" name="last_name">
                           <label for="last-name">LAST NAME</label>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input class="form-control" id="new-pwd" type="password" style="cursor: auto;">
+                          <input class="form-control" id="last-name" type="text" style="cursor: auto;" name="username">
+                          <label for="last-name">USER NAME</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input class="form-control" id="new-pwd" type="password" style="cursor: auto;" name="password">
                           <label for="new-pwd">NEW PASSWORD</label>
                         </div>
                       </div>
@@ -665,7 +677,7 @@
                 </form>
                 <div class="modal-footer">
                   <div class="form-actions d-flex align-items-end">
-                    <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="button">Submit</button>
+                    <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="submit">Submit</button>
                     <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
                   </div>
                 </div>
@@ -729,7 +741,7 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- Edit ends here -->
-          <!-- Deactivate Modal -->
+          <!-- Deactive Modal -->
           <div id="deactivate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -759,8 +771,8 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
-          <!-- Deactivate here -->
-          <!-- Activate Modal -->
+          <!-- Deactive here -->
+          <!-- Active Modal -->
           <div id="activate-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -790,7 +802,7 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
-          <!-- Activate here -->
+          <!-- Active here -->
           <!-- Delete Modal -->
           <div id="delete-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog">

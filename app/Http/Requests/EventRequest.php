@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EventRequest extends FormRequest
 {
@@ -29,9 +30,33 @@ class EventRequest extends FormRequest
         ];
 
         if($this->isMethod('put')){
-            $rules['photo_path'] = ['nullable', 'file', 'image', 'max:1024'];
+            $rules['photo_path'] = 
+            [
+                'nullable', 'file', 'image', 'max:1024', 
+                function($attribute, $value, $fail){
+                    $image = getimagesize($value);
+                    if($image[0]<520){
+                        $fail('The photo width must be at least 520px');
+                    }
+                     if ($image[1] < 360) {
+                        $fail('The photo height must be at least 360px.');
+                    }
+                }
+            ];
         }else{
-            $rules['photo_path'] = ['required', 'file', 'image', 'max:1024'];
+            $rules['photo_path'] = 
+            [
+                'required', 'file', 'image', 'max:1024',  
+                function($attribute, $value, $fail){
+                    $image = getimagesize($value);
+                    if($image[0]<520){
+                        $fail('The photo width must be at least 520px');
+                    }
+                     if ($image[1] < 360) {
+                        $fail('The photo height must be at least 360px.');
+                    }
+                }
+            ];
         }
         
         return $rules;

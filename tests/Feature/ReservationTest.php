@@ -39,7 +39,7 @@ class ReservationTest extends TestCase
 
         $response = $this->post(route('reserve', $input));
         $response->assertStatus(200);
-        $response->assertViewIs('thankyou');
+        // $response->assertViewIs('thankyou'); using javascript now (window.location.href) so the response is not a view
 
         $this->assertDatabaseCount('reservations', 1);
         $this->assertDatabaseHas('reservations', [
@@ -109,7 +109,7 @@ class ReservationTest extends TestCase
 
         $response = $this->post(route('reserve', $input));
         $response->assertStatus(200);
-        $response->assertViewIs('thankyou');
+        // $response->assertViewIs('thankyou'); using javascript now (window.location.href) so the response is not a view
         
         $this->assertDatabaseHas('reservations', [
             'reservation_name'=> 'Sally Khoo',
@@ -206,4 +206,7 @@ class ReservationTest extends TestCase
             'email'=> 'sallybeegmail@com',
         ]);
     }
+
+    //Admin
+    // public function
 }

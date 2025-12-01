@@ -410,7 +410,7 @@
                       <div class="form-group row input-has-value">
                         <label class="col-md-2 form-control-label text-center text-md-left">Event Date:</label>
                         <div class="input-group col-md-10 input-has-value">
-                          <input type="text" class="form-control datepicker" name="event_date" placeholder="Pick a Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' id="event_date" value="{{old('event_date',  $event->event_date)->format('d/m/Y') }}" required>
+                          <input type="text" class="form-control datepicker" name="event_date" placeholder="Pick a Date" data-plugin-options='{"autoclose": true, "format": "dd/mm/yyyy"}' id="event_date" value="{{old('event_date',  ($event->event_date)->format('d/m/Y')) }}" required>
                           <span class="input-group-addon"><i class="list-icon material-icons">date_range</i></span>
                         </div>
                         @error('event_date')

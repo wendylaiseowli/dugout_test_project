@@ -6,7 +6,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Matches;
+use App\Models\Player;
 use App\Models\Team;
+use App\Models\Reservation;
+use App\Models\User;
 
 class IndexTest extends TestCase
 {
@@ -142,5 +145,43 @@ class IndexTest extends TestCase
         $response->assertDontSee('AFC Bournemouth');
         $response->assertDontSee('Burnley');
         $response->assertSee('Coming Soon');
+    }
+
+    //Admin
+    public function test_admin_dashboard_render_with_correct_content(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+      
+        $reservationNotToday = Reservation::factory()->count(10)->create([
+            'reservation_date'=> now()->addDay(1),
+            'reservation_name'=>'KARENNNN',
+        ]);
+
+        $reservationToday = Reservation::factory()->count(10)->create([
+            'reservation_date'=> now(),
+            'reservation_name'=>'Wendyyy',
+        ]);
+
+        $matches = Matches::factory()->count(2)->create();
+        
+        $players = Player::factory()->count(5)->create([
+            'name'=>'Alo ha',
+        ]);
+
+        $players = Player::factory()->count(10)->create([
+            'name'=>'Brendonn',
+        ]);
+
+        $response = $this->get(route('dashboard'));
+        $response->assertStatus(200);
+        $response->assertSeeText('Wendyyy');
+        $response->assertSeeText('Brendonn');
+        $response->assertDontSeeText('KARENNNN');
+        $response->assertDontSeeText('Alo ha');
+        $response->assertSee('<span class="counter">10</span>', false);
+
+        $this->assertDatabaseCount('matches', 17, 'mysql2');
+        $this->assertDatabaseCount('reservations', 20);
+        $this->assertDatabaseCount('players', 15, 'mysql2');
     }
 }

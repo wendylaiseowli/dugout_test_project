@@ -10,7 +10,7 @@
         <!-- Favicon Link -->
         <link
         rel="shortcut icon"
-        href="./assets/img/favicon-dugout.png"
+        href="{{ asset('img/admin/favicon-dugout.png') }}"
         type="image/x-icon"
         />
 

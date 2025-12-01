@@ -17,13 +17,15 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 1,
+            'userID' => 1,
             'reservation_name'=> $this->faker->name,
             'reservation_date'=> now()->addDay(2),
             'reservation_time'=> now()->addDay(2)->format('H:i'),
-            'number_of_prople'=> $this->faker->numberBetween(1, 10),
-            'phone_number'=> $this->faker->phoneNumber,
+            'number_of_people'=> $this->faker->numberBetween(1, 8),
+            'phone_number'=> $this->faker->numerify('###########'),
             'email'=> $this->faker->unique()->email,
+            'status'=>1,
+            'created_at'=>null,
         ];
     }
 }

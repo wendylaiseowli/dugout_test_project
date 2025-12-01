@@ -21,8 +21,8 @@ class MatchesFactory extends Factory
             'startDateTime'=> '2025-09-12 22:00:00',
             'homeTeamID'=> Team::factory()->create()->id,
             'awayTeamID'=> Team::factory()->create()->id,
-            'homeTeamResult'=> null,
-            'awayTeamResult'=> null,
+            'homeTeamResult'=> $this->faker->numberBetween(1,3),
+            'awayTeamResult'=> $this->faker->numberBetween(1,3),
             'leagueID'=>1,
             'status'=>1,
         ];

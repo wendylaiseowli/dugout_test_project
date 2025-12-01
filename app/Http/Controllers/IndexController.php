@@ -24,8 +24,8 @@ class IndexController extends Controller
         $endToday = Carbon::today()->endOfDay();
         $todayReservations = Reservation::whereBetween('reservation_date', [$startToday, $endToday])->get();
         $todayReservationCount = $todayReservations->count();
-        $lastTenWinners = Player::join('matches', 'players.matchID', '=', 'matches.id')->where('isWinner', true)->orderBy('players.updated_at', 'desc')->limit(10)->get();
-        $lastTenReservations = Reservation::latest()->limit(10)->get();
+        $lastTenWinners = Player::join('matches', 'players.matchID', '=', 'matches.id')->where('isWinner', true)->orderBy('players.id', 'desc')->limit(10)->get();
+        $lastTenReservations = Reservation::orderByDesc('id')->limit(10)->get();
         return view('dashboard.dashboard', compact('todayReservations', 'lastTenWinners', 'todayReservationCount', 'lastTenReservations'));
     } 
 }

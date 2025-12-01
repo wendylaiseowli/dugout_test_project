@@ -509,6 +509,7 @@
           name="name"
           id="name"
           required
+          placeholder=""
           autocomplete="off"
           class="peer w-full h-14 bg-transparent text-base px-3 py-4 border-2 border-[#ccc] focus:outline-none rounded-md focus:border-black"
           value="{{ old('name') }}"
@@ -524,7 +525,7 @@
         @enderror
         <label
           for="name"
-          class="uppercase absolute font-roboto-condensed left-3 top-1/2 -translate-y-1/2 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:text-sm peer-valid:top-0 peer-valid:text-sm font-semibold"
+          class="uppercase absolute font-roboto-condensed left-3 top-1/2 -translate-y-1/2 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:text-sm peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[#ccc] peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-sm peer-not-placeholder-shown:text-black font-semibold"
         >
           Name*
         </label>
@@ -538,6 +539,7 @@
           id="email"
           required
           autocomplete="off"
+          placeholder=""
           class="peer w-full h-14 bg-transparent text-base px-3 py-4 border-2 border-[#ccc] focus:outline-none rounded-md focus:border-black"
           value="{{ old('email') }}"
         />
@@ -552,7 +554,7 @@
         @enderror
         <label
           for="email"
-          class="uppercase absolute font-roboto-condensed left-3 top-1/2 -translate-y-1/2 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:text-sm peer-valid:top-0 peer-valid:text-sm font-semibold"
+          class="uppercase absolute font-roboto-condensed left-3 top-1/2 -translate-y-1/2 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:text-sm peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[#ccc] peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-sm peer-not-placeholder-shown:text-black font-semibold"
         >
           Email*
         </label>
@@ -579,7 +581,8 @@
         @enderror
         <label
           for="phone"
-          class="uppercase absolute font-roboto-condensed left-14 top-1/2 -translate-y-1/2 text-base 2xl:text-sm bg-white text-[#ccc] peer-focus:text-black px-1 font-semibold transition-all duration-200 ease-in-out peer-focus:top-0 peer-valid:text-sm peer-focus:left-3"
+          id="phone-label"
+          class="uppercase absolute font-roboto-condensed left-14 top-1/2 -translate-y-1/2 text-base 2xl:text-sm bg-white text-[#ccc] peer-focus:text-black px-1 font-semibold transition-all duration-200 ease-in-out peer-focus:top-0 peer-focus:left-3"
           autocomplete="off"
         >
           Phone Number*
@@ -1100,5 +1103,43 @@
         }
       });
     });    
+  </script>
+  <script>
+      const phoneInput = document.getElementById("phone");
+      const phoneLabel = document.getElementById("phone-label");
+
+      function updateLabel() {
+        const value = phoneInput.value.trim();
+        // Only move label if there's more than just the country code (+60 or similar)
+        const hasActualInput = value.length > 3 && value !== "+60";
+
+        if (hasActualInput) {
+          phoneLabel.classList.add(
+            "!top-0",
+            "!left-3",
+            "!text-black",
+            "!-translate-y-1/2"
+          );
+          phoneLabel.classList.remove("top-1/2", "left-14", "text-[#ccc]");
+        } else {
+          phoneLabel.classList.remove(
+            "!top-0",
+            "!left-3",
+            "!text-black",
+            "!-translate-y-1/2"
+          );
+          phoneLabel.classList.add("top-1/2", "left-14", "text-[#ccc]");
+        }
+      }
+
+      // Check on input change
+      phoneInput.addEventListener("input", updateLabel);
+
+      // Check on focus/blur
+      phoneInput.addEventListener("focus", updateLabel);
+      phoneInput.addEventListener("blur", updateLabel);
+
+      // Initial check
+      updateLabel();
   </script>
 </x-app-layout>
