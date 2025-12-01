@@ -382,23 +382,15 @@
                         </a>
                         <select class="form-control input-m sort-time-dropdown" id="sub-category-list">
                           <option value="" disabled selected>Sub Category</option>
-                          <option value="starters">Starters</option>
-                          <option value="mains">Mains</option>
-                          <option value="burgers">Burgers</option>
-                          <option value="dessert">Dessert</option>
-                          <option value="cocktails">Cocktails</option>
-                          <option value="shooters">Shooters</option>
-                          <option value="wine">Wine</option>
-                          <option value="beers">Beers</option>
-                          <option value="pizza">Pizza</option>
-                          <option value="non-alcoholic">Non-Alcoholic</option>
-                          <option value="liquor">Liquor</option>
-                          <option value="asian">Asian</option>
+                          @foreach($subcategory as $item)
+                            <option value="{{ strtolower($item->name) }}">{{ $item->name }}</option>
+                          @endforeach
                         </select>
                         <select class="form-control input-m sort-time-dropdown" id="main-category-list">
                           <option value="" disabled selected>Main Category</option>
-                          <option value="food">Food</option>
-                          <option value="drinks">Drinks</option>
+                          @foreach($category as $item)
+                            <option value="{{ strtolower($item->name) }}">{{ $item->name }}</option>
+                          @endforeach
                         </select>
                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default ripple mb-2 input-m m-btn-full pull-right export-btn" type="button">Export<span class="caret"></span>
                         </button>

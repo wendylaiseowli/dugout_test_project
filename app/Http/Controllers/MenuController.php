@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\SubCategory;
 use App\Http\Requests\MenuRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 class MenuController extends Controller
 {
@@ -48,7 +49,9 @@ class MenuController extends Controller
     #Admin
     public function index(Menu $menu){
         $menus = Menu::join('subcategory', 'menus.subCategoryID', '=', 'subcategory.id')->join('category', 'category.id', '=', 'subCategory.categoryID')->select('menus.*', 'subcategory.name as subcategory_name', 'category.name as category_name')->orderBy('menus.updated_at', 'desc')->get();
-        return view('menu.menu', compact('menus'));         
+        $category = Category::all();
+        $subcategory = SubCategory::all();
+        return view('menu.menu', compact('menus', 'category', 'subcategory'));         
     }
 
     public function create(){

@@ -24,9 +24,4 @@ class Player extends Model
         'isWinner',
         'message',
     ];
-
-    public function match()
-    {
-        return $this->belongsTo(Matches::class, 'matchID');
-    }
 }

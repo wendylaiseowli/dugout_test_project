@@ -54,12 +54,12 @@
           Please enter the details below to reset your password
         </div>
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        
 
         <form action="{{ route('password.store') }}" class="flex flex-col gap-y-7 w-full mt-5" method="POST">
           @csrf
-          
+          <!-- Password Reset Token -->
+          <input type="hidden" name="token" value="{{ $request->route('token') }}">
           <!-- Email -->
           <div class="flex flex-col gap-y-2">
             <input

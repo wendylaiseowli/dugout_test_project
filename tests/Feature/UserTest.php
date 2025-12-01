@@ -26,13 +26,6 @@ class UserTest extends TestCase
         $this->artisan('migrate:fresh', ['--database' => 'mysql2']);
     }
 
-    // public function test_example(): void
-    // {
-    //     $response = $this->get('/');
-
-    //     $response->assertStatus(200);
-    // }
-
     public function test_view_user_management_page_render_correctly(){
         $user = User::factory()->create(['id'=>1,'username' => 'DS']);
         $user1 = User::factory()->create(['id'=>2,'username' => 'Wendy']);
@@ -43,7 +36,6 @@ class UserTest extends TestCase
         
         $this->actingAs($user);
         $response = $this->get(route('users.index'));
-        
 
         $response->assertStatus(200);
         $response->assertViewIs('user.user');
@@ -54,6 +46,147 @@ class UserTest extends TestCase
         $response->assertSeeText('Brendon');
         $response->assertSeeText('Asif');
         $response->assertSeeText('Jega');      
+    }
+
+    public function test_add_user_management_add_user_successfully(){
+        $user = User::factory()->create(['id'=>1,'username' => 'DS']);
+        $this->actingAs($user);
+
+        $data =[
+            'first_name'=> 'alo sir',
+            'last_name'=> 'alo',
+            'username' => 'sir alo',
+            'email' => 'alo@gmail.com',
+            'password' => 'dssymphony',
+            'password_confirmation'=> 'dssymphony',
+        ];
+
+        $response = $this->post(route('users.store'), $data);
+        $response->assertStatus(302);
+        $this->assertDatabaseCount('users', 2);
+        $this->assertDatabaseHas('users', [
+            'first_name'=> 'alo sir',
+            'last_name'=> 'alo',
+            'username' => 'sir alo',
+            'email' => 'alo@gmail.com',
+        ]);
+    }
+
+    public function test_add_user_management_add_user_unsucessfully_if_input_field_blank(){
+        $user = User::factory()->create(['id'=>1,'username' => 'DS']);
+        $this->actingAs($user);
+
+        $data =[
+            'first_name'=> '',
+            'last_name'=> '',
+            'username' => '',
+            'email' => '',
+            'password' => '',
+            'password_confirmation'=> '',
+        ];
+
+        $response = $this->post(route('users.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('first_name');
+        $response->assertSessionHasErrors('last_name');
+        $response->assertSessionHasErrors('username');
+        $response->assertSessionHasErrors('password');
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    public function test_add_user_management_add_user_unsucessfully_if_input_is_ineteger(){
+        $user = User::factory()->create(['id'=>1,'username' => 'DS']);
+        $this->actingAs($user);
+
+        $data =[
+            'first_name'=> 123,
+            'last_name'=> 123,
+            'username' => 123,
+            'email' => 'ds@mail.com',
+            'password' => 'dssymphony',
+            'password_confirmation'=> 'dssymphony',
+        ];
+
+        $response = $this->post(route('users.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('first_name');
+        $response->assertSessionHasErrors('last_name');
+        $response->assertSessionHasErrors('username');
+        $response->assertSessionDoesntHaveErrors('password');
+        $response->assertSessionDoesntHaveErrors('password-confirmation');
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    public function test_add_user_management_add_user_unsucessfully_if_email_has_been_existed(){
+        $user = User::factory()->create(['id'=>1,'username' => 'DS', 'email'=>'ds@mail.com']);
+        $this->actingAs($user);
+
+        $data =[
+            'first_name'=> 'drfghjklvb',
+            'last_name'=> 'drfghjkbn',
+            'username' => 'dfghjkldfg',
+            'email' => 'ds@mail.com',
+            'password' => 'dssymphony',
+            'password_confirmation'=> 'dssymphony',
+        ];
+
+        $response = $this->post(route('users.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('email');
+        $response->assertSessionDoesntHaveErrors('first_name');
+        $response->assertSessionDoesntHaveErrors('last_name');
+        $response->assertSessionDoesntHaveErrors('username');
+        $response->assertSessionDoesntHaveErrors('password');
+        $response->assertSessionDoesntHaveErrors('password-confirmation');
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    public function test_add_user_management_add_user_unsucessfully_if_email_format_incorrect(){
+        $user = User::factory()->create(['id'=>1,'username' => 'DS']);
+        $this->actingAs($user);
+
+        $data =[
+            'first_name'=> 'drfghjklvb',
+            'last_name'=> 'drfghjkbn',
+            'username' => 'dfghjkldfg',
+            'email' => 'ds@.com',
+            'password' => 'dssymphony',
+            'password_confirmation'=> 'dssymphony',
+        ];
+
+        $response = $this->post(route('users.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('email');
+        $response->assertSessionDoesntHaveErrors('first_name');
+        $response->assertSessionDoesntHaveErrors('last_name');
+        $response->assertSessionDoesntHaveErrors('username');
+        $response->assertSessionDoesntHaveErrors('password');
+        $response->assertSessionDoesntHaveErrors('password-confirmation');
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    public function test_add_user_management_add_user_unsucessfully_if_password_is_not_matched_with_the_confirm_password(){
+        $user = User::factory()->create(['id'=>1,'username' => 'DS']);
+        $this->actingAs($user);
+
+        $data =[
+            'first_name'=> 'drfghjklvb',
+            'last_name'=> 'drfghjkbn',
+            'username' => 'dfghjkldfg',
+            'email' => 'ds@gmail.com',
+            'password' => 'dssymph',
+            'password_confirmation'=> 'dssymphony',
+        ];
+
+        $response = $this->post(route('users.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('password');
+        $response->assertSessionDoesntHaveErrors('first_name');
+        $response->assertSessionDoesntHaveErrors('last_name');
+        $response->assertSessionDoesntHaveErrors('username');
+        $response->assertSessionDoesntHaveErrors('email');
+        $response->assertSessionDoesntHaveErrors('password-confirmation');
+        $this->assertDatabaseCount('users', 1);
     }
 
     public function test_active_user_management_page_active_user_correctly(){
@@ -191,4 +324,21 @@ class UserTest extends TestCase
         $this->assertDatabaseMissing('users', ['id'=>$user1->id]); 
         $this->assertDatabaseHas('users', ['id'=>$user->id]);
     }
+
+    public function test_user_managment_validation_returns_json_errors(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $data = [];
+
+        // Use postJson() to trigger expectsJson()
+        $response = $this->putJson(route('users.update', $user), $data);
+
+        // Assert it returns the JSON error response
+        $response->assertStatus(422)
+                ->assertJsonStructure([
+                    'errors'
+                ]);
+    }
+
 }

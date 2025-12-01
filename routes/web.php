@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [IndexController::class, 'showDashBoard'])->name('dashboard');
     Route::post('/promotions/replicate', [PromotionController::class, 'replicate'])->name('replicate-promotion');
     Route::get('/promotions/replicate', [PromotionController::class, 'replicateForm'])->name('replicatepromotionform');
+    
     Route::resources([
         'users' => UserController::class,
         'reservations' => ReservationController::class,

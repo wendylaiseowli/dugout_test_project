@@ -596,6 +596,7 @@
           id="message"
           required
           autocomplete="off"
+          placeholder=" "
           rows="3"
           class="peer w-full bg-transparent text-base px-3 py-10 border-2 border-[#ccc] focus:outline-none rounded-md focus:border-black"
         >{{ old('message') }}</textarea>
@@ -610,7 +611,7 @@
         @enderror
         <label
           for="message"
-          class="uppercase absolute font-roboto-condensed left-3 top-3 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:-top-2 peer-focus:text-sm peer-valid:top-0 peer-valid:text-sm font-semibold pointer-events-none"
+          class="uppercase absolute font-roboto-condensed left-3 top-3 text-base bg-white text-[#ccc] peer-focus:text-black px-1 transition-all duration-200 ease-in-out peer-focus:-top-2 peer-focus:text-sm peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:text-black font-semibold pointer-events-none"
         >
           Type A Message
         </label>

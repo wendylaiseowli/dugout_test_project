@@ -618,30 +618,6 @@
             </div>
             <!-- /.row -->
           </div>
-          {{-- @if ($errors->any())
-            <script>
-              document.addEventListener("DOMContentLoaded", function() {
-                var addModal = new bootstrap.Modal(document.getElementById('addreservation-modal'));
-                addModal.show();
-              });
-            </script>
-          @endif --}}
-          {{-- <script>
-            document.addEventListener("DOMContentLoaded", function () {
-
-                // Auto-open the modal if there are validation errors
-                @if ($errors->any())
-                    var addModalEl = document.getElementById('addreservation-modal');
-                    var addModal = new bootstrap.Modal(addModalEl);
-                    addModal.show();
-
-                    // When the modal is closed, reset Bootstrap's modal instance
-                    addModalEl.addEventListener('hidden.bs.modal', function () {
-                        addModal.dispose(); // Destroy modal instance
-                    });
-                @endif
-            });
-          </script> --}}
 
           <!-- Page Title Area -->
           <!-- /.page-title -->
@@ -2158,6 +2134,7 @@
             $('#active-reservation-form').attr('action', '/reservations/' + reservationId + '/active');
         });
 
+        //Add
         $('#add-reservation-form').on('submit', function(e) {
           e.preventDefault(); // stop normal form submit
 
@@ -2190,6 +2167,12 @@
               }
             }
           });
+        });
+
+        $('#addreservation-modal').on('hidden.bs.modal', function(){
+          let form = $(this).find('form');
+          form.find('.text-danger').remove(),
+          form.trigger('reset');
         });
 
         //View
@@ -2270,6 +2253,12 @@
               }
             }
           });
+        });
+
+        $('#editreservation-modal').on('hidden.bs.modal', function(){
+          let form = $(this).find('form');
+          form.find('.text-danger').remove();
+          form.trigger(reset);
         });
 
         //Delete

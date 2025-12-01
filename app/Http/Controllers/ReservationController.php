@@ -43,10 +43,6 @@ class ReservationController extends Controller
         return view('reservation.reservation', compact('reservations'));        
     }
 
-    public function ceate(){
-
-    }
-
     public function store(ReservationRequest $request){
         $validated = $request->validated();
 
@@ -68,14 +64,6 @@ class ReservationController extends Controller
         Reservation::create($validated);
         // return redirect('/reservations')->with('success', 'Reservation has been successfully added');
         return response()->json(['success' => true]);
-    }
-
-    public function show(){
-
-    }
-
-    public function edit(){
-
     }
 
     public function update(ReservationRequest $request, Reservation $reservation){        

@@ -8,6 +8,7 @@ use App\Models\Menu;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class MenuTest extends TestCase
 {
@@ -202,5 +203,479 @@ class MenuTest extends TestCase
             $response->assertSee($item->menu_item_description);
             $response->assertSee($item->price);
         }
+    }
+
+    //Admin
+    public function test_menu_management_render_index_page_correct_and_successfully(){
+        $menu = Menu::factory()->create();
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route('menus.index'));
+        $response->assertViewIs('menu.menu');
+        $response->assertStatus(200);
+        $response->assertViewHas('menus');
+        $response->assertViewHas('category');
+        $response->assertViewHas('subcategory');
+    }
+
+    public function test_menu_management_render_create_page_correct_and_successfully(){
+        $menu = Menu::factory()->create();
+        $user = User::factory()->create();
+        $subcategory = Subcategory::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route('menus.create'));
+        $response->assertViewIs('menu.menu-add');
+        $response->assertStatus(200);
+        $response->assertViewHas('subcategory');
+    }
+
+    public function test_menu_management_created_successfully(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => '100',
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->post(route('menus.store'), $data);
+        $response->assertStatus(302);
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => '100',
+        ]);
+    }
+
+    public function test_menu_management_created_unsuccessfully_if_input_field_is_blank(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $data = [
+            'menu_item_name' => '',
+            'menu_item_description'=> '',
+            'price' => '',
+            'subCategoryID'=> null,
+        ];
+
+        $response = $this->post(route('menus.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('menu_item_name');
+        $response->assertSessionHasErrors('menu_item_description');
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionHasErrors('subCategoryID');
+        $this->assertDatabaseCount('menus', 0);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => '',
+            'menu_item_description'=> '',
+            'price' => '',
+        ]);
+    }
+
+    public function test_menu_management_created_unsuccessfully_if_price_is_not_integer(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 'cvbnm',
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->post(route('menus.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionDoesntHaveErrors('menu_item_description');
+        $response->assertSessionDoesntHaveErrors('menu_item_name');
+        $response->assertSessionDoesntHaveErrors('subCategoryID');
+        $this->assertDatabaseCount('menus', 0);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 'cvbnm',
+        ]);        
+    }
+
+    public function test_menu_management_created_unsuccessfully_if_price_is_negative(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => -21,
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->post(route('menus.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionDoesntHaveErrors('menu_item_description');
+        $response->assertSessionDoesntHaveErrors('menu_item_name');
+        $response->assertSessionDoesntHaveErrors('subCategoryID');
+        $this->assertDatabaseCount('menus', 0);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => -21,
+        ]);        
+    }
+
+    public function test_menu_management_created_unsuccessfully_if_price_is_invalid_format(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 10.023,
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->post(route('menus.store'), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionDoesntHaveErrors('menu_item_description');
+        $response->assertSessionDoesntHaveErrors('menu_item_name');
+        $response->assertSessionDoesntHaveErrors('subCategoryID');
+        $this->assertDatabaseCount('menus', 0);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 10.023,
+        ]);        
+    }
+
+    public function test_menu_management_render_edit_page_correct_and_successfully(){
+        $menu = Menu::factory()->create();
+        $user = User::factory()->create();
+        $subcategory = Subcategory::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route('menus.edit', $menu));
+        $response->assertViewIs('menu.menu-edit');
+        $response->assertStatus(200);
+        $response->assertViewHas('subcategory');
+        $response->assertViewHas('menu');
+    }
+
+    public function test_menu_management_updated_successfully(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+        $subcategory2 = SubCategory::factory()->create();
+
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,            
+        ]);
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => '100',
+            'subCategoryID'=> $subcategory2->id,
+        ];
+
+        $response = $this->put(route('menus.update', $menu), $data);
+        $response->assertStatus(302);
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => '100',
+            'subCategoryID'=> $subcategory2->id,
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id, 
+        ]);         
+    }
+
+    public function test_menu_management_updated_unsuccessfully_if_input_field_is_blank(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,            
+        ]);
+
+        $data = [
+            'menu_item_name' => '',
+            'menu_item_description'=> '',
+            'price' => '',
+            'subCategoryID'=> null,
+        ];
+
+        $response = $this->put(route('menus.update', $menu), $data);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('menu_item_name');
+        $response->assertSessionHasErrors('menu_item_description');
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionHasErrors('subCategoryID');
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,   
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => '',
+            'menu_item_description'=> '',
+            'price' => '',
+            'subCategoryID'=> null,
+        ]);       
+    }
+
+    public function test_menu_management_updated_unsuccessfully_if_input_field_is_not_integer(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,            
+        ]);
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 'EVBNM,',
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->put(route('menus.update', $menu), $data);
+        $response->assertStatus(302);
+        $response->assertSessionDoesntHaveErrors('menu_item_name');
+        $response->assertSessionDoesntHaveErrors('menu_item_description');
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionDoesntHaveErrors('subCategoryID');
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,   
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 'EVBNM,',
+            'subCategoryID'=> $subcategory->id,
+        ]);        
+    }
+
+    public function test_menu_management_updated_unsuccessfully_if_price_is_negative(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,            
+        ]);
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => -89.236,
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->put(route('menus.update', $menu), $data);
+        $response->assertStatus(302);
+        $response->assertSessionDoesntHaveErrors('menu_item_name');
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionDoesntHaveErrors('menu_item_description');
+        $response->assertSessionDoesntHaveErrors('subCategoryID');
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,   
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => -89.236,
+            'subCategoryID'=> $subcategory->id,
+        ]);       
+    }
+
+    public function test_menu_management_updated_unsuccessfully_if_price_is_invalid_format(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,            
+        ]);
+
+        $data = [
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 12.503,
+            'subCategoryID'=> $subcategory->id,
+        ];
+
+        $response = $this->put(route('menus.update', $menu), $data);
+        $response->assertStatus(302);
+        $response->assertSessionDoesntHaveErrors('menu_item_name');
+        $response->assertSessionHasErrors('price');
+        $response->assertSessionDoesntHaveErrors('menu_item_description');
+        $response->assertSessionDoesntHaveErrors('subCategoryID');
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,   
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger king soy sauce',
+            'menu_item_description'=> 'burger with king soy sauce',
+            'price' => 12.503,
+            'subCategoryID'=> $subcategory->id,
+        ]);        
+    }
+
+    public function test_menu_management_deactive_menu_successfully(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=> 1,        
+        ]);
+
+        $response = $this->put(route('deactive-menu', $menu));
+        $response->assertStatus(302);
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=>0,  
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=>1,
+        ]);    
+    }
+
+    public function test_menu_management_active_menu_successfully(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=> 1,        
+        ]);
+
+        $response = $this->put(route('active-menu', $menu));
+        $response->assertStatus(302);
+
+        $this->assertDatabaseCount('menus', 1);
+        $this->assertDatabaseHas('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=>1,  
+        ]);
+        $this->assertDatabaseMissing('menus',[
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=>0,
+        ]);    
+    }
+
+    public function test_menu_management_delete_menu_successfully(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $subcategory = SubCategory::factory()->create();
+        $menu = Menu::factory()->create([
+            'menu_item_name' => 'burger queen',
+            'menu_item_description'=> 'burger with queen soy sauce',
+            'price' => '200',
+            'subCategoryID'=> $subcategory->id,
+            'status'=> 1,        
+        ]);
+
+        $response = $this->delete(route('menus.destroy', $menu));
+        $response->assertStatus(302);
+
+        $this->assertDatabaseCount('menus', 0);        
     }
 }

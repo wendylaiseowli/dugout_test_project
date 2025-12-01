@@ -628,6 +628,7 @@
 
           <!-- Page Title Area -->
           <!-- /.page-title -->
+          
           <div id="adduser-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
             <div class="modal-dialog modal-large">
               <div class="modal-content">
@@ -638,7 +639,7 @@
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <form class="form-material" _lpchecked="1" method="POST">
+                <form class="form-material" _lpchecked="1" method="POST" id="add-user-form">
                   @csrf
                   <div class="modal-body">
                     <div class="row">
@@ -662,25 +663,31 @@
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
+                          <input class="form-control" id="email" type="email" style="cursor: auto;" name="email">
+                          <label for="email">EMAIL</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
                           <input class="form-control" id="new-pwd" type="password" style="cursor: auto;" name="password">
                           <label for="new-pwd">NEW PASSWORD</label>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <input class="form-control" id="confirm-pwd" type="password" style="cursor: auto;">
+                          <input class="form-control" id="confirm-pwd" type="password" style="cursor: auto;" name="password_confirmation">
                           <label for="confirm-pwd">CONFIRM PASSWORD</label>
                         </div>
                       </div>
                     </div>
                   </div>
-                </form>
-                <div class="modal-footer">
-                  <div class="form-actions d-flex align-items-end">
-                    <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="submit">Submit</button>
-                    <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                  <div class="modal-footer">
+                    <div class="form-actions d-flex align-items-end">
+                      <button class="btn btn-primary btn-oval btn-submit ml-auto mr-2" type="submit">Submit</button>
+                      <button class="btn btn-outline-default btn-oval btn-cancel btn-black" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>  <!-- delete one div below -->
               <!-- /.modal-content -->
             </div>
@@ -1955,6 +1962,47 @@
           $('#modal-user-email').text(userEmail);
         });
 
+        // Add
+        $('#add-user-form').on('submit', function(e) {
+          e.preventDefault(); // stop normal form submit
+
+          let form = $(this);
+          let formData = form.serialize();
+
+          $.ajax({
+            url: '/users',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                $('#adduser-modal').modal('hide');
+                location.reload(); // reload table after success
+            },
+            error: function (xhr) {
+              if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+
+                // Clear old errors
+                form.find('.text-danger').remove();
+
+                // Show new errors
+                $.each(errors, function (key, messages) {
+                    let input = form.find('[name="'+ key +'"]');
+                    // Find the closest parent for input groups, otherwise use input itself
+                    let wrapper = input.closest('.input-group').length ? input.closest('.input-group') : input;
+
+                    wrapper.after('<span class="text-danger">' + messages[0] + '</span>');
+                });
+              }
+            }
+          });
+        });
+
+        $('#adduser-modal').on('hidden.bs.modal', function () {
+            let form = $(this).find('form');       // find the form inside modal
+            form.find('.text-danger').remove();    // remove all error messages
+            form.trigger('reset');                 // optional: reset form fields
+        });
+
         //Edit
         $('#userdetails-edit-modal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget); // jQuery object for the button
@@ -2007,6 +2055,12 @@
               }
             }
           });
+        });
+
+        $('#userdetails-edit-modal').on('hidden.bs.modal', function(){
+          let form = $(this).find('form');
+          form.find('.text-danger').remove();
+          form.trigger(reset);
         });
 
         //Delete
