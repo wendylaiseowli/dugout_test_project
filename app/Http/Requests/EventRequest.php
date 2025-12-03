@@ -25,8 +25,8 @@ class EventRequest extends FormRequest
         $rules = [
             'event_name'=>['required', 'string'],
             'description'=> ['required', 'string'],
-            'event_date'=> ['nullable', 'date_format:d/m/Y'],
-            'event_time'=> ['nullable', 'date_format:H:i'],
+            'event_date'=> ['required', 'date_format:d/m/Y'],
+            'event_time'=> ['required', 'date_format:H:i'],
         ];
 
         if($this->isMethod('put')){

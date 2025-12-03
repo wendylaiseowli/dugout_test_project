@@ -379,7 +379,7 @@
                       <div class="form-group row">
                         <label class="col-md-2 text-center text-md-left" for="event-description">Event Description:</label>
                         <div class="col-md-10">
-                          <textarea class="form-control" id="event-description" rows="10" data-validation="required" name="description">{{ old('description') }}</textarea>
+                          <textarea class="form-control" id="event-description" rows="10" name="description">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                           {{ $message }}

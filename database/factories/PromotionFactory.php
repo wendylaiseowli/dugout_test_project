@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Promotion>
@@ -21,8 +22,8 @@ class PromotionFactory extends Factory
             'userID'=>1,
             'name'=>$this->faker->word(),
             'photo_path'=> '93681670855720357.jpg',
-            'promotion_startDate'=>'2025-03-25 00:00:00',
-            'promotion_endDate'=>'2025-04-30 00:00:00',
+            'promotion_startDate'=>Carbon::parse(now()->addDay(1)->second(0))->format('Y-m-d H:i:s'),
+            'promotion_endDate'=>Carbon::parse(now()->addDay(3))->second(0)->format('Y-m-d H:i:s'),
             'description'=> $this->faker->sentence(),
             'status'=>true,
         ];

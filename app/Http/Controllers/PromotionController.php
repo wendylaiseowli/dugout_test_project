@@ -30,32 +30,24 @@ class PromotionController extends Controller
         $validated = $request->validated();
         $validated['userID'] = Auth::id();
 
-        if ($request->hasFile('photo_path')) {
+        $file = $request->file('photo_path');
+        $folder = 'img/admin/gallery'; 
 
-            $file = $request->file('photo_path');
-            $folder = 'img/admin/gallery'; 
+        // Full path to the folder
+        $fullPath = public_path($folder);
 
-            // Full path to the folder
-            $fullPath = public_path($folder);
-
-            // Create folder if it doesn't exist
-            if (!file_exists($fullPath)) {
-                mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
-            }
-
-            // Create filename
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
-
-            // Move the file to the folder
-            $file->move($fullPath, $filename);
-
-            $validated['photo_path'] = $folder . '/' . $filename;
-
-        } else {
-            return redirect()->back()
-                ->withErrors(['original_photo_path' => 'The original photo path failed to upload'])
-                ->withInput();
+        // Create folder if it doesn't exist
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
         }
+
+        // Create filename
+        $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+        // Move the file to the folder
+        $file->move($fullPath, $filename);
+
+        $validated['photo_path'] = $folder . '/' . $filename;
 
         // Convert to Y-m-d for database
         $validated['promotion_startDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])->format('Y-m-d');
@@ -64,10 +56,6 @@ class PromotionController extends Controller
         Promotion::create($validated);
 
         return redirect('/promotions')->with('success', 'The promotion has been successfully created');
-    }
-
-    public function show(){
-
     }
 
     public function edit(Promotion $promotion){
@@ -103,10 +91,7 @@ class PromotionController extends Controller
 
             $validated['photo_path'] = $folder . '/' . $filename;
 
-        } else {
-            // No new image uploaded (keep old one) 
-            $validated['photo_path'] = $promotion->photo_path;
-        }
+        } 
 
         // Convert to Y-m-d for database
         $validated['promotion_startDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])->format('Y-m-d');
@@ -119,6 +104,13 @@ class PromotionController extends Controller
 
     public function destroy(Promotion $promotion){
         $promotion->delete();
+
+        $filepath = public_path($promotion->photo_path);
+        
+        if(file_exists($filepath)){
+            unlink($filepath);
+        }
+
         return redirect('/promotions')->with('success', 'The promotion has been successfully deleted');
     }
 
@@ -136,32 +128,24 @@ class PromotionController extends Controller
         $validated = $request->validated();
         $validated['userID'] = Auth::id();
 
-        if ($request->hasFile('photo_path')) {
+        $file = $request->file('photo_path');
+        $folder = 'img/admin/gallery'; 
 
-            $file = $request->file('photo_path');
-            $folder = 'img/admin/gallery'; 
+        // Full path to the folder
+        $fullPath = public_path($folder);
 
-            // Full path to the folder
-            $fullPath = public_path($folder);
-
-            // Create folder if it doesn't exist
-            if (!file_exists($fullPath)) {
-                mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
-            }
-
-            // Create filename
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
-
-            // Move the file to the folder
-            $file->move($fullPath, $filename);
-
-            $validated['photo_path'] = $folder . '/' . $filename;
-
-        } else {
-            return redirect()->back()
-                ->withErrors(['original_photo_path' => 'The original photo path failed to upload'])
-                ->withInput();
+        // Create folder if it doesn't exist
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
         }
+
+        // Create filename
+        $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+        // Move the file to the folder
+        $file->move($fullPath, $filename);
+
+        $validated['photo_path'] = $folder . '/' . $filename;
 
         // Convert to Y-m-d for database
         $validated['promotion_startDate'] = Carbon::createFromFormat('d/m/Y', $validated['promotion_startDate'])->format('Y-m-d');

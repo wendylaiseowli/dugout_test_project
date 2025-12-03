@@ -422,7 +422,7 @@
                             <tr data-expanded="true">
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $menu->menu_item_name }}</td>
-                              <td>{{ $menu->menu_item_description }}</td>
+                              <td class="text-truncate" style="max-width: 200px;">{{ $menu->menu_item_description }}</td>
                               <td><span>RM</span>{{ $menu->price }}</td>
                               <td>{{ $menu->category_name }}</td>
                               <td>{{ $menu->subcategory_name }}</td>

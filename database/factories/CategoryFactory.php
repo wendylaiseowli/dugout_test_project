@@ -11,7 +11,7 @@ class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
+     *s
      * @return array<string, mixed>
      */
     public function definition(): array

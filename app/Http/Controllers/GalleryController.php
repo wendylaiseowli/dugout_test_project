@@ -39,42 +39,30 @@ class GalleryController extends Controller
     {
         $validated = $request->validated();
         $validated['userID'] = Auth::id();
-        if ($request->hasFile('new_photo_path')) {
+        
+        $file = $request->file('new_photo_path');
+        $folder = 'img/admin/gallery'; 
 
-            $file = $request->file('new_photo_path');
-            $folder = 'img/admin/gallery'; 
+        // Full path to the folder
+        $fullPath = public_path($folder);
 
-            // Full path to the folder
-            $fullPath = public_path($folder);
-
-            // Create folder if it doesn't exist
-            if (!file_exists($fullPath)) {
-                mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
-            }
-
-            // Create filename
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
-
-            // Move the file to the folder
-            $file->move($fullPath, $filename);
-
-            $validated['original_photo_path'] = $folder . '/' . $filename;
-            $validated['new_photo_path'] = $folder . '/' . $filename;
-
-        } else {
-            return redirect()->back()
-                ->withErrors(['original_photo_path' => 'The original photo path failed to upload'])
-                ->withInput();
+        // Create folder if it doesn't exist
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0755, true); // 0755 gives read/write/execute for owner
         }
+
+        // Create filename
+        $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+        // Move the file to the folder
+        $file->move($fullPath, $filename);
+
+        $validated['original_photo_path'] = $folder . '/' . $filename;
+        $validated['new_photo_path'] = $folder . '/' . $filename;
 
         Gallery::create($validated);
 
         return redirect('/gallerys')->with('success', 'The gallery has been added successfully');
-    }
-
-
-    public function show(){
-
     }
 
     public function edit(Gallery $gallery){
@@ -114,10 +102,6 @@ class GalleryController extends Controller
             $validated['original_photo_path'] = $folder . '/' . $filename;
             $validated['new_photo_path'] = $folder . '/' . $filename;
 
-        } else {
-            // No new image uploaded (keep old one) 
-            $validated['new_photo_path'] = $gallery->new_photo_path;
-            $validated['original_photo_path'] = $gallery->original_photo_path;
         }
 
         $gallery->update($validated);
