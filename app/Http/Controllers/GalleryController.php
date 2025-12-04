@@ -27,7 +27,8 @@ class GalleryController extends Controller
     #Admin
     public function index(){
         $galleries = Gallery::join('category', 'galleries.categoryID', '=', 'category.id')->select('name', 'original_photo_path', 'new_photo_path', 'status', 'galleries.updated_at', 'galleries.id')->orderBy('galleries.updated_at', 'desc')->get();
-        return view('gallery.gallery', compact('galleries'));
+        $category = Category::all();
+        return view('gallery.gallery', compact('galleries', 'category'));
     }
 
     public function create(){

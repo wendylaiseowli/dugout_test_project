@@ -383,9 +383,9 @@
                         
                         <select class="form-control input-m sort-time-dropdown" id="gallery-list">
                           <option value="" disabled selected>Category</option>
-                          <option value="food">Food</option>
-                          <option value="drinks">Drinks</option>
-                          <option value="events">Events</option>
+                          @foreach($category as $item)
+                            <option value="{{ strtolower($item->name) }}">{{ $item->name }}</option>
+                          @endforeach
                         </select>
                        
                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default ripple mb-2 input-m m-btn-full pull-right export-btn" type="button">Export<span class="caret"></span>
